@@ -15,7 +15,6 @@
   "dependencies": {
     "@astrojs/react": "^3.6.2",
     "@astrojs/tailwind": "^5.1.5",
-    "@astrojs/netlify": "^5.5.4",
     "@astrojs/sitemap": "^3.2.1",
     "@supabase/supabase-js": "^2.45.6",
     "astro": "^5.8.0",

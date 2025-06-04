@@ -1,13 +1,10 @@
 ---
-import ParticleBackground from './ParticleBackground.astro';
-import TypewriterText from './TypewriterText.astro';
-import CTAButtons from './CTAButtons.astro';
+import ParticleBackground from "./ParticleBackground.astro";
+import TypewriterText from "./TypewriterText.astro";
+import CTAButtons from "./CTAButtons.astro";
 ---
 
-<section
-  id="hero"
-  class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero"
->
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
   <ParticleBackground />
 
   <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary-900/20 to-primary-900/60"></div>
@@ -21,9 +18,7 @@ import CTAButtons from './CTAButtons.astro';
         data-aos="fade-down"
       >
         <span class="w-2 h-2 bg-accent-green rounded-full mr-3 animate-pulse"></span>
-        <span class="text-sm font-medium text-white">
-          🚀 Early Access - Únete a +10,000 traders profesionales
-        </span>
+        <span class="text-sm font-medium text-white"> 🚀 Early Access - Únete a +10,000 traders profesionales </span>
       </div>
 
       <div class="space-y-8">
@@ -31,10 +26,10 @@ import CTAButtons from './CTAButtons.astro';
         <div class="space-y-6">
           <h1 class="hero-title opacity-0">
             <span class="block font-hero text-6xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight">
-              El <span class="text-gradient">Futuro</span> del
+              El Trading de <span class="text-gradient">Wall Street,</span>
             </span>
             <span class="block font-hero text-6xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight mt-2">
-              Trading <span class="text-accent-gold">Crypto</span>
+              Ahora en tu <span class="text-accent-gold">Bolsillo</span>
             </span>
           </h1>
 
@@ -43,7 +38,9 @@ import CTAButtons from './CTAButtons.astro';
           </div>
 
           <p class="hero-description text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed opacity-0">
-            Señales de trading institucionales impulsadas por <span class="text-accent-green font-semibold">Inteligencia Artificial</span>
+            Señales de trading institucionales impulsadas por <span class="text-accent-green font-semibold"
+              >Inteligencia Artificial</span
+            >
             para maximizar tus ganancias en el mercado cripto más volátil de la historia.
           </p>
         </div>
@@ -81,8 +78,8 @@ import CTAButtons from './CTAButtons.astro';
 </section>
 
 <script>
-  import { initHeroAnimations } from '../../scripts/animations';
-  document.addEventListener('DOMContentLoaded', () => {
+  import { initHeroAnimations } from "../../scripts/animations";
+  document.addEventListener("DOMContentLoaded", () => {
     initHeroAnimations();
   });
 </script>
