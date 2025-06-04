@@ -1,0 +1,49 @@
+---
+---
+
+<div class="hero-cta flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0">
+  <button
+    id="cta-primary"
+    class="btn-primary group relative overflow-hidden px-12 py-5 text-lg font-bold shadow-glow-gold"
+  >
+    <span class="relative z-10 flex items-center">
+      🚀 Acceso Anticipado
+      <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </span>
+    <div class="absolute inset-0 bg-gradient-to-r from-accent-green to-accent-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  </button>
+
+  <button
+    id="cta-secondary"
+    class="btn-secondary group px-12 py-5 text-lg font-bold"
+  >
+    <span class="flex items-center">
+      📊 Ver Demo en Vivo
+      <svg class="w-5 h-5 ml-2 transform group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+    </span>
+  </button>
+</div>
+
+<p class="hero-disclaimer text-sm text-gray-500 mt-6 opacity-0">
+  💡 <strong>Sin riesgo</strong> • Cancela cuando quieras •
+  <span class="text-accent-green">Garantía de 30 días</span>
+</p>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const primaryBtn = document.getElementById('cta-primary');
+    const secondaryBtn = document.getElementById('cta-secondary');
+
+    primaryBtn?.addEventListener('click', () => {
+      console.log('Abrir modal de acceso anticipado');
+    });
+
+    secondaryBtn?.addEventListener('click', () => {
+      console.log('Abrir demo en vivo');
+    });
+  });
+</script>

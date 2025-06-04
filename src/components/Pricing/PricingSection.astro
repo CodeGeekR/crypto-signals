@@ -1,0 +1,118 @@
+---
+import { Check } from 'lucide-react';
+
+const plans = [
+  {
+    name: "Básico",
+    price: "49",
+    description: "Perfecto para traders principiantes",
+    features: [
+      "Señales de trading diarias",
+      "Análisis técnico básico",
+      "Acceso al grupo de Discord",
+      "Soporte por email",
+    ],
+    cta: "Comenzar Gratis",
+    popular: false
+  },
+  {
+    name: "Pro",
+    price: "99",
+    description: "Para traders serios y profesionales",
+    features: [
+      "Todo lo del plan Básico",
+      "Señales premium en tiempo real",
+      "Análisis técnico avanzado",
+      "Alertas personalizadas",
+      "Soporte prioritario 24/7",
+      "Webinars semanales"
+    ],
+    cta: "Obtener Pro",
+    popular: true
+  },
+  {
+    name: "Institucional",
+    price: "299",
+    description: "Solución empresarial completa",
+    features: [
+      "Todo lo del plan Pro",
+      "API dedicada",
+      "Gestión de cartera IA",
+      "Señales institucionales",
+      "Soporte dedicado",
+      "Consultoría personalizada"
+    ],
+    cta: "Contactar Ventas",
+    popular: false
+  }
+];
+---
+
+<section id="pricing" class="relative py-24 bg-primary-800/50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-hero font-bold mb-6">
+        Planes <span class="text-gradient">Flexibles</span>
+      </h2>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        Elige el plan que mejor se adapte a tus necesidades y comienza a operar como un profesional.
+      </p>
+    </div>
+
+    <!-- Pricing Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      {plans.map((plan) => (
+        <div class={`card-glass p-8 rounded-2xl relative ${plan.popular ? 'border-2 border-accent-green' : ''}`}>
+          {plan.popular && (
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent-green text-white text-sm font-bold px-4 py-1 rounded-full">
+              Más Popular
+            </div>
+          )}
+          
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold mb-2">{plan.name}</h3>
+            <div class="flex items-center justify-center gap-1 mb-4">
+              <span class="text-sm">USD</span>
+              <span class="text-4xl font-bold">${plan.price}</span>
+              <span class="text-gray-400">/mes</span>
+            </div>
+            <p class="text-gray-400">{plan.description}</p>
+          </div>
+
+          <ul class="space-y-4 mb-8">
+            {plan.features.map((feature) => (
+              <li class="flex items-center text-sm text-gray-300">
+                <span class="w-5 h-5 mr-2 text-accent-green">
+                  <Check size={20} />
+                </span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          <button
+            class={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-300 ${
+              plan.popular
+                ? 'bg-gradient-to-r from-accent-gold to-accent-green text-white hover:shadow-glow-gold'
+                : 'border-2 border-white/20 hover:bg-white/10'
+            }`}
+          >
+            {plan.cta}
+          </button>
+        </div>
+      ))}
+    </div>
+
+    <!-- Guarantee Notice -->
+    <div class="text-center mt-12">
+      <p class="text-gray-400">
+        <span class="text-accent-green">✓</span> 30 días de garantía de devolución de dinero
+        <span class="mx-2">•</span>
+        <span class="text-accent-green">✓</span> Cancela en cualquier momento
+        <span class="mx-2">•</span>
+        <span class="text-accent-green">✓</span> Soporte 24/7
+      </p>
+    </div>
+  </div>
+</section>

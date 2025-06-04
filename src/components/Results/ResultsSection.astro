@@ -1,0 +1,104 @@
+---
+import { TrendingUp, Users, Award, Clock } from 'lucide-react';
+---
+
+<section id="results" class="relative py-24 bg-primary-900">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 bg-[linear-gradient(30deg,#f7931a12_1px,transparent_1px),linear-gradient(150deg,#00d4aa12_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-hero font-bold mb-6">
+        Resultados <span class="text-gradient">Comprobados</span>
+      </h2>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        Nuestro historial de trading verificado demuestra la efectividad de nuestras señales y estrategias.
+      </p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+      <!-- Stat 1 -->
+      <div class="card-glass p-6 text-center">
+        <div class="w-12 h-12 bg-accent-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <TrendingUp className="w-6 h-6 text-accent-green" />
+        </div>
+        <div class="text-3xl font-bold text-accent-green mb-2">347%</div>
+        <div class="text-sm text-gray-400">ROI Promedio Anual</div>
+      </div>
+
+      <!-- Stat 2 -->
+      <div class="card-glass p-6 text-center">
+        <div class="w-12 h-12 bg-accent-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Users className="w-6 h-6 text-accent-gold" />
+        </div>
+        <div class="text-3xl font-bold text-accent-gold mb-2">10,000+</div>
+        <div class="text-sm text-gray-400">Traders Activos</div>
+      </div>
+
+      <!-- Stat 3 -->
+      <div class="card-glass p-6 text-center">
+        <div class="w-12 h-12 bg-accent-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Award className="w-6 h-6 text-accent-blue" />
+        </div>
+        <div class="text-3xl font-bold text-accent-blue mb-2">89.7%</div>
+        <div class="text-sm text-gray-400">Precisión de Señales</div>
+      </div>
+
+      <!-- Stat 4 -->
+      <div class="card-glass p-6 text-center">
+        <div class="w-12 h-12 bg-accent-red/20 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Clock className="w-6 h-6 text-accent-red" />
+        </div>
+        <div class="text-3xl font-bold text-accent-red mb-2">24/7</div>
+        <div class="text-sm text-gray-400">Soporte Técnico</div>
+      </div>
+    </div>
+
+    <!-- Performance Chart -->
+    <div class="card-glass p-8 rounded-2xl">
+      <div class="flex justify-between items-center mb-8">
+        <h3 class="text-xl font-bold">Rendimiento Histórico</h3>
+        <div class="flex gap-4">
+          <button class="text-sm text-gray-400 hover:text-white transition-colors">1M</button>
+          <button class="text-sm text-accent-green">6M</button>
+          <button class="text-sm text-gray-400 hover:text-white transition-colors">1Y</button>
+          <button class="text-sm text-gray-400 hover:text-white transition-colors">ALL</button>
+        </div>
+      </div>
+      
+      <div class="relative h-[300px] mb-6">
+        <div class="performance-chart absolute inset-0"></div>
+      </div>
+
+      <!-- Performance Metrics -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="text-center">
+          <div class="text-sm text-gray-400 mb-1">Operaciones Totales</div>
+          <div class="text-xl font-bold">1,247</div>
+        </div>
+        <div class="text-center">
+          <div class="text-sm text-gray-400 mb-1">Win Rate</div>
+          <div class="text-xl font-bold text-accent-green">89.7%</div>
+        </div>
+        <div class="text-center">
+          <div class="text-sm text-gray-400 mb-1">Profit Factor</div>
+          <div class="text-xl font-bold text-accent-gold">3.2</div>
+        </div>
+        <div class="text-center">
+          <div class="text-sm text-gray-400 mb-1">Drawdown Máx</div>
+          <div class="text-xl font-bold text-accent-red">12.4%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initPerformanceChart } from '../../scripts/chart';
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    initPerformanceChart();
+  });
+</script>

@@ -1,0 +1,174 @@
+---
+import { Mail, Phone, MapPin } from 'lucide-react';
+---
+
+<section id="contact" class="relative py-24 bg-primary-800/50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-hero font-bold mb-6">
+        Contacta con <span class="text-gradient">Nosotros</span>
+      </h2>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        ¿Tienes dudas sobre nuestros servicios? Nuestro equipo está disponible 24/7 para ayudarte.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+      <!-- Contact Form -->
+      <div class="card-glass p-8 rounded-2xl">
+        <form id="contact-form" class="space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Nombre</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-green"
+                placeholder="Tu nombre"
+                required
+              />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-green"
+                placeholder="tu@email.com"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">Asunto</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-green"
+              placeholder="¿En qué podemos ayudarte?"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Mensaje</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-green"
+              placeholder="Escribe tu mensaje aquí..."
+              required
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full btn-primary group relative overflow-hidden"
+          >
+            <span class="relative z-10 flex items-center justify-center">
+              Enviar Mensaje
+              <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+              </svg>
+            </span>
+            <div class="absolute inset-0 bg-gradient-to-r from-accent-green to-accent-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="space-y-8">
+        <div class="card-glass p-8 rounded-2xl">
+          <h3 class="text-2xl font-bold mb-6">Información de Contacto</h3>
+          
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-accent-green/20 rounded-xl flex items-center justify-center mr-4">
+                <Mail className="w-6 h-6 text-accent-green" />
+              </div>
+              <div>
+                <h4 class="font-semibold mb-1">Email</h4>
+                <a href="mailto:info@cryptosenales.pro" class="text-gray-300 hover:text-accent-green transition-colors">
+                  info@cryptosenales.pro
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-accent-gold/20 rounded-xl flex items-center justify-center mr-4">
+                <Phone className="w-6 h-6 text-accent-gold" />
+              </div>
+              <div>
+                <h4 class="font-semibold mb-1">Teléfono</h4>
+                <a href="tel:+34900123456" class="text-gray-300 hover:text-accent-gold transition-colors">
+                  +34 900 123 456
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-accent-blue/20 rounded-xl flex items-center justify-center mr-4">
+                <MapPin className="w-6 h-6 text-accent-blue" />
+              </div>
+              <div>
+                <h4 class="font-semibold mb-1">Ubicación</h4>
+                <p class="text-gray-300">
+                  Madrid, España<br />
+                  Calle Gran Vía 123
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="card-glass p-8 rounded-2xl">
+          <h3 class="text-2xl font-bold mb-6">Síguenos</h3>
+          <div class="flex space-x-4">
+            <a href="#" class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center hover:bg-white/10 transition-colors">
+              <span class="text-2xl">𝕏</span>
+            </a>
+            <a href="#" class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center hover:bg-white/10 transition-colors">
+              <span class="text-xl">📱</span>
+            </a>
+            <a href="#" class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center hover:bg-white/10 transition-colors">
+              <span class="text-xl">💬</span>
+            </a>
+            <a href="#" class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center hover:bg-white/10 transition-colors">
+              <span class="text-xl">📺</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target as HTMLFormElement);
+      const data = Object.fromEntries(formData.entries());
+      
+      try {
+        // Here you would typically send the data to your backend
+        console.log('Form submitted:', data);
+        alert('Mensaje enviado correctamente. Nos pondremos en contacto contigo pronto.');
+        (e.target as HTMLFormElement).reset();
+      } catch (error) {
+        console.error('Error sending message:', error);
+        alert('Error al enviar el mensaje. Por favor, inténtalo de nuevo.');
+      }
+    });
+  });
+</script>

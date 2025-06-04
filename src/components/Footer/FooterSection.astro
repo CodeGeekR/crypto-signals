@@ -1,0 +1,182 @@
+---
+import { ChevronRight } from 'lucide-react';
+---
+
+<footer class="bg-primary-900 pt-24 pb-12">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Newsletter Section -->
+    <div class="card-glass p-8 rounded-2xl mb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div>
+          <h3 class="text-2xl font-bold mb-2">Newsletter</h3>
+          <p class="text-gray-300">
+            Recibe análisis semanales y señales exclusivas directamente en tu inbox.
+          </p>
+        </div>
+        <form id="newsletter-form" class="flex gap-4">
+          <input
+            type="email"
+            placeholder="tu@email.com"
+            class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-green"
+            required
+          />
+          <button
+            type="submit"
+            class="btn-primary whitespace-nowrap"
+          >
+            Suscribirse
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+      <!-- Company Info -->
+      <div>
+        <h4 class="text-xl font-bold mb-6">CryptoSeñales Pro</h4>
+        <p class="text-gray-300 mb-6">
+          La plataforma líder de señales de trading institucionales en Latinoamérica.
+        </p>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <span class="text-xl">𝕏</span>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <span class="text-xl">📱</span>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-white transition-colors">
+            <span class="text-xl">💬</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-xl font-bold mb-6">Enlaces Rápidos</h4>
+        <ul class="space-y-4">
+          <li>
+            <a href="#features" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              Características
+            </a>
+          </li>
+          <li>
+            <a href="#pricing" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              Precios
+            </a>
+          </li>
+          <li>
+            <a href="#testimonials" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              Testimonios
+            </a>
+          </li>
+          <li>
+            <a href="#faq" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              FAQ
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-xl font-bold mb-6">Recursos</h4>
+        <ul class="space-y-4">
+          <li>
+            <a href="#" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              Blog
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              Tutoriales
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              Webinars
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              Documentación
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h4 class="text-xl font-bold mb-6">Legal</h4>
+        <ul class="space-y-4">
+          <li>
+            <a href="#" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              Términos de Uso
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              Política de Privacidad
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              Aviso Legal
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-300 hover:text-accent-green flex items-center group">
+              <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
+              Cookies
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-white/10 pt-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400 text-sm mb-4 md:mb-0">
+          © {new Date().getFullYear()} CryptoSeñales Pro. Todos los derechos reservados.
+        </p>
+        <div class="flex items-center space-x-4">
+          <img src="https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg" alt="Secure Payment" class="h-8" />
+          <img src="https://images.pexels.com/photos/730547/pexels-photo-730547.jpeg" alt="SSL Certified" class="h-8" />
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const newsletterForm = document.getElementById('newsletter-form');
+    
+    newsletterForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = (e.target as HTMLFormElement).querySelector('input[type="email"]')?.value;
+      
+      try {
+        // Here you would typically send the email to your backend
+        console.log('Newsletter subscription:', email);
+        alert('¡Gracias por suscribirte! Recibirás nuestro próximo newsletter.');
+        (e.target as HTMLFormElement).reset();
+      } catch (error) {
+        console.error('Error subscribing to newsletter:', error);
+        alert('Error al suscribirse. Por favor, inténtalo de nuevo.');
+      }
+    });
+  });
+</script>

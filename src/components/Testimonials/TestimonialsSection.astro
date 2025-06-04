@@ -1,0 +1,122 @@
+---
+import { Star } from 'lucide-react';
+
+const testimonials = [
+  {
+    name: "Carlos Rodríguez",
+    role: "Day Trader",
+    image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
+    content: "Las señales de CryptoSeñales Pro transformaron mi trading. En 6 meses, mi portafolio creció un 280% siguiendo sus estrategias institucionales.",
+    rating: 5,
+    stats: {
+      roi: "+280%",
+      period: "6 meses",
+      trades: "426 operaciones"
+    }
+  },
+  {
+    name: "Ana Martínez",
+    role: "Trader Profesional",
+    image: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
+    content: "La precisión de sus señales y el análisis técnico avanzado me han permitido maximizar mis ganancias mientras minimizo riesgos. El mejor servicio de señales que he usado.",
+    rating: 5,
+    stats: {
+      roi: "+175%",
+      period: "3 meses",
+      trades: "213 operaciones"
+    }
+  },
+  {
+    name: "Miguel Torres",
+    role: "Swing Trader",
+    image: "https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg",
+    content: "El soporte 24/7 y la comunidad son increíbles. He aprendido tanto de otros traders y el equipo siempre está disponible para resolver dudas.",
+    rating: 5,
+    stats: {
+      roi: "+420%",
+      period: "12 meses",
+      trades: "892 operaciones"
+    }
+  }
+];
+---
+
+<section id="testimonials" class="relative py-24 bg-primary-800/50">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-hero font-bold mb-6">
+        Traders <span class="text-gradient">Exitosos</span>
+      </h2>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        Conoce a algunos de nuestros traders más exitosos y sus resultados reales usando nuestras señales.
+      </p>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {testimonials.map((testimonial) => (
+        <div class="card-glass p-8 rounded-2xl">
+          <!-- User Info -->
+          <div class="flex items-center mb-6">
+            <img
+              src={testimonial.image}
+              alt={testimonial.name}
+              class="w-16 h-16 rounded-full object-cover mr-4"
+            />
+            <div>
+              <h3 class="font-bold text-lg">{testimonial.name}</h3>
+              <p class="text-gray-400 text-sm">{testimonial.role}</p>
+            </div>
+          </div>
+
+          <!-- Rating -->
+          <div class="flex items-center mb-4">
+            {Array(testimonial.rating).fill(null).map(() => (
+              <Star className="w-5 h-5 text-accent-gold fill-current" />
+            ))}
+          </div>
+
+          <!-- Content -->
+          <p class="text-gray-300 mb-6">"{testimonial.content}"</p>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
+            <div class="text-center">
+              <div class="text-xl font-bold text-accent-green">{testimonial.stats.roi}</div>
+              <div class="text-sm text-gray-400">ROI</div>
+            </div>
+            <div class="text-center">
+              <div class="text-xl font-bold text-accent-gold">{testimonial.stats.period}</div>
+              <div class="text-sm text-gray-400">Período</div>
+            </div>
+            <div class="text-center">
+              <div class="text-xl font-bold text-accent-blue">{testimonial.stats.trades}</div>
+              <div class="text-sm text-gray-400">Trades</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Trust Indicators -->
+    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="text-center">
+        <div class="text-4xl font-bold text-accent-green mb-2">10K+</div>
+        <div class="text-gray-400">Traders Activos</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-bold text-accent-gold mb-2">$50M+</div>
+        <div class="text-gray-400">Volumen Mensual</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-bold text-accent-blue mb-2">15+</div>
+        <div class="text-gray-400">Países</div>
+      </div>
+      <div class="text-center">
+        <div class="text-4xl font-bold text-accent-red mb-2">24/7</div>
+        <div class="text-gray-400">Soporte</div>
+      </div>
+    </div>
+  </div>
+</section>
