@@ -1,49 +1,102 @@
 ---
+
 ---
 
-<div class="hero-cta flex flex-col sm:flex-row gap-6 justify-center items-center opacity-0">
-  <button
-    id="cta-primary"
-    class="btn-primary group relative overflow-hidden px-12 py-5 text-lg font-bold shadow-glow-gold"
+<div
+  class="hero-cta flex flex-col items-center justify-center w-full max-w-md mx-auto animate-slide-up"
+  style="animation-delay: 0.8s;"
+>
+  <!-- Primary CTA Button - Lista de Espera -->
+  <a
+    href="#contact"
+    id="cta-waitlist"
+    class="group relative overflow-hidden w-full px-8 py-5 bg-gradient-to-r from-red-500 to-orange-500 text-white text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:from-red-400 hover:to-orange-400 inline-block text-center"
+    aria-label="Ir a la lista de espera gratuita"
   >
-    <span class="relative z-10 flex items-center">
-      🚀 Acceso Anticipado
-      <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-      </svg>
-    </span>
-    <div class="absolute inset-0 bg-gradient-to-r from-accent-green to-accent-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-  </button>
+    <!-- Background glow effect -->
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-red-400/20 to-orange-400/20 rounded-xl blur-lg scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    >
+    </div>
 
-  <button
-    id="cta-secondary"
-    class="btn-secondary group px-12 py-5 text-lg font-bold"
-  >
-    <span class="flex items-center">
-      📊 Ver Demo en Vivo
-      <svg class="w-5 h-5 ml-2 transform group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    <!-- Button content -->
+    <span class="relative z-10 flex items-center justify-center space-x-2">
+      <span class="hidden sm:inline">🔥 Reservar Mi Spot Gratuito</span>
+      <span class="sm:hidden">🔥 Spot Gratuito</span>
+      <svg
+        class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
       </svg>
     </span>
-  </button>
+
+    <!-- Pulse effect -->
+    <div
+      class="absolute inset-0 rounded-xl bg-gradient-to-r from-red-400 to-orange-400 opacity-0 group-hover:opacity-20 animate-pulse"
+    >
+    </div>
+  </a>
+
+  <!-- Urgency Text -->
+  <div class="mt-4 text-center">
+    <p class="text-sm text-gray-300 flex items-center justify-center space-x-2">
+      <span class="w-2 h-2 bg-accent-green rounded-full animate-pulse"></span>
+      <span>
+        <strong class="text-white">Sin tarjeta de crédito</strong> •
+        <span class="text-accent-green">por tiempo limitado</span> • <br />
+      </span>
+    </p>
+  </div>
+
+  <!-- Social Proof Mini -->
+  <div class="mt-3 text-center">
+    <p class="text-xs text-gray-400">
+      <span class="text-accent-gold font-medium">+2,847 traders</span> se registraron esta semana
+    </p>
+  </div>
 </div>
 
-<p class="hero-disclaimer text-sm text-gray-500 mt-6 opacity-0">
-  💡 <strong>Sin riesgo</strong> • Cancela cuando quieras •
-  <span class="text-accent-green">Garantía de 30 días</span>
-</p>
-
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const primaryBtn = document.getElementById('cta-primary');
-    const secondaryBtn = document.getElementById('cta-secondary');
+  // TypeScript declarations
+  declare global {
+    interface Window {
+      gtag?: (...args: any[]) => void;
+    }
+  }
 
-    primaryBtn?.addEventListener('click', () => {
-      console.log('Abrir modal de acceso anticipado');
-    });
+  document.addEventListener("DOMContentLoaded", () => {
+    const waitlistBtn = document.getElementById("cta-waitlist");
 
-    secondaryBtn?.addEventListener('click', () => {
-      console.log('Abrir demo en vivo');
+    waitlistBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      // Scroll suave hacia la sección de contacto
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        const headerElement = document.querySelector(".header-main") as HTMLElement;
+        const headerHeight = headerElement?.offsetHeight || 80;
+        const targetPosition = contactSection.offsetTop - headerHeight;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+
+        // Track CTA click para analytics
+        if (typeof window.gtag !== "undefined") {
+          window.gtag("event", "cta_click", {
+            event_category: "engagement",
+            event_label: "waitlist_hero_cta",
+            value: 1,
+          });
+        }
+
+        console.log("Redirecting to waitlist section");
+      }
     });
   });
 </script>

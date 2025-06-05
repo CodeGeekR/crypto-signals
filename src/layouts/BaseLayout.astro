@@ -1,13 +1,19 @@
 ---
+import Header from "../components/Layout/Header.astro";
+import FontOptimization from "../components/Layout/FontOptimization.astro";
+import LoadingOptimization from "../components/UI/LoadingOptimization.astro";
+
 export interface Props {
   title: string;
   description: string;
+  showHeader?: boolean;
+  isAuthenticated?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, showHeader = true, isAuthenticated = false } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
@@ -15,19 +21,43 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    
+
+    <!-- Performance hints -->
+    <link rel="dns-prefetch" href="https://api.binance.com" />
+
     <meta name="theme-color" content="#0a0e27" />
     <meta name="color-scheme" content="dark" />
+
+    <!-- Performance optimization -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <FontOptimization />
   </head>
-  <body class="antialiased">
-    <slot />
-    
+  <body class="antialiased bg-primary-900 text-white">
+    <LoadingOptimization />
+
+    {showHeader && <Header isAuthenticated={isAuthenticated} />}
+
+    <main class={showHeader ? "pt-16 lg:pt-20" : ""}>
+      <slot />
+    </main>
+
     <script is:inline>
-      document.documentElement.classList.add('js-enabled');
+      document.documentElement.classList.add("js-enabled");
+
+      // Prevent FOUC (Flash of Unstyled Content)
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      }
     </script>
   </body>
 </html>
 
 <style is:global>
-  @import '../styles/globals.css';
+  @import "../styles/globals.css";
 </style>

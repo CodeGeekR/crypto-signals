@@ -1,26 +1,22 @@
 ---
 const words = [
-  "Señales IA Institucionales",
-  "Trading Algorítmico", 
-  "Gestión de Riesgo Pro"
+  "Señales Institucionales",
+  "Trading Algorítmico",
+  "Gestión de Riesgo",
+  "Análisis Fundamental",
+  "Análisis Técnico",
 ];
 
-const colors = [
-  "text-accent-green",
-  "text-accent-gold",
-  "text-accent-blue"
-];
+const colors = ["text-accent-green", "text-accent-gold", "text-accent-blue", "text-accent-red", "text-accent-gold"];
 ---
 
-<div class="flex flex-col items-center">
-  <span class="text-2xl text-gray-300 mb-4">Domina el mercado con</span>
-  <div class="scrolling-words-container">
+<div class="flex flex-col items-center px-4 sm:px-0">
+  <span class="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-3 lg:mb-4 text-center">Domina el mercado con</span>
+  <div class="scrolling-words-container w-full flex justify-center">
     <div class="scrolling-words-box">
       <ul>
-        {words.map((word, index) => (
-          <li class={colors[index]}>{word}</li>
-        ))}
-        <li class={colors[0]}>{words[0]}</li>
+        {words.map((word, index) => <li class={`${colors[index]} text-center`}>{word}</li>)}
+        <li class={`${colors[0]} text-center`}>{words[0]}</li>
       </ul>
     </div>
   </div>
@@ -34,37 +30,74 @@ const colors = [
   }
 
   .scrolling-words-box {
-    height: 58px;
+    height: 40px;
     overflow: hidden;
   }
 
   .scrolling-words-box ul {
     margin: 0;
     padding: 0;
-    animation: scrollUp 9s infinite;
+    animation: scrollUp 12s infinite linear;
   }
 
   .scrolling-words-box ul li {
-    height: 58px;
+    height: 40px;
     list-style: none;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Responsive font sizes */
+  @media (min-width: 640px) {
+    .scrolling-words-box {
+      height: 48px;
+    }
+
+    .scrolling-words-box ul li {
+      height: 48px;
+      font-size: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .scrolling-words-box {
+      height: 58px;
+    }
+
+    .scrolling-words-box ul li {
+      height: 58px;
+      font-size: 2.5rem;
+    }
   }
 
   @keyframes scrollUp {
-    15%, 25% {
-      transform: translateY(-25%);
+    0%,
+    16% {
+      transform: translateY(0%);
     }
-    40%, 50% {
+    20%,
+    36% {
+      transform: translateY(-16.666%);
+    }
+    40%,
+    56% {
+      transform: translateY(-33.333%);
+    }
+    60%,
+    76% {
       transform: translateY(-50%);
     }
-    65%, 75% {
-      transform: translateY(-75%);
+    80%,
+    96% {
+      transform: translateY(-66.666%);
     }
-    90%, 100% {
-      transform: translateY(-100%);
+    100% {
+      transform: translateY(-83.333%);
     }
   }
 </style>

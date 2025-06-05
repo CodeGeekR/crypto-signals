@@ -29,3 +29,15 @@ pnpm-debug.log*
 
 # netlify local config and cache
 .netlify/
+Instruction-fase01.md
+README_Landing.md
+src/components/Contact/__tests__/
+src/components/Hero/__tests__/
+src/components/Layout/__tests__/
+src/components/Results/README.md
+src/components/Results/__tests__/
+src/scripts/__tests__/
+src/test-setup.ts
+src/test/
+test-results/
+vitest.config.ts

@@ -10,8 +10,8 @@ interface Particle {
 
 export class ParticleSystem {
   private particles: Particle[] = [];
-  private canvas: HTMLCanvasElement;
-  private ctx: CanvasRenderingContext2D;
+  private canvas!: HTMLCanvasElement;
+  private ctx!: CanvasRenderingContext2D;
   private animationId: number = 0;
   private mouseX: number = 0;
   private mouseY: number = 0;

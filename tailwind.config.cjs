@@ -4,9 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        hero: ["Space Grotesk", "sans-serif"],
-        body: ["Inter", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
+        hero: ["Space Grotesk", "Space-Grotesk-fallback", "system-ui", "sans-serif"],
+        body: ["Inter", "Inter-fallback", "system-ui", "sans-serif"],
       },
       colors: {
         primary: {
@@ -84,6 +83,14 @@ module.exports = {
         "neo-raised": "8px 8px 16px #0a0e27, -8px -8px 16px #2a2f54",
         "glow-gold": "0 0 20px rgba(247, 147, 26, 0.3)",
         "glow-green": "0 0 20px rgba(0, 212, 170, 0.3)",
+      },
+      perspective: {
+        '500': '500px',
+        '1000': '1000px',
+        '1500': '1500px',
+      },
+      transformStyle: {
+        'preserve-3d': 'preserve-3d',
       }
     },
   },

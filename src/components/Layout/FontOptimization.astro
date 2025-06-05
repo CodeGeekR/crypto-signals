@@ -1,0 +1,69 @@
+---
+// Font optimization component
+---
+
+<!-- Font display optimization -->
+<style is:global>
+  /* Prevent FOUT (Flash of Unstyled Text) */
+  html {
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  /* Progressive font loading */
+  .fonts-loaded body {
+    font-family: "Inter", sans-serif;
+  }
+
+  .fonts-loaded .font-hero {
+    font-family: "Space Grotesk", sans-serif;
+  }
+
+  /* Fallback font metrics to reduce layout shift */
+  @font-face {
+    font-family: "Inter-fallback";
+    src: local("Arial");
+    ascent-override: 90.2%;
+    descent-override: 22.48%;
+    line-gap-override: 0%;
+    size-adjust: 107.4%;
+  }
+
+  @font-face {
+    font-family: "Space-Grotesk-fallback";
+    src: local("Arial");
+    ascent-override: 77%;
+    descent-override: 20%;
+    line-gap-override: 0%;
+    size-adjust: 115%;
+  }
+</style>
+
+<script is:inline>
+  // Font loading optimization
+  (function () {
+    // Check if fonts are already loaded
+    if (sessionStorage.getItem("fonts-loaded")) {
+      document.documentElement.classList.add("fonts-loaded");
+      return;
+    }
+
+    // Load fonts asynchronously
+    if ("fonts" in document) {
+      Promise.all([document.fonts.load("400 1em Inter"), document.fonts.load("700 1em Space Grotesk")])
+        .then(function () {
+          document.documentElement.classList.add("fonts-loaded");
+          sessionStorage.setItem("fonts-loaded", "true");
+        })
+        .catch(function () {
+          // Fallback if font loading fails
+          document.documentElement.classList.add("fonts-loaded");
+        });
+    } else {
+      // Fallback for browsers without Font Loading API
+      document.documentElement.classList.add("fonts-loaded");
+    }
+  })();
+</script>

@@ -1,5 +1,5 @@
 ---
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus } from "lucide-react";
 ---
 
 <section id="faq" class="relative py-24 bg-primary-900">
@@ -16,70 +16,62 @@ import { Plus, Minus } from 'lucide-react';
 
     <!-- FAQ Grid -->
     <div class="max-w-4xl mx-auto space-y-6">
-      {[
-        {
-          question: "¿Cómo funcionan las señales de trading?",
-          answer: "Nuestras señales son generadas por algoritmos de IA que analizan múltiples indicadores técnicos, patrones de mercado y datos fundamentales en tiempo real. Cada señal incluye punto de entrada, stop loss y take profit optimizados."
-        },
-        {
-          question: "¿Necesito experiencia previa en trading?",
-          answer: "No es necesario tener experiencia previa. Nuestro sistema está diseñado tanto para principiantes como para traders avanzados. Ofrecemos recursos educativos y soporte para ayudarte a comenzar."
-        },
-        {
-          question: "¿Qué exchanges y pares de trading soportan?",
-          answer: "Soportamos los principales exchanges como Binance, Coinbase Pro, y FTX. Cubrimos más de 100 pares de trading, incluyendo BTC, ETH, y las principales altcoins."
-        },
-        {
-          question: "¿Cuál es la rentabilidad promedio?",
-          answer: "Nuestros usuarios reportan un ROI promedio del 347% anual. Sin embargo, los resultados pueden variar según el capital invertido, la gestión de riesgo y las condiciones del mercado."
-        },
-        {
-          question: "¿Cómo funciona la garantía de devolución?",
-          answer: "Ofrecemos una garantía de devolución de 30 días sin preguntas. Si no estás satisfecho con nuestro servicio, te reembolsaremos el 100% de tu inversión."
-        },
-        {
-          question: "¿Qué tipo de soporte ofrecen?",
-          answer: "Brindamos soporte técnico 24/7 a través de chat en vivo, email y Discord. Los usuarios Pro y Enterprise tienen acceso a líneas de soporte prioritario y consultoría personalizada."
-        }
-      ].map((faq, index) => (
-        <div class="card-glass rounded-2xl overflow-hidden">
-          <button
-            class="faq-trigger w-full flex items-center justify-between p-6 text-left"
-            data-faq-id={index}
-          >
-            <span class="text-lg font-semibold">{faq.question}</span>
-            <span class="text-accent-green ml-4">
-              <Plus className="w-6 h-6 plus-icon" />
-              <Minus className="w-6 h-6 minus-icon hidden" />
-            </span>
-          </button>
-          <div class="faq-content hidden px-6 pb-6">
-            <p class="text-gray-300">{faq.answer}</p>
+      {
+        [
+          {
+            question: "¿Cómo funcionan las señales de trading?",
+            answer:
+              "Nuestras señales son generadas por algoritmos de IA que analizan múltiples indicadores técnicos, patrones de mercado y datos fundamentales en tiempo real. Cada señal incluye punto de entrada, stop loss y take profit optimizados.",
+          },
+          {
+            question: "¿Necesito experiencia previa en trading?",
+            answer:
+              "No es necesario tener experiencia previa. Nuestro sistema está diseñado tanto para principiantes como para traders avanzados. Ofrecemos recursos educativos y soporte para ayudarte a comenzar.",
+          },
+          {
+            question: "¿Qué exchanges y pares de trading soportan?",
+            answer:
+              "Soportamos los principales exchanges como Binance, Coinbase Pro, y FTX. Cubrimos más de 100 pares de trading, incluyendo BTC, ETH, y las principales altcoins.",
+          },
+          {
+            question: "¿Cuál es la rentabilidad promedio?",
+            answer:
+              "Nuestros usuarios reportan un ROI promedio del 347% anual. Sin embargo, los resultados pueden variar según el capital invertido, la gestión de riesgo y las condiciones del mercado.",
+          },
+          {
+            question: "¿Cómo funciona la garantía de devolución?",
+            answer:
+              "Ofrecemos una garantía de devolución de 30 días sin preguntas. Si no estás satisfecho con nuestro servicio, te reembolsaremos el 100% de tu inversión.",
+          },
+          {
+            question: "¿Qué tipo de soporte ofrecen?",
+            answer:
+              "Brindamos soporte técnico 24/7 a través de chat en vivo, email y Discord. Los usuarios Pro y Enterprise tienen acceso a líneas de soporte prioritario y consultoría personalizada.",
+          },
+        ].map((faq, index) => (
+          <div class="card-glass rounded-2xl overflow-hidden">
+            <button class="faq-trigger w-full flex items-center justify-between p-6 text-left" data-faq-id={index}>
+              <span class="text-lg font-semibold">{faq.question}</span>
+              <span class="text-accent-green ml-4">
+                <Plus className="w-6 h-6 plus-icon" />
+                <Minus className="w-6 h-6 minus-icon hidden" />
+              </span>
+            </button>
+            <div class="faq-content hidden px-6 pb-6">
+              <p class="text-gray-300">{faq.answer}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
 
     <!-- Contact CTA -->
     <div class="text-center mt-16">
       <p class="text-gray-300 mb-4">¿No encuentras la respuesta que buscas?</p>
-      <a
-        href="#contact"
-        class="inline-flex items-center text-accent-green hover:text-accent-gold transition-colors"
-      >
+      <a href="#contact" class="inline-flex items-center text-accent-green hover:text-accent-gold transition-colors">
         Contáctanos directamente
-        <svg
-          class="w-5 h-5 ml-2"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M14 5l7 7m0 0l-7 7m7-7H3"
-          />
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
         </svg>
       </a>
     </div>
@@ -87,32 +79,38 @@ import { Plus, Minus } from 'lucide-react';
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const faqTriggers = document.querySelectorAll('.faq-trigger');
-    
-    faqTriggers.forEach(trigger => {
-      trigger.addEventListener('click', () => {
-        const content = trigger.nextElementSibling;
-        const plusIcon = trigger.querySelector('.plus-icon');
-        const minusIcon = trigger.querySelector('.minus-icon');
-        
-        // Toggle current FAQ
-        content?.classList.toggle('hidden');
-        plusIcon?.classList.toggle('hidden');
-        minusIcon?.classList.toggle('hidden');
-        
-        // Close other FAQs
-        faqTriggers.forEach(otherTrigger => {
+  document.addEventListener("DOMContentLoaded", () => {
+    const faqTriggers = document.querySelectorAll(".faq-trigger");
+
+    faqTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const content = trigger.nextElementSibling as HTMLElement;
+        const plusIcon = trigger.querySelector(".plus-icon");
+        const minusIcon = trigger.querySelector(".minus-icon");
+
+        // Close other open FAQs first
+        faqTriggers.forEach((otherTrigger) => {
           if (otherTrigger !== trigger) {
-            const otherContent = otherTrigger.nextElementSibling;
-            const otherPlusIcon = otherTrigger.querySelector('.plus-icon');
-            const otherMinusIcon = otherTrigger.querySelector('.minus-icon');
-            
-            otherContent?.classList.add('hidden');
-            otherPlusIcon?.classList.remove('hidden');
-            otherMinusIcon?.classList.add('hidden');
+            const otherContent = otherTrigger.nextElementSibling as HTMLElement;
+            const otherPlusIcon = otherTrigger.querySelector(".plus-icon");
+            const otherMinusIcon = otherTrigger.querySelector(".minus-icon");
+
+            otherContent.classList.add("hidden");
+            otherPlusIcon?.classList.remove("hidden");
+            otherMinusIcon?.classList.add("hidden");
           }
         });
+
+        // Toggle current FAQ
+        if (content.classList.contains("hidden")) {
+          content.classList.remove("hidden");
+          plusIcon?.classList.add("hidden");
+          minusIcon?.classList.remove("hidden");
+        } else {
+          content.classList.add("hidden");
+          plusIcon?.classList.remove("hidden");
+          minusIcon?.classList.add("hidden");
+        }
       });
     });
   });

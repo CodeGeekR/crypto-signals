@@ -7,7 +7,7 @@ export class AnimationController {
   private tl: gsap.core.Timeline;
 
   constructor() {
-    this.tl = gsap.timeline();
+    this.tl = gsap.timeline({ delay: 0.5 });
     this.initializeAnimations();
   }
 
@@ -17,8 +17,14 @@ export class AnimationController {
   }
 
   heroAnimations() {
+    // Set initial states
+    gsap.set([".hero-badge-container", ".hero-title", ".hero-subtitle", ".hero-description", ".hero-metrics", ".hero-cta"], {
+      opacity: 0,
+      y: 30
+    });
+
     this.tl
-      .to(".hero-badge", {
+      .to(".hero-badge-container", {
         duration: 1,
         opacity: 1,
         y: 0,
@@ -52,20 +58,10 @@ export class AnimationController {
       .to(".hero-cta", {
         duration: 1,
         opacity: 1,
+        y: 0,
         scale: 1,
         ease: "elastic.out(1, 0.75)"
-      }, "-=0.3")
-      .to(".hero-disclaimer", {
-        duration: 0.8,
-        opacity: 1,
-        ease: "power2.out"
-      }, "-=0.2")
-      .to(".hero-scroll", {
-        duration: 0.6,
-        opacity: 1,
-        y: 0,
-        ease: "power2.out"
-      }, "-=0.1");
+      }, "-=0.3");
   }
 
   setupScrollTriggers() {
