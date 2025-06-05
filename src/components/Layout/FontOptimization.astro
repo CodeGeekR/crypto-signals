@@ -1,69 +1,317 @@
 ---
-// Font optimization component
+// 🚀 Optimización Avanzada de Fuentes para PageSpeed 100/100
+// Resuelve: "Recursos que bloquean el primer procesamiento de imagen"
+// Target: FCP < 1800ms, LCP < 2500ms
 ---
 
-<!-- Font display optimization -->
+<!-- 🔗 DNS Prefetch y Preconnect para Google Fonts (Crítico para FCP) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+<!-- ⚡ Preload de fuentes críticas (Above-the-fold) -->
+<link
+  rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+  crossorigin
+/>
+
+<link
+  rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+  crossorigin
+/>
+
+<!-- 🎯 Fallback crítico para JavaScript deshabilitado -->
+<noscript>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    crossorigin
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap"
+    crossorigin
+  />
+</noscript>
+
+<!-- 📱 Optimización de carga de fuentes responsiva -->
 <style is:global>
-  /* Prevent FOUT (Flash of Unstyled Text) */
+  /* 🎯 Sistema de fuentes con fallbacks optimizados para reducir CLS */
+  :root {
+    /* Variables de fuentes con fallbacks calculados */
+    --font-inter: "Inter", "Inter-fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-space-grotesk:
+      "Space Grotesk", "Space-Grotesk-fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    /* Métricas optimizadas para evitar layout shift */
+    --font-inter-adjust: 107.4%;
+    --font-grotesk-adjust: 115%;
+  }
+
+  /* 🚀 Fuente base del sistema para renderizado inmediato (sin bloqueo) */
   html {
-    font-family:
-      system-ui,
-      -apple-system,
-      sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-display: swap;
+    text-rendering: optimizeSpeed;
   }
 
-  /* Progressive font loading */
-  .fonts-loaded body {
-    font-family: "Inter", sans-serif;
+  /* ⚡ Optimización de renderizado de texto */
+  body {
+    font-family: var(--font-inter);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1;
   }
 
-  .fonts-loaded .font-hero {
-    font-family: "Space Grotesk", sans-serif;
+  /* 🎨 Fuente hero optimizada */
+  .font-hero {
+    font-family: var(--font-space-grotesk);
+    font-display: swap;
   }
 
-  /* Fallback font metrics to reduce layout shift */
+  /* 📊 Fuentes pre-calculadas para evitar layout shift */
   @font-face {
     font-family: "Inter-fallback";
-    src: local("Arial");
+    src: local("BlinkMacSystemFont"), local("Segoe UI"), local("Roboto"), local("Arial");
     ascent-override: 90.2%;
     descent-override: 22.48%;
     line-gap-override: 0%;
-    size-adjust: 107.4%;
+    size-adjust: var(--font-inter-adjust);
   }
 
   @font-face {
     font-family: "Space-Grotesk-fallback";
-    src: local("Arial");
+    src: local("BlinkMacSystemFont"), local("Segoe UI"), local("Helvetica Neue"), local("Arial");
     ascent-override: 77%;
     descent-override: 20%;
     line-gap-override: 0%;
-    size-adjust: 115%;
+    size-adjust: var(--font-grotesk-adjust);
+  }
+
+  /* 🎯 Estados de carga de fuentes para mejor UX */
+  .fonts-loading {
+    visibility: hidden;
+  }
+
+  .fonts-loaded body {
+    font-family: var(--font-inter);
+  }
+
+  .fonts-loaded .font-hero {
+    font-family: var(--font-space-grotesk);
+  }
+
+  .fonts-failed body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  .fonts-failed .font-hero {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 600;
+  }
+
+  /* 📱 Optimizaciones responsive para performance */
+  @media (max-width: 768px) {
+    body {
+      text-rendering: optimizeSpeed; /* Priorizar velocidad en mobile */
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+
+  /* 🎨 Optimización de subpixel rendering */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
   }
 </style>
 
+<!-- 🚀 Script de carga optimizada de fuentes (no bloquea renderizado) -->
 <script is:inline>
-  // Font loading optimization
   (function () {
-    // Check if fonts are already loaded
-    if (sessionStorage.getItem("fonts-loaded")) {
-      document.documentElement.classList.add("fonts-loaded");
-      return;
+    "use strict";
+
+    // ⚡ Variables de configuración
+    const FONT_CACHE_KEY = "cryptosenales-fonts-v2";
+    const FONT_TIMEOUT = 3000; // 3 segundos timeout
+    const STORAGE_KEY = "fonts-loaded-timestamp";
+    const CACHE_DURATION = 86400000; // 24 horas en ms
+
+    // 🎯 Verificar caché de fuentes
+    function areFontsCached() {
+      try {
+        const timestamp = localStorage.getItem(STORAGE_KEY);
+        if (!timestamp) return false;
+
+        const now = Date.now();
+        const cacheTime = parseInt(timestamp, 10);
+
+        // Verificar si el caché sigue válido (24 horas)
+        return now - cacheTime < CACHE_DURATION;
+      } catch (e) {
+        return false;
+      }
     }
 
-    // Load fonts asynchronously
-    if ("fonts" in document) {
-      Promise.all([document.fonts.load("400 1em Inter"), document.fonts.load("700 1em Space Grotesk")])
-        .then(function () {
-          document.documentElement.classList.add("fonts-loaded");
-          sessionStorage.setItem("fonts-loaded", "true");
-        })
-        .catch(function () {
-          // Fallback if font loading fails
-          document.documentElement.classList.add("fonts-loaded");
+    // 💾 Guardar estado de fuentes cargadas
+    function markFontsAsLoaded() {
+      try {
+        localStorage.setItem(STORAGE_KEY, Date.now().toString());
+        sessionStorage.setItem(FONT_CACHE_KEY, "true");
+      } catch (e) {
+        // Silently fail for users with disabled storage
+      }
+    }
+
+    // 🎨 Aplicar clase de fuentes cargadas
+    function applyLoadedFonts() {
+      const html = document.documentElement;
+      html.classList.remove("fonts-loading", "fonts-failed");
+      html.classList.add("fonts-loaded");
+
+      // 📊 Performance mark para métricas
+      if ("performance" in window && performance.mark) {
+        performance.mark("fonts-loaded");
+      }
+    }
+
+    // ❌ Manejar error de carga de fuentes
+    function handleFontError() {
+      const html = document.documentElement;
+      html.classList.remove("fonts-loading");
+      html.classList.add("fonts-failed");
+
+      // 📊 Performance mark para debug
+      if ("performance" in window && performance.mark) {
+        performance.mark("fonts-failed");
+      }
+    }
+
+    // 🚀 Función principal de carga de fuentes
+    function loadFonts() {
+      // Verificar si las fuentes ya están en caché
+      if (areFontsCached()) {
+        applyLoadedFonts();
+        return;
+      }
+
+      // Verificar soporte de Font Loading API
+      if (!("fonts" in document)) {
+        // Fallback para navegadores sin soporte
+        setTimeout(applyLoadedFonts, 100);
+        return;
+      }
+
+      // Marcar inicio de carga
+      document.documentElement.classList.add("fonts-loading");
+
+      // 📝 Definir fuentes críticas a cargar
+      const fontsToLoad = [
+        // Inter (fuente principal)
+        "400 1em Inter",
+        "500 1em Inter",
+        "600 1em Inter",
+        "700 1em Inter",
+
+        // Space Grotesk (fuente hero)
+        '500 1em "Space Grotesk"',
+        '600 1em "Space Grotesk"',
+        '700 1em "Space Grotesk"',
+      ];
+
+      // ⏱️ Timeout de seguridad
+      const timeoutId = setTimeout(() => {
+        handleFontError();
+      }, FONT_TIMEOUT);
+
+      // 🎯 Cargar fuentes de forma asíncrona
+      const fontPromises = fontsToLoad.map((font) => {
+        return document.fonts.load(font).catch(() => {
+          // Silently fail individual fonts
+          return null;
         });
+      });
+
+      // ✅ Procesar resultados de carga
+      Promise.allSettled(fontPromises)
+        .then((results) => {
+          clearTimeout(timeoutId);
+
+          // Verificar si al menos algunas fuentes se cargaron
+          const successCount = results.filter((r) => r.status === "fulfilled" && r.value).length;
+
+          if (successCount > 0) {
+            applyLoadedFonts();
+            markFontsAsLoaded();
+
+            // 📊 Métricas de performance opcional
+            if (window.gtag) {
+              gtag("event", "fonts_loaded", {
+                custom_parameter: successCount,
+                event_category: "Performance",
+              });
+            }
+          } else {
+            handleFontError();
+          }
+        })
+        .catch(() => {
+          clearTimeout(timeoutId);
+          handleFontError();
+        });
+    }
+
+    // 🚀 Inicializar carga de fuentes
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", loadFonts);
     } else {
-      // Fallback for browsers without Font Loading API
-      document.documentElement.classList.add("fonts-loaded");
+      loadFonts();
+    }
+
+    // 🔄 Escuchar cambios de visibilidad para optimizar recursos
+    if ("hidden" in document) {
+      document.addEventListener("visibilitychange", function () {
+        if (!document.hidden && !document.documentElement.classList.contains("fonts-loaded")) {
+          loadFonts();
+        }
+      });
     }
   })();
 </script>
+
+<!-- 📊 Resource Hints adicionales para optimización -->
+<link rel="prefetch" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- 🎯 Critical CSS inline para evitar bloqueo de renderizado -->
+<style>
+  /* CSS crítico inline para renderizado inmediato */
+  .hero-title,
+  .font-hero {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 600;
+    font-display: swap;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 400;
+    font-display: swap;
+  }
+</style>

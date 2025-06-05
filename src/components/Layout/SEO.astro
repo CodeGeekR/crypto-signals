@@ -462,13 +462,11 @@ const webPageSchema = {
 <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
 
 <!-- Performance optimization preconnects -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- NOTA: Google Fonts preconnects se manejan en FontOptimization.astro -->
 <link rel="preconnect" href="https://www.googletagmanager.com" />
 <link rel="preconnect" href="https://www.google-analytics.com" />
 
 <!-- DNS Prefetch para recursos externos críticos -->
-<link rel="dns-prefetch" href="//fonts.googleapis.com" />
 <link rel="dns-prefetch" href="//api.binance.com" />
 <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
 <link rel="dns-prefetch" href="//www.googletagmanager.com" />

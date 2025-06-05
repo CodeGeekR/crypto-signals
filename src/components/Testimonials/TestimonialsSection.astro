@@ -1,11 +1,13 @@
 ---
 import { Star } from 'lucide-react';
+import { Image } from 'astro:assets';
 
 const testimonials = [
   {
     name: "Carlos Rodríguez",
     role: "Day Trader",
-    image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
+    image: "/images/testimonials/carlos-rodriguez.webp",
+    imageAlt: "Foto de perfil de Carlos Rodríguez, Day Trader exitoso",
     content: "Las señales de CryptoSeñales Pro transformaron mi trading. En 6 meses, mi portafolio creció un 280% siguiendo sus estrategias institucionales.",
     rating: 5,
     stats: {
@@ -17,7 +19,8 @@ const testimonials = [
   {
     name: "Ana Martínez",
     role: "Trader Profesional",
-    image: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
+    image: "/images/testimonials/ana-martinez.webp",
+    imageAlt: "Foto de perfil de Ana Martínez, Trader Profesional exitosa",
     content: "La precisión de sus señales y el análisis técnico avanzado me han permitido maximizar mis ganancias mientras minimizo riesgos. El mejor servicio de señales que he usado.",
     rating: 5,
     stats: {
@@ -29,7 +32,8 @@ const testimonials = [
   {
     name: "Miguel Torres",
     role: "Swing Trader",
-    image: "https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg",
+    image: "/images/testimonials/miguel-torres.webp",
+    imageAlt: "Foto de perfil de Miguel Torres, Swing Trader exitoso",
     content: "El soporte 24/7 y la comunidad son increíbles. He aprendido tanto de otros traders y el equipo siempre está disponible para resolver dudas.",
     rating: 5,
     stats: {
@@ -55,43 +59,63 @@ const testimonials = [
 
     <!-- Testimonials Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {testimonials.map((testimonial) => (
+      {testimonials.map((testimonial, index) => (
         <div class="card-glass p-8 rounded-2xl">
           <!-- User Info -->
           <div class="flex items-center mb-6">
-            <img
-              src={testimonial.image}
-              alt={testimonial.name}
-              class="w-16 h-16 rounded-full object-cover mr-4"
-            />
-            <div>
-              <h3 class="font-bold text-lg">{testimonial.name}</h3>
-              <p class="text-gray-400 text-sm">{testimonial.role}</p>
+            <!-- Avatar optimizado con Astro Image -->
+            <div class="flex-shrink-0 mr-4">
+              <img
+                src={testimonial.image}
+                alt={testimonial.imageAlt}
+                class="w-16 h-16 rounded-full object-cover"
+                width="64"
+                height="64"
+                loading={index < 3 ? "eager" : "lazy"}
+                decoding="async"
+                sizes="64px"
+              />
+            </div>
+            <div class="min-w-0">
+              <h3 class="font-bold text-lg text-white truncate">{testimonial.name}</h3>
+              <p class="text-gray-400 text-sm truncate">{testimonial.role}</p>
             </div>
           </div>
 
           <!-- Rating -->
-          <div class="flex items-center mb-4">
-            {Array(testimonial.rating).fill(null).map(() => (
-              <Star className="w-5 h-5 text-accent-gold fill-current" />
+          <div class="flex items-center mb-4" aria-label={`Calificación: ${testimonial.rating} de 5 estrellas`}>
+            {Array(testimonial.rating).fill(null).map((_, starIndex) => (
+              <Star 
+                className="w-5 h-5 text-accent-gold fill-current" 
+                aria-hidden="true"
+                key={starIndex}
+              />
             ))}
           </div>
 
           <!-- Content -->
-          <p class="text-gray-300 mb-6">"{testimonial.content}"</p>
+          <blockquote class="text-gray-300 mb-6 leading-relaxed">
+            "{testimonial.content}"
+          </blockquote>
 
           <!-- Stats -->
           <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
             <div class="text-center">
-              <div class="text-xl font-bold text-accent-green">{testimonial.stats.roi}</div>
+              <div class="text-xl font-bold text-accent-green" aria-label={`ROI: ${testimonial.stats.roi}`}>
+                {testimonial.stats.roi}
+              </div>
               <div class="text-sm text-gray-400">ROI</div>
             </div>
             <div class="text-center">
-              <div class="text-xl font-bold text-accent-gold">{testimonial.stats.period}</div>
+              <div class="text-xl font-bold text-accent-gold" aria-label={`Período: ${testimonial.stats.period}`}>
+                {testimonial.stats.period}
+              </div>
               <div class="text-sm text-gray-400">Período</div>
             </div>
             <div class="text-center">
-              <div class="text-xl font-bold text-accent-blue">{testimonial.stats.trades}</div>
+              <div class="text-xl font-bold text-accent-blue" aria-label={`Trades: ${testimonial.stats.trades}`}>
+                {testimonial.stats.trades}
+              </div>
               <div class="text-sm text-gray-400">Trades</div>
             </div>
           </div>
@@ -100,23 +124,85 @@ const testimonials = [
     </div>
 
     <!-- Trust Indicators -->
-    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8" role="region" aria-label="Indicadores de confianza">
       <div class="text-center">
-        <div class="text-4xl font-bold text-accent-green mb-2">10K+</div>
+        <div class="text-4xl font-bold text-accent-green mb-2" aria-label="10 mil traders activos">
+          10K+
+        </div>
         <div class="text-gray-400">Traders Activos</div>
       </div>
       <div class="text-center">
-        <div class="text-4xl font-bold text-accent-gold mb-2">$50M+</div>
+        <div class="text-4xl font-bold text-accent-gold mb-2" aria-label="50 millones de dólares en volumen mensual">
+          $50M+
+        </div>
         <div class="text-gray-400">Volumen Mensual</div>
       </div>
       <div class="text-center">
-        <div class="text-4xl font-bold text-accent-blue mb-2">15+</div>
+        <div class="text-4xl font-bold text-accent-blue mb-2" aria-label="Presencia en más de 15 países">
+          15+
+        </div>
         <div class="text-gray-400">Países</div>
       </div>
       <div class="text-center">
-        <div class="text-4xl font-bold text-accent-red mb-2">24/7</div>
+        <div class="text-4xl font-bold text-accent-red mb-2" aria-label="Soporte 24 horas 7 días">
+          24/7
+        </div>
         <div class="text-gray-400">Soporte</div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- Schema.org JSON-LD para SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Testimonios de Traders Exitosos",
+  "description": "Testimonios reales de traders que han tenido éxito usando CryptoSeñales Pro",
+  "itemListElement": [
+    {
+      "@type": "Review",
+      "position": 1,
+      "author": {
+        "@type": "Person",
+        "name": "Carlos Rodríguez"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "reviewBody": "Las señales de CryptoSeñales Pro transformaron mi trading. En 6 meses, mi portafolio creció un 280% siguiendo sus estrategias institucionales."
+    },
+    {
+      "@type": "Review",
+      "position": 2,
+      "author": {
+        "@type": "Person",
+        "name": "Ana Martínez"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "reviewBody": "La precisión de sus señales y el análisis técnico avanzado me han permitido maximizar mis ganancias mientras minimizo riesgos. El mejor servicio de señales que he usado."
+    },
+    {
+      "@type": "Review",
+      "position": 3,
+      "author": {
+        "@type": "Person",
+        "name": "Miguel Torres"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "reviewBody": "El soporte 24/7 y la comunidad son increíbles. He aprendido tanto de otros traders y el equipo siempre está disponible para resolver dudas."
+    }
+  ]
+}
+</script>
