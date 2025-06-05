@@ -41,3 +41,4 @@ src/test-setup.ts
 src/test/
 test-results/
 vitest.config.ts
+docs/

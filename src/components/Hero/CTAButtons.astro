@@ -3,81 +3,345 @@
 ---
 
 <div
-  class="hero-cta flex flex-col items-center justify-center w-full max-w-md mx-auto animate-slide-up"
+  class="hero-cta flex flex-col items-center justify-center w-full max-w-2xl mx-auto animate-slide-up"
   style="animation-delay: 0.8s;"
 >
-  <!-- Primary CTA Button - Lista de Espera -->
-  <a
-    href="#contact"
-    id="cta-waitlist"
-    class="group relative overflow-hidden w-full px-8 py-5 bg-gradient-to-r from-red-500 to-orange-500 text-white text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:from-red-400 hover:to-orange-400 inline-block text-center"
-    aria-label="Ir a la lista de espera gratuita"
-  >
-    <!-- Background glow effect -->
-    <div
-      class="absolute inset-0 bg-gradient-to-r from-red-400/20 to-orange-400/20 rounded-xl blur-lg scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-    >
+  <!-- Pre-CTA Features Section -->
+  <div id="pre-cta-section" class="w-full mb-12">
+    <!-- Section Title -->
+    <div class="text-center mb-8">
+      <p class="text-sm text-gray-400 uppercase tracking-wider font-medium">Tecnología Institucional Disponible</p>
     </div>
 
-    <!-- Button content -->
-    <span class="relative z-10 flex items-center justify-center space-x-2">
-      <span class="hidden sm:inline">🔥 Reservar Mi Spot Gratuito</span>
-      <span class="sm:hidden">🔥 Spot Gratuito</span>
-      <svg
-        class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-      </svg>
-    </span>
+    <!-- Features Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-lg mx-auto">
+      <!-- Feature 1 -->
+      <div class="feature-card">
+        <div class="feature-content">
+          <div class="feature-icon">
+            <svg
+              class="w-5 h-5 text-accent-green"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              ></path>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <h4 class="text-sm font-semibold text-white mb-1">Análisis Técnico</h4>
+            <p class="text-xs text-gray-400">Trading Profesional</p>
+          </div>
+        </div>
+      </div>
 
-    <!-- Pulse effect -->
-    <div
-      class="absolute inset-0 rounded-xl bg-gradient-to-r from-red-400 to-orange-400 opacity-0 group-hover:opacity-20 animate-pulse"
-    >
+      <!-- Feature 2 -->
+      <div class="feature-card">
+        <div class="feature-content">
+          <div class="feature-icon">
+            <svg
+              class="w-5 h-5 text-accent-gold"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+              ></path>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <h4 class="text-sm font-semibold text-white mb-1">Bitcoin Trading</h4>
+            <p class="text-xs text-gray-400">Institucional</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </a>
-
-  <!-- Urgency Text -->
-  <div class="mt-4 text-center">
-    <p class="text-sm text-gray-300 flex items-center justify-center space-x-2">
-      <span class="w-2 h-2 bg-accent-green rounded-full animate-pulse"></span>
-      <span>
-        <strong class="text-white">Sin tarjeta de crédito</strong> •
-        <span class="text-accent-green">por tiempo limitado</span> • <br />
-      </span>
-    </p>
   </div>
 
-  <!-- Social Proof Mini -->
-  <div class="mt-3 text-center">
-    <p class="text-xs text-gray-400">
-      <span class="text-accent-gold font-medium">+2,847 traders</span> se registraron esta semana
-    </p>
+  <!-- Primary CTA Button -->
+  <div class="w-full mb-12">
+    <a
+      href="#contact"
+      id="cta-waitlist"
+      class="group relative overflow-hidden w-full max-w-md mx-auto px-8 py-5 bg-gradient-to-r from-red-500 to-orange-500 text-white text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:from-red-400 hover:to-orange-400 inline-block text-center"
+      aria-label="Acceder a señales de trading en vivo gratis - Plataforma institucional"
+    >
+      <!-- Background glow effect -->
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-red-400/20 to-orange-400/20 rounded-xl blur-lg scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      >
+      </div>
+
+      <!-- Button content -->
+      <span class="relative z-10 flex items-center justify-center space-x-2">
+        <span class="hidden sm:inline">🚀 Acceder a Señales Gratis</span>
+        <span class="sm:hidden">🚀 Señales Gratis</span>
+        <svg
+          class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+        </svg>
+      </span>
+
+      <!-- Pulse effect -->
+      <div
+        class="absolute inset-0 rounded-xl bg-gradient-to-r from-red-400 to-orange-400 opacity-0 group-hover:opacity-20 animate-pulse"
+      >
+      </div>
+    </a>
+  </div>
+
+  <!-- Post-CTA Benefits Section -->
+  <div id="post-cta-section" class="w-full">
+    <!-- Section Divider -->
+    <div class="flex items-center justify-center mb-10">
+      <div class="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent w-full max-w-xs"></div>
+      <span class="px-4 text-xs text-gray-500 uppercase tracking-wider font-medium whitespace-nowrap">
+        Incluido en tu acceso
+      </span>
+      <div class="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent w-full max-w-xs"></div>
+    </div>
+
+    <!-- Benefits Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+      <!-- Benefit 1 -->
+      <div class="benefit-card">
+        <div class="benefit-content">
+          <div class="benefit-icon">
+            <svg
+              class="w-5 h-5 text-accent-blue"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"
+              ></path>
+            </svg>
+          </div>
+          <div class="benefit-text">
+            <h4 class="text-base font-medium text-white mb-2">Mejores Indicadores</h4>
+            <p class="text-sm text-gray-400 leading-relaxed">Trading Automatizado con herramientas institucionales</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Benefit 2 -->
+      <div class="benefit-card">
+        <div class="benefit-content">
+          <div class="benefit-icon">
+            <svg
+              class="w-5 h-5 text-accent-green"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
+            </svg>
+          </div>
+          <div class="benefit-text">
+            <h4 class="text-base font-medium text-white mb-2">Arbitrage Crypto</h4>
+            <p class="text-sm text-gray-400 leading-relaxed">Estrategias Avanzadas de Wall Street</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Advanced Features Info -->
+    <div class="advanced-features-info mb-10">
+      <div class="info-content">
+        <div class="flex items-center justify-center space-x-3 mb-3">
+          <span class="info-dot"></span>
+          <h5 class="text-sm font-medium text-white">Acceso Completo Incluido</h5>
+          <span class="info-dot"></span>
+        </div>
+        <p class="text-sm text-gray-300 text-center leading-relaxed max-w-md mx-auto">
+          Acceso a <span class="text-accent-gold font-medium">criptomonedas más rentables</span>
+          con <span class="text-accent-blue font-medium">institutional trading software</span> profesional
+        </p>
+      </div>
+    </div>
+
+    <!-- Social Proof -->
+    <div class="social-proof-section">
+      <div class="proof-content">
+        <div class="proof-stats">
+          <span class="text-accent-gold font-bold text-2xl">+2,847</span>
+          <span class="text-white text-sm font-medium ml-2">traders LATAM</span>
+        </div>
+        <div class="proof-badge">
+          <span class="text-xs text-gray-400">ya usan nuestras</span>
+          <span class="text-sm text-white font-medium">Señales de Trading en Vivo Gratis</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<script>
-  // TypeScript declarations
-  declare global {
-    interface Window {
-      gtag?: (...args: any[]) => void;
+<script is:inline>
+  // Global variables for Motion library
+  window.Motion = window.Motion || null;
+  window.gtag = window.gtag || null;
+
+  // Motion library loader with fallback
+  async function loadMotion() {
+    try {
+      const motion = await import("https://cdn.jsdelivr.net/npm/motion@11.13.5/+esm");
+      window.Motion = {
+        animate: motion.animate,
+        stagger: motion.stagger,
+      };
+      return true;
+    } catch (error) {
+      return false;
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Load Motion library
+    const motionLoaded = await loadMotion();
+
+    // Initialize animations
+    if (motionLoaded) {
+      initMotionAnimations();
+    } else {
+      initCSSFallbackAnimations();
+    }
+
+    // Initialize interactions
+    initCTAInteractions();
+  });
+
+  function initMotionAnimations() {
+    const { animate, stagger } = window.Motion;
+
+    // Animate feature cards with stagger
+    const featureCards = document.querySelectorAll(".feature-card");
+    if (featureCards.length > 0) {
+      animate(
+        featureCards,
+        {
+          opacity: [0, 1],
+          y: [30, 0],
+          scale: [0.95, 1],
+        },
+        {
+          delay: stagger(0.2, { start: 1.2 }),
+          duration: 0.8,
+          easing: "ease-out",
+        }
+      );
+    }
+
+    // Animate benefit cards with stagger
+    const benefitCards = document.querySelectorAll(".benefit-card");
+    if (benefitCards.length > 0) {
+      animate(
+        benefitCards,
+        {
+          opacity: [0, 1],
+          y: [20, 0],
+        },
+        {
+          delay: stagger(0.3, { start: 2.0 }),
+          duration: 0.7,
+          easing: "ease-out",
+        }
+      );
+    }
+
+    // Animate advanced features info
+    const advancedInfo = document.querySelector(".advanced-features-info");
+    if (advancedInfo) {
+      animate(
+        advancedInfo,
+        {
+          opacity: [0, 1],
+          y: [15, 0],
+        },
+        {
+          delay: 2.8,
+          duration: 0.6,
+          easing: "ease-out",
+        }
+      );
+    }
+
+    // Animate social proof
+    const socialProof = document.querySelector(".social-proof-section");
+    if (socialProof) {
+      animate(
+        socialProof,
+        {
+          opacity: [0, 1],
+          y: [10, 0],
+        },
+        {
+          delay: 3.2,
+          duration: 0.8,
+          easing: "ease-out",
+        }
+      );
+    }
+  }
+
+  function initCSSFallbackAnimations() {
+    // CSS-based stagger animation fallback
+    const allElements = document.querySelectorAll(
+      ".feature-card, .benefit-card, .advanced-features-info, .social-proof-section"
+    );
+
+    allElements.forEach((element, index) => {
+      element.style.opacity = "0";
+      element.style.transform = "translateY(20px)";
+      element.style.transition = "all 0.8s ease-out";
+
+      setTimeout(
+        () => {
+          element.style.opacity = "1";
+          element.style.transform = "translateY(0)";
+        },
+        1200 + index * 200
+      );
+    });
+  }
+
+  function initCTAInteractions() {
     const waitlistBtn = document.getElementById("cta-waitlist");
 
+    // CTA button click handler (solo el botón principal debe tener interacciones)
     waitlistBtn?.addEventListener("click", (e) => {
       e.preventDefault();
 
-      // Scroll suave hacia la sección de contacto
+      // Button click animation
+      if (window.Motion) {
+        window.Motion.animate(waitlistBtn, { scale: [1, 0.95, 1] }, { duration: 0.2 });
+      }
+
+      // Scroll to contact section
       const contactSection = document.getElementById("contact");
       if (contactSection) {
-        const headerElement = document.querySelector(".header-main") as HTMLElement;
+        const headerElement = document.querySelector(".header-main");
         const headerHeight = headerElement?.offsetHeight || 80;
         const targetPosition = contactSection.offsetTop - headerHeight;
 
@@ -86,17 +350,142 @@
           behavior: "smooth",
         });
 
-        // Track CTA click para analytics
-        if (typeof window.gtag !== "undefined") {
+        // Track analytics
+        if (typeof window.gtag === "function") {
           window.gtag("event", "cta_click", {
             event_category: "engagement",
-            event_label: "waitlist_hero_cta",
+            event_label: "institutional_trading_access",
+            event_content: "señales_trading_gratis",
             value: 1,
           });
         }
-
-        console.log("Redirecting to waitlist section");
       }
     });
-  });
+  }
 </script>
+
+<style>
+  /* Feature Cards - Puramente informativas, sin interacciones */
+  .feature-card {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 transition-opacity duration-500;
+    opacity: 0; /* Initially hidden for animation */
+  }
+
+  .feature-content {
+    @apply flex items-center space-x-4;
+  }
+
+  .feature-icon {
+    @apply w-12 h-12 bg-gradient-to-br from-primary-700 to-primary-600 rounded-xl flex items-center justify-center flex-shrink-0;
+  }
+
+  .feature-text {
+    @apply flex-1;
+  }
+
+  /* Benefit Cards - Enfoque en contenido, no en interacción */
+  .benefit-card {
+    @apply bg-gradient-to-br from-primary-800/30 to-primary-700/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 transition-opacity duration-500;
+    opacity: 0; /* Initially hidden for animation */
+  }
+
+  .benefit-content {
+    @apply flex items-start space-x-4;
+  }
+
+  .benefit-icon {
+    @apply w-12 h-12 bg-gradient-to-br from-accent-blue/20 to-accent-green/20 border border-accent-blue/30 rounded-xl flex items-center justify-center flex-shrink-0 mt-1;
+  }
+
+  .benefit-text {
+    @apply flex-1;
+  }
+
+  /* Advanced Features Info */
+  .advanced-features-info {
+    @apply w-full;
+    opacity: 0; /* Initially hidden for animation */
+  }
+
+  .info-content {
+    @apply bg-gradient-to-r from-primary-800/20 via-primary-700/30 to-primary-800/20 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center;
+  }
+
+  .info-dot {
+    @apply w-2 h-2 bg-accent-green rounded-full animate-pulse flex-shrink-0;
+  }
+
+  /* Social Proof Section */
+  .social-proof-section {
+    @apply w-full;
+    opacity: 0; /* Initially hidden for animation */
+  }
+
+  .proof-content {
+    @apply bg-gradient-to-r from-primary-800/25 to-primary-700/25 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center space-y-3;
+  }
+
+  .proof-stats {
+    @apply flex items-center justify-center;
+  }
+
+  .proof-badge {
+    @apply space-y-1;
+  }
+
+  /* Subtle visual enhancements without suggesting interactivity */
+  .feature-icon,
+  .benefit-icon {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .hero-cta {
+      @apply max-w-sm;
+    }
+
+    .feature-content,
+    .benefit-content {
+      @apply space-x-3;
+    }
+
+    .feature-icon,
+    .benefit-icon {
+      @apply w-10 h-10;
+    }
+
+    .feature-text h4,
+    .benefit-text h4 {
+      @apply text-xs;
+    }
+
+    .feature-text p,
+    .benefit-text p {
+      @apply text-xs;
+    }
+
+    .grid {
+      @apply gap-6;
+    }
+  }
+
+  /* Extra spacing for better visual hierarchy */
+  #pre-cta-section {
+    margin-bottom: 3rem;
+  }
+
+  #post-cta-section {
+    margin-top: 3rem;
+  }
+
+  @media (min-width: 640px) {
+    #pre-cta-section {
+      margin-bottom: 4rem;
+    }
+
+    #post-cta-section {
+      margin-top: 4rem;
+    }
+  }
+</style>

@@ -173,23 +173,36 @@ export class HeaderController {
   private setupSignupButtons() {
     // Handle desktop signup button
     const signupBtn = document.getElementById('signup-btn');
-    signupBtn?.addEventListener('click', (e) => {
-      this.scrollToContact();
-    });
+    if (signupBtn) {
+      signupBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.scrollToContact();
+      });
+    }
 
-    // Handle mobile signup button
-    const mobileSignupBtn = document.querySelector('.mobile-signup-btn');
-    mobileSignupBtn?.addEventListener('click', (e) => {
-      this.scrollToContact();
-      this.closeMobileMenu();
-    });
+    // Handle mobile signup button with retry logic
+    const setupMobileButton = () => {
+      const mobileSignupBtn = document.querySelector('.mobile-signup-btn');
+      if (mobileSignupBtn) {
+        mobileSignupBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.scrollToContact();
+          this.closeMobileMenu();
+        });
+      } else {
+        // Retry after a short delay in case the DOM isn't fully loaded
+        setTimeout(setupMobileButton, 100);
+      }
+    };
+
+    setupMobileButton();
   }
 
   private scrollToContact() {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
       const headerHeight = this.header?.offsetHeight || 80;
-      const targetPosition = contactSection.offsetTop - headerHeight;
+      const targetPosition = contactSection.offsetTop - headerHeight - 20; // Extra padding for better UX
 
       window.scrollTo({
         top: targetPosition,
@@ -197,12 +210,18 @@ export class HeaderController {
       });
 
       // Track button click for analytics
-      if (typeof (window as any).gtag !== 'undefined') {
+      if (typeof (window as any).gtag === 'function') {
         (window as any).gtag('event', 'signup_click', {
           event_category: 'engagement',
           event_label: 'header_signup',
           value: 1,
         });
+      }
+    } else {
+      // Fallback: try to find the section by querySelector
+      const fallbackSection = document.querySelector('[id="contact"], section[id*="contact"]');
+      if (fallbackSection) {
+        fallbackSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
   }

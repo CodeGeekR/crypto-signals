@@ -15,22 +15,29 @@ const { isAuthenticated = false } = Astro.props;
     <div class="nav-wrapper flex items-center justify-between h-16 lg:h-20">
       <!-- Logo -->
       <div class="logo-container flex-shrink-0">
-        <a href="/" class="logo-link flex items-center space-x-3 group" aria-label="CryptoSeñales Pro - Inicio">
+        <a
+          href="/"
+          class="logo-link flex items-center space-x-3 group"
+          aria-label="CryptoSeñales Pro - Plataformas Trading Criptomonedas Líder en LATAM"
+        >
           <div class="logo-icon relative">
             <div
-              class="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-accent-gold to-accent-green rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+              class="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
             >
-              <svg class="w-6 h-6 lg:w-7 lg:h-7 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-              </svg>
+              <img
+                src="/images/logo-cs.svg"
+                alt="logo de la plataforma Crypto Señales de trading con criptomonedas mas rentables"
+                class="w-full h-full object-contain"
+                width="48"
+                height="48"
+              />
             </div>
-            <div class="absolute -top-1 -right-1 w-4 h-4 bg-accent-green rounded-full animate-pulse"></div>
           </div>
           <div class="logo-text hidden sm:block">
             <span class="text-xl lg:text-2xl font-hero font-bold text-white">
               Crypto<span class="text-gradient">Señales</span>
             </span>
-            <div class="text-xs text-gray-400 -mt-1">Pro Trading</div>
+            <div class="text-xs text-gray-400 -mt-1">Institutional Trading</div>
           </div>
         </a>
       </div>
@@ -41,13 +48,15 @@ const { isAuthenticated = false } = Astro.props;
           href="#features"
           class="nav-link text-gray-300 hover:text-white transition-colors duration-200 font-medium"
           data-section="features"
+          title="Mejores indicadores trading y análisis técnico avanzado"
         >
-          Características
+          Señales IA
         </a>
         <a
           href="#results"
           class="nav-link text-gray-300 hover:text-white transition-colors duration-200 font-medium"
           data-section="results"
+          title="Resultados reales de bitcoin trading y criptomonedas rentables"
         >
           Resultados
         </a>
@@ -55,13 +64,15 @@ const { isAuthenticated = false } = Astro.props;
           href="#pricing"
           class="nav-link text-gray-300 hover:text-white transition-colors duration-200 font-medium"
           data-section="pricing"
+          title="Comprar bot trading y planes de arbitrage crypto"
         >
-          Precios
+          Planes
         </a>
         <a
           href="#testimonials"
           class="nav-link text-gray-300 hover:text-white transition-colors duration-200 font-medium"
           data-section="testimonials"
+          title="Testimonios de usuarios usando estrategia trading criptomonedas"
         >
           Testimonios
         </a>
@@ -73,19 +84,13 @@ const { isAuthenticated = false } = Astro.props;
           !isAuthenticated ? (
             <div class="auth-buttons flex items-center space-x-2 lg:space-x-4">
               <button
-                id="login-btn"
-                class="btn-login hidden sm:inline-flex px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200"
-                aria-label="Iniciar sesión"
-              >
-                Iniciar Sesión
-              </button>
-              <button
                 id="signup-btn"
                 class="btn-signup px-4 py-2 lg:px-6 lg:py-3 bg-gradient-to-r from-accent-gold to-accent-green text-white font-semibold rounded-lg hover:scale-105 transition-all duration-300 text-sm lg:text-base"
-                aria-label="Unirse a la lista de espera VIP"
+                aria-label="Acceso gratis a señales de trading en vivo"
+                title="Proveedor de señales trading líder - Acceso gratuito"
               >
-                <span class="hidden sm:inline">🔥 Lista VIP</span>
-                <span class="sm:hidden">Lista VIP</span>
+                <span class="hidden sm:inline">🔥 Acceso Gratuito</span>
+                <span class="sm:hidden">🔥 Gratis</span>
               </button>
             </div>
           ) : (
@@ -158,7 +163,7 @@ const { isAuthenticated = false } = Astro.props;
             role="menuitem"
             data-section="features"
           >
-            Características
+            Señales IA & Análisis Técnico
           </a>
           <a
             href="#results"
@@ -166,7 +171,7 @@ const { isAuthenticated = false } = Astro.props;
             role="menuitem"
             data-section="results"
           >
-            Resultados
+            Resultados Bitcoin Trading
           </a>
           <a
             href="#pricing"
@@ -174,7 +179,7 @@ const { isAuthenticated = false } = Astro.props;
             role="menuitem"
             data-section="pricing"
           >
-            Precios
+            Planes Bot Trading
           </a>
           <a
             href="#testimonials"
@@ -182,7 +187,7 @@ const { isAuthenticated = false } = Astro.props;
             role="menuitem"
             data-section="testimonials"
           >
-            Testimonios
+            Testimonios Usuarios
           </a>
         </nav>
 
@@ -190,11 +195,8 @@ const { isAuthenticated = false } = Astro.props;
         {
           !isAuthenticated && (
             <div class="mobile-auth space-y-4">
-              <button class="mobile-login-btn w-full py-3 px-4 text-center text-gray-300 border border-gray-600 rounded-lg hover:bg-white/10 transition-colors duration-200">
-                Iniciar Sesión
-              </button>
               <button class="mobile-signup-btn w-full py-3 px-4 bg-gradient-to-r from-accent-gold to-accent-green text-white font-semibold rounded-lg hover:scale-105 transition-all duration-300">
-                🔥 Unirse a Lista VIP
+                🔥 Señales Trading Gratis
               </button>
             </div>
           )
@@ -202,12 +204,12 @@ const { isAuthenticated = false } = Astro.props;
 
         <!-- Mobile Social Links -->
         <div class="mobile-social border-t border-gray-600/40 pt-6">
-          <p class="text-sm text-gray-300 mb-4">Síguenos en redes sociales</p>
+          <p class="text-sm text-gray-300 mb-4">Síguenos - Análisis fundamental diario</p>
           <div class="flex space-x-4">
             <a
               href="https://x.com/cryptosenalespro"
               class="social-link p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-colors duration-200"
-              aria-label="Síguenos en X"
+              aria-label="Síguenos en X - Estrategias trading actualizadas"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -224,7 +226,7 @@ const { isAuthenticated = false } = Astro.props;
             <a
               href="https://instagram.com/cryptosenalespro"
               class="social-link p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-colors duration-200"
-              aria-label="Síguenos en Instagram"
+              aria-label="Síguenos en Instagram - Criptomonedas más rentables"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -246,7 +248,7 @@ const { isAuthenticated = false } = Astro.props;
             <a
               href="https://tiktok.com/@cryptosenalespro"
               class="social-link p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-colors duration-200"
-              aria-label="Síguenos en TikTok"
+              aria-label="Síguenos en TikTok - Tips de arbitrage crypto trading"
               target="_blank"
               rel="noopener noreferrer"
             >

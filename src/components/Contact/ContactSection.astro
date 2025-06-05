@@ -243,7 +243,7 @@ import { TrendingUp, Zap } from "lucide-react";
 
       try {
         // Track conversion event
-        if (typeof window.gtag !== "undefined") {
+        if (typeof window.gtag === "function") {
           window.gtag("event", "waitlist_signup", {
             event_category: "conversion",
             event_label: "priority_access",
@@ -252,7 +252,6 @@ import { TrendingUp, Zap } from "lucide-react";
         }
 
         // Simulate API call
-        console.log("Waitlist signup:", data);
 
         // Show success state
         const button = target.querySelector('button[type="submit"]') as HTMLButtonElement;
@@ -383,7 +382,7 @@ import { TrendingUp, Zap } from "lucide-react";
       }
 
       // Track stats view for analytics
-      if (typeof window.gtag !== "undefined") {
+      if (typeof window.gtag === "function") {
         window.gtag("event", "stats_viewed", {
           event_category: "engagement",
           event_label: "contact_section_stats",

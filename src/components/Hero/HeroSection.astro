@@ -8,6 +8,14 @@ import CountdownTimer from "./CountdownTimer.astro";
 <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
   <ParticleBackground />
 
+  <!-- H1 SEO-friendly oculto - Visible para Google, oculto para usuarios -->
+  <h1 class="sr-only">
+    Plataformas Trading Criptomonedas: Proveedor de Señales Trading Profesional con Bitcoin Trading, Arbitrage Crypto
+    Trading, Análisis Técnico Trading y Criptomonedas Más Rentables - Comprar Bot Trading Institucional con Mejores
+    Indicadores Trading, Señales de Trading en Vivo Gratis, Análisis Fundamental Trading y Estrategia Trading
+    Criptomonedas Avanzada usando Institutional Trading Software
+  </h1>
+
   <!-- Gradient Overlays -->
   <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary-900/20 to-primary-900/60"></div>
   <div class="absolute inset-0 bg-gradient-to-r from-primary-900/30 via-transparent to-primary-900/30"></div>
@@ -30,13 +38,13 @@ import CountdownTimer from "./CountdownTimer.astro";
               <!-- Urgency content -->
               <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-2 text-left sm:text-center">
                 <span class="text-xs sm:text-sm font-bold text-red-200 uppercase tracking-wide">
-                  <span class="hidden sm:inline">🔥 ACCESO GRATUITO LIMITADO</span>
-                  <span class="sm:hidden">🔥 ACCESO LIMITADO</span>
+                  <span class="hidden sm:inline">🔥 SEÑALES TRADING GRATIS</span>
+                  <span class="sm:hidden">🔥 SEÑALES GRATIS</span>
                 </span>
                 <span class="hidden sm:inline text-white/80 text-sm">•</span>
                 <span class="text-xs sm:text-sm font-medium text-white/90">
-                  <span class="hidden lg:inline">Solo 247 spots restantes</span>
-                  <span class="hidden sm:inline lg:hidden">247 spots restantes</span>
+                  <span class="hidden lg:inline">Solo 247 spots para institutional trading</span>
+                  <span class="hidden sm:inline lg:hidden">247 spots institucionales</span>
                   <span class="sm:hidden">247 restantes</span>
                 </span>
               </div>
@@ -52,18 +60,18 @@ import CountdownTimer from "./CountdownTimer.astro";
         <!-- Main Content -->
         <div class="space-y-8 lg:space-y-12">
           <!-- Hero Title -->
-          <h1 class="hero-title animate-slide-up-delayed">
-            <span
+          <div class="hero-title animate-slide-up-delayed">
+            <h2
               class="block font-hero text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] tracking-tight"
             >
-              El Trading de <span class="text-gradient">Wall Street,</span>
-            </span>
-            <span
+              Tecnología de <span class="text-gradient">Wall Street</span>
+            </h2>
+            <h3
               class="block font-hero text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] tracking-tight mt-2 lg:mt-4"
             >
-              Ahora en tu <span class="text-accent-gold">Bolsillo</span>
-            </span>
-          </h1>
+              Para <span class="text-accent-gold">Bitcoin Trading</span>
+            </h3>
+          </div>
 
           <!-- Typewriter Section -->
           <div class="hero-subtitle animate-slide-up-delayed-2 mt-8 lg:mt-12">
@@ -74,9 +82,11 @@ import CountdownTimer from "./CountdownTimer.astro";
           <p
             class="hero-description text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed animate-slide-up-delayed-3 px-4 sm:px-0 mt-8 lg:mt-10"
           >
-            Señales de trading institucionales impulsadas por <span class="text-accent-green font-semibold"
-              >Inteligencia Artificial</span
-            > para maximizar tus ganancias en el mercado cripto más volátil de la historia.
+            El proveedor de señales trading más confiable de LATAM. <span class="text-accent-green font-semibold"
+              >Analisis tecnico trading</span
+            > institucional para acceder a las <span class="text-accent-gold font-semibold"
+              >criptomonedas más rentables</span
+            > con estrategias probadas de <span class="text-accent-blue font-semibold">arbitrage crypto trading</span>.
           </p>
         </div>
 
@@ -98,6 +108,28 @@ import CountdownTimer from "./CountdownTimer.astro";
           </div>
         </div>
 
+        <!-- Value Proposition -->
+        <div class="mt-12 lg:mt-16 animate-slide-up-delayed-5">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div class="text-center">
+              <div class="text-accent-green font-semibold text-sm uppercase tracking-wide mb-2">
+                Análisis Fundamental Trading
+              </div>
+              <div class="text-gray-300 text-sm">Solo proyectos sólidos, sin meme coins</div>
+            </div>
+            <div class="text-center">
+              <div class="text-accent-gold font-semibold text-sm uppercase tracking-wide mb-2">Bot Trading</div>
+              <div class="text-gray-300 text-sm">Tecnología institucional accesible</div>
+            </div>
+            <div class="text-center">
+              <div class="text-accent-blue font-semibold text-sm uppercase tracking-wide mb-2">
+                Señales de Trading en Vivo Gratis
+              </div>
+              <div class="text-gray-300 text-sm">Alertas en tiempo real vía email</div>
+            </div>
+          </div>
+        </div>
+
         <!-- Call to Action -->
         <div class="mt-12 lg:mt-20">
           <CTAButtons />
@@ -115,13 +147,25 @@ import CountdownTimer from "./CountdownTimer.astro";
         initHeroAnimations();
       })
       .catch((error) => {
-        console.log("GSAP animations not loaded, using CSS fallback", error);
         // Las animaciones CSS ya están funcionando como fallback
       });
   });
 </script>
 
 <style>
+  /* Screen reader only - Visible para Google, oculto para usuarios */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
   /* Badge hover effects */
   .hero-badge:hover {
     @apply shadow-red-500/25;

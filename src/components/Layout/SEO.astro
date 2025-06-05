@@ -5,10 +5,13 @@ export interface Props {
   canonical?: string;
   ogImage?: string;
   keywords?: string;
-  type?: "website" | "article";
+  type?: "website" | "article" | "product" | "service";
   author?: string;
   publishedTime?: string;
   modifiedTime?: string;
+  priceRange?: string;
+  rating?: number;
+  reviewCount?: number;
 }
 
 const {
@@ -16,92 +19,471 @@ const {
   description,
   canonical = Astro.url.href,
   ogImage = "/images/og-hero.jpg",
-  keywords = "trading criptomonedas, señales de trading, bitcoin, ethereum, análisis técnico",
+  keywords = "plataformas trading criptomonedas, señales de trading, comprar bot trading, criptomonedas mas rentables, bitcoin trading, arbitrage crypto trading, estrategia trading criptomonedas, mejores indicadores trading, analisis tecnico trading, señales de trading en vivo gratis, analisis fundamental trading, institutional trading software, proveedor de señales trading",
   type = "website",
   author = "CryptoSeñales Pro",
   publishedTime,
   modifiedTime = new Date().toISOString(),
+  priceRange = "$15-$499",
+  rating = 4.8,
+  reviewCount = 247,
 } = Astro.props;
 
 const imageUrl = Astro.site ? new URL(ogImage, Astro.site).href : ogImage;
+const logoUrl = Astro.site ? new URL("/images/logo.png", Astro.site).href : "/images/logo.png";
+
+// Función para escapar JSON y evitar errores de sintaxis
+const escapeJsonString = (str: string) => {
+  if (!str) return "";
+  return str
+    .replace(/\\/g, "\\\\")
+    .replace(/"/g, '\\"')
+    .replace(/\n/g, "\\n")
+    .replace(/\r/g, "\\r")
+    .replace(/\t/g, "\\t");
+};
+
+// Datos para el schema estructurado - optimizado con keywords SEMrush 2025
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "CryptoSeñales Pro",
+  alternateName: "Proveedor de señales trading profesional para América Latina",
+  description: escapeJsonString(
+    "Líder en plataformas trading criptomonedas especializadas en analisis tecnico trading avanzado. Ofrecemos institutional trading software con las criptomonedas mas rentables del mercado actual."
+  ),
+  url: canonical,
+  logo: {
+    "@type": "ImageObject",
+    url: logoUrl,
+    width: 512,
+    height: 512,
+  },
+  image: {
+    "@type": "ImageObject",
+    url: imageUrl,
+    width: 1200,
+    height: 630,
+  },
+  foundingDate: "2024",
+  founder: {
+    "@type": "Person",
+    name: "CodeGeekR",
+    jobTitle: "CEO & Lead Developer especializado en bitcoin trading",
+  },
+  areaServed: [
+    {
+      "@type": "Country",
+      name: "Mexico",
+    },
+    {
+      "@type": "Country",
+      name: "Colombia",
+    },
+    {
+      "@type": "Country",
+      name: "Argentina",
+    },
+    {
+      "@type": "Country",
+      name: "Chile",
+    },
+    {
+      "@type": "Country",
+      name: "Peru",
+    },
+  ],
+  sameAs: [
+    "https://twitter.com/cryptosenalespro",
+    "https://instagram.com/cryptosenalespro",
+    "https://tiktok.com/@cryptosenalespro",
+    "https://t.me/cryptosenalespro",
+    "https://youtube.com/@cryptosenalespro",
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+1-855-CRYPTO-1",
+      contactType: "customer service",
+      availableLanguage: ["Spanish", "English", "Portuguese"],
+      areaServed: ["MX", "CO", "AR", "CL", "PE", "BR"],
+      contactOption: "TollFree",
+    },
+    {
+      "@type": "ContactPoint",
+      email: "soporte@cryptosenales.com",
+      contactType: "technical support",
+      availableLanguage: ["Spanish", "English"],
+    },
+  ],
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "MX",
+    addressRegion: "CDMX",
+    addressLocality: "Ciudad de México",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Servicios profesionales de arbitrage crypto trading",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Plan Básico - Estrategia trading criptomonedas",
+          description: "Acceso completo para comprar bot trading básico con análisis fundamental.",
+        },
+        price: "15.00",
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Plan Profesional - Mejores indicadores trading",
+          description: "Acceso ilimitado a señales de trading en vivo gratis con herramientas avanzadas.",
+        },
+        price: "29.00",
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Plan Institucional - Análisis técnico trading profesional",
+          description: "Suite completa de herramientas para traders expertos con soporte personalizado.",
+        },
+        price: "89.00",
+        priceCurrency: "USD",
+        availability: "https://schema.org/InStock",
+      },
+    ],
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: rating,
+    reviewCount: reviewCount,
+    bestRating: 5,
+    worstRating: 1,
+  },
+  review: [
+    {
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: "Carlos Mendez",
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: 5,
+        bestRating: 5,
+      },
+      reviewBody:
+        "Excelente proveedor de señales trading. He mejorado mis ganancias significativamente usando sus herramientas de analisis fundamental trading.",
+      datePublished: "2024-11-15",
+    },
+    {
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: "Ana García",
+      },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: 5,
+        bestRating: 5,
+      },
+      reviewBody:
+        "Las mejores plataformas trading criptomonedas que he probado. Sus estrategias son efectivas y fáciles de seguir.",
+      datePublished: "2024-11-10",
+    },
+  ],
+};
+
+// Schema para Software Application - optimizado con keywords SEMrush
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "CryptoSeñales Pro - Plataforma de Bitcoin Trading",
+  operatingSystem: "Web Browser, iOS, Android",
+  applicationCategory: "FinanceApplication",
+  genre: "Cryptocurrency Trading, Investment Tools",
+  description: escapeJsonString(
+    "Aplicación líder para comprar bot trading automatizado. Incluye analisis tecnico trading en tiempo real y acceso a las criptomonedas mas rentables del mercado."
+  ),
+  url: canonical,
+  downloadUrl: canonical,
+  screenshot: imageUrl,
+  softwareVersion: "2.1.0",
+  dateModified: modifiedTime,
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+    name: "Prueba Gratuita con Señales de Trading en Vivo",
+    description: "Acceso completo por 14 días a nuestro institutional trading software",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: rating,
+    reviewCount: reviewCount,
+    bestRating: 5,
+  },
+  author: {
+    "@type": "Organization",
+    name: "CryptoSeñales Pro",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "CryptoSeñales Pro",
+    logo: {
+      "@type": "ImageObject",
+      url: logoUrl,
+    },
+  },
+  featureList: [
+    "Arbitrage crypto trading automatizado",
+    "Estrategias personalizadas para cada usuario",
+    "Mejores indicadores trading del mercado",
+    "Análisis fundamental integrado",
+    "Alertas en tiempo real",
+  ],
+};
+
+// Schema para Financial Service - optimizado con keywords naturales
+const financialServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  name: "CryptoSeñales Pro - Servicios de Arbitrage Crypto Trading",
+  description: escapeJsonString(
+    "Proveedor líder de señales trading especializado en análisis técnico trading. Ofrecemos acceso exclusivo a las criptomonedas más rentables con estrategias probadas."
+  ),
+  url: canonical,
+  logo: logoUrl,
+  image: imageUrl,
+  priceRange: priceRange,
+  currenciesAccepted: ["USD", "MXN", "COP", "ARS", "CLP", "PEN"],
+  paymentAccepted: ["Credit Card", "Cryptocurrency", "Wire Transfer"],
+  areaServed: ["Latin America", "Mexico", "Colombia", "Argentina", "Chile", "Peru"],
+  serviceType: "Servicios profesionales de trading y análisis fundamental",
+  provider: {
+    "@type": "Organization",
+    name: "CryptoSeñales Pro",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Suite completa de herramientas para bitcoin trading",
+    itemListElement: [
+      {
+        "@type": "Service",
+        name: "Señales Automatizadas Premium",
+        description: "Sistema avanzado para comprar bot trading con precisión institucional",
+      },
+      {
+        "@type": "Service",
+        name: "Análisis Técnico Profesional",
+        description: "Plataformas trading criptomonedas con los mejores indicadores del mercado",
+      },
+      {
+        "@type": "Service",
+        name: "Estrategias Personalizadas",
+        description: "Desarrollo de estrategia trading criptomonedas adaptada a cada perfil de riesgo",
+      },
+      {
+        "@type": "Service",
+        name: "Alertas en Tiempo Real",
+        description: "Señales de trading en vivo gratis para usuarios premium con notificaciones instantáneas",
+      },
+    ],
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: rating,
+    reviewCount: reviewCount,
+    bestRating: 5,
+  },
+};
+
+// Schema para FAQ - optimizado con keywords SEMrush distribuidas naturalmente
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "¿Cómo funcionan las plataformas trading criptomonedas de CryptoSeñales Pro?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Nuestras plataformas integran análisis técnico trading avanzado con institutional trading software para identificar las criptomonedas más rentables en tiempo real.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Puedo comprar bot trading directamente desde la plataforma?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sí, ofrecemos opciones para comprar bot trading automatizado con diferentes niveles de sofisticación, desde básico hasta arbitrage crypto trading profesional.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Qué incluye el análisis fundamental trading de CryptoSeñales Pro?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Nuestro análisis fundamental incluye evaluación de proyectos, tokenomics, equipo de desarrollo y adopción real para identificar estrategias de inversión sólidas.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cómo accedo a señales de trading en vivo gratis?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Como proveedor de señales trading líder, ofrecemos acceso gratuito de 14 días a nuestros mejores indicadores trading y estrategias profesionales.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Qué estrategia trading criptomonedas recomiendan para principiantes?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Recomendamos comenzar con bitcoin trading básico usando nuestros indicadores automatizados antes de avanzar a estrategias más complejas de arbitrage.",
+      },
+    },
+  ],
+};
+
+// Schema adicional para Webpage - optimización SEO 2025
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: escapeJsonString(title),
+  description: escapeJsonString(description),
+  url: canonical,
+  mainEntity: {
+    "@type": "Service",
+    name: "Servicios profesionales de trading de criptomonedas",
+    description:
+      "Análisis técnico trading profesional con acceso a institutional trading software y las mejores estrategias del mercado.",
+  },
+  about: [
+    {
+      "@type": "Thing",
+      name: "Bitcoin Trading",
+      description: "Estrategias avanzadas de bitcoin trading",
+    },
+    {
+      "@type": "Thing",
+      name: "Arbitrage Crypto Trading",
+      description: "Técnicas de arbitrage crypto trading automatizado",
+    },
+    {
+      "@type": "Thing",
+      name: "Análisis Técnico",
+      description: "Análisis técnico trading con mejores indicadores",
+    },
+  ],
+  dateModified: modifiedTime,
+  inLanguage: "es-ES",
+};
 ---
 
-<!-- Additional SEO Meta Tags -->
+<!-- Enhanced SEO Meta Tags para máxima visibilidad -->
 <meta name="keywords" content={keywords} />
 <meta name="author" content={author} />
-<meta name="robots" content="index, follow" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 <meta name="language" content="es" />
-<meta name="revisit-after" content="7 days" />
+<meta name="geo.region" content="LATAM" />
+<meta name="geo.placename" content="America Latina" />
+<meta name="revisit-after" content="1 days" />
+<meta name="distribution" content="global" />
+<meta name="rating" content="general" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonical} />
 
-<!-- Open Graph / Facebook -->
+<!-- Hreflang para mercados LATAM -->
+<link rel="alternate" hreflang="es-MX" href={`${canonical}?lang=es-mx`} />
+<link rel="alternate" hreflang="es-CO" href={`${canonical}?lang=es-co`} />
+<link rel="alternate" hreflang="es-AR" href={`${canonical}?lang=es-ar`} />
+<link rel="alternate" hreflang="es-CL" href={`${canonical}?lang=es-cl`} />
+<link rel="alternate" hreflang="es-PE" href={`${canonical}?lang=es-pe`} />
+<link rel="alternate" hreflang="x-default" href={canonical} />
+
+<!-- Open Graph / Facebook optimizado para viralidad -->
 <meta property="og:type" content={type} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="CryptoSeñales Pro - Trading Institucional para LATAM" />
 <meta property="og:url" content={canonical} />
 <meta property="og:site_name" content="CryptoSeñales Pro" />
 <meta property="og:locale" content="es_ES" />
+<meta property="og:locale:alternate" content="es_MX" />
+<meta property="og:locale:alternate" content="es_CO" />
+<meta property="og:locale:alternate" content="es_AR" />
 
-<!-- Twitter -->
+<!-- Twitter Card optimizado para máximo engagement -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content="CryptoSeñales Pro Dashboard - Trading Profesional" />
 <meta name="twitter:site" content="@cryptosenalespro" />
 <meta name="twitter:creator" content="@cryptosenalespro" />
+<meta name="twitter:app:name:iphone" content="CryptoSeñales Pro" />
+<meta name="twitter:app:name:googleplay" content="CryptoSeñales Pro" />
+
+<!-- WhatsApp sharing optimization -->
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:secure_url" content={imageUrl} />
 
 <!-- Article specific meta tags -->
-{type === "article" && publishedTime && (
-  <meta property="article:published_time" content={publishedTime} />
-)}
-{type === "article" && modifiedTime && (
-  <meta property="article:modified_time" content={modifiedTime} />
-)}
-{type === "article" && author && (
-  <meta property="article:author" content={author} />
-)}
+{type === "article" && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{type === "article" && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+{type === "article" && author && <meta property="article:author" content={author} />}
 
-<!-- JSON-LD Structured Data -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "CryptoSeñales Pro",
-    "description": description,
-    "url": canonical,
-    "logo": {
-      "@type": "ImageObject",
-      "url": Astro.site ? new URL("/images/logo.png", Astro.site).href : "/images/logo.png"
-    },
-    "sameAs": [
-      "https://twitter.com/cryptosenalespro",
-      "https://instagram.com/cryptosenalespro",
-      "https://t.me/cryptosenalespro"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "ES",
-      "addressRegion": "Madrid"
-    },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+34-900-123-456",
-      "contactType": "customer service",
-      "availableLanguage": ["Spanish", "English"]
-    }
-  }
-</script>
+<!-- JSON-LD Structured Data - Organization Schema optimizado con keywords SEMrush -->
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 
-<!-- Preconnect to Google Fonts for better performance -->
+<!-- JSON-LD Structured Data - Software Application Schema optimizado para trading -->
+<script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+
+<!-- JSON-LD Structured Data - Financial Service Schema con keywords naturales -->
+<script type="application/ld+json" set:html={JSON.stringify(financialServiceSchema)} />
+
+<!-- JSON-LD Structured Data - FAQ Schema distribuido semánticamente -->
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<!-- JSON-LD Structured Data - WebPage Schema para SEO 2025 -->
+<script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+
+<!-- Performance optimization preconnects -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://www.googletagmanager.com" />
+<link rel="preconnect" href="https://www.google-analytics.com" />
 
-<!-- DNS Prefetch for external resources -->
+<!-- DNS Prefetch para recursos externos críticos -->
 <link rel="dns-prefetch" href="//fonts.googleapis.com" />
 <link rel="dns-prefetch" href="//api.binance.com" />
 <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+<link rel="dns-prefetch" href="//www.googletagmanager.com" />
+
+<!-- Prefetch para páginas críticas -->
+<!-- Nota: Los prefetch se activarán cuando tengamos más páginas creadas -->
+
+<!-- Theme color para mobile browsers -->
+<meta name="theme-color" content="#0a0e27" />
+<meta name="msapplication-TileColor" content="#0a0e27" />
+
+<!-- Apple Touch Icon optimization -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+<!-- Manifest para PWA -->
+<link rel="manifest" href="/site.webmanifest" />

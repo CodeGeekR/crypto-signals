@@ -34,12 +34,14 @@ import { ChevronRight } from "lucide-react";
       <!-- Company Info -->
       <div class="text-center md:text-left" data-company-info>
         <div class="flex items-center justify-center md:justify-start mb-4">
-          <div
-            class="w-10 h-10 bg-gradient-to-br from-accent-gold to-accent-green rounded-xl flex items-center justify-center mr-3"
-          >
-            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-            </svg>
+          <div class="w-10 h-10 flex items-center justify-center mr-3">
+            <img
+              src="/images/logo-cs.svg"
+              alt="logo de la mejor plataforma proveedora de señales trading para las criptomonedas mas rentables"
+              class="w-full h-full object-contain"
+              width="40"
+              height="40"
+            />
           </div>
           <h4 class="text-xl font-bold">CryptoSeñales Pro</h4>
         </div>
@@ -371,7 +373,7 @@ import { ChevronRight } from "lucide-react";
         submitButton.disabled = true;
 
         // Track newsletter subscription
-        if (typeof window.gtag !== "undefined") {
+        if (typeof window.gtag === "function") {
           window.gtag("event", "newsletter_signup", {
             event_category: "engagement",
             event_label: "footer_newsletter",
@@ -381,7 +383,6 @@ import { ChevronRight } from "lucide-react";
 
         // Simulate API call
         await new Promise((resolve) => setTimeout(resolve, 1500));
-        console.log("Newsletter subscription:", email);
 
         // Show success state
         submitButton.innerHTML = "✅ ¡Suscrito!";

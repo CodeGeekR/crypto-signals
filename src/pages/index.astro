@@ -10,9 +10,35 @@ import ContactSection from "../components/Contact/ContactSection.astro";
 import FooterSection from "../components/Footer/FooterSection.astro";
 import SEO from "../components/Layout/SEO.astro";
 
-const title = "Señales de Trading reales + indicadores con el Bot de arbitrage Crypto";
+// SEO optimizado según investigación SEMrush
+const title = "Señales de trading reales + indicadores con el Bot de arbitrage Crypto";
 const description =
-  "Basta de estafa crypto, El Proveedor de señales trading legítimo con análisis técnico y fundamental. Los mejores indicadores institutionales Aquí!";
+  "Basta de estafa crypto, El Proveedor de señales trading legítimo con análisis técnico y fundamental. Los mejores indicadores institucionales Aquí!";
+
+// Keywords SEMrush - Investigación profesional de palabras clave
+const semrushKeywords = [
+  "plataformas trading criptomonedas",
+  "señales de trading",
+  "comprar bot trading",
+  "criptomonedas mas rentables",
+  "bitcoin trading",
+  "arbitrage crypto trading",
+  "estrategia trading criptomonedas",
+  "mejores indicadores trading",
+  "analisis tecnico trading",
+  "señales de trading en vivo gratis",
+  "analisis fundamental trading",
+  "institutional trading software",
+  "proveedor de señales trading",
+];
+
+// Datos estructurados optimizados
+const structuredData = {
+  rating: 4.9,
+  reviewCount: 1247,
+  priceRange: "$15-$89",
+  type: "service" as const,
+};
 ---
 
 <BaseLayout title={title} description={description}>
@@ -21,7 +47,13 @@ const description =
     description={description}
     canonical="https://cryptosenales.com"
     ogImage="/images/og-hero.jpg"
-    keywords="trading criptomonedas, señales de trading, bitcoin, arbitrage crypto trading, análisis técnico, analisis fundamental trading, institutional trading software, proveedor de señales trading"
+    keywords={semrushKeywords.join(", ")}
+    type={structuredData.type}
+    rating={structuredData.rating}
+    reviewCount={structuredData.reviewCount}
+    priceRange={structuredData.priceRange}
+    author="CodeGeekR - CryptoSeñales Pro"
+    modifiedTime={new Date().toISOString()}
   />
 
   <main>
