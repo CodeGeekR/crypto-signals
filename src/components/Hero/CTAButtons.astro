@@ -19,20 +19,7 @@
       <div class="feature-card">
         <div class="feature-content">
           <div class="feature-icon">
-            <svg
-              class="w-5 h-5 text-accent-green"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              ></path>
-            </svg>
+            <span class="feature-emoji text-accent-green">📊</span>
           </div>
           <div class="feature-text">
             <h3 class="text-sm font-semibold text-white mb-1">Análisis Técnico</h3>
@@ -45,20 +32,7 @@
       <div class="feature-card">
         <div class="feature-content">
           <div class="feature-icon">
-            <svg
-              class="w-5 h-5 text-accent-gold"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
-              ></path>
-            </svg>
+            <span class="feature-emoji text-accent-gold">₿</span>
           </div>
           <div class="feature-text">
             <h3 class="text-sm font-semibold text-white mb-1">Bitcoin Trading</h3>
@@ -87,15 +61,7 @@
       <span class="relative z-10 flex items-center justify-center space-x-2">
         <span class="hidden sm:inline">🚀 Acceder a Señales Gratis</span>
         <span class="sm:hidden">🚀 Señales Gratis</span>
-        <svg
-          class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-        </svg>
+        <span class="cta-arrow">→</span>
       </span>
 
       <!-- Pulse effect -->
@@ -123,16 +89,7 @@
       <div class="benefit-card">
         <div class="benefit-content">
           <div class="benefit-icon">
-            <svg
-              class="w-5 h-5 text-accent-blue"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"
-              ></path>
-            </svg>
+            <span class="benefit-emoji text-accent-blue">⚡</span>
           </div>
           <div class="benefit-text">
             <h3 class="text-base font-medium text-white mb-2">Mejores Indicadores</h3>
@@ -145,19 +102,7 @@
       <div class="benefit-card">
         <div class="benefit-content">
           <div class="benefit-icon">
-            <svg
-              class="w-5 h-5 text-accent-green"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
-            </svg>
+            <span class="benefit-emoji text-accent-green">📈</span>
           </div>
           <div class="benefit-text">
             <h3 class="text-base font-medium text-white mb-2">Arbitrage Crypto</h3>
@@ -377,6 +322,22 @@
 
   .feature-icon {
     @apply w-12 h-12 bg-gradient-to-br from-primary-700 to-primary-600 rounded-xl flex items-center justify-center flex-shrink-0;
+  }
+
+  /* Emoji icons styling */
+  .feature-emoji {
+    @apply text-xl leading-none;
+    font-size: 1.25rem;
+  }
+
+  .benefit-emoji {
+    @apply text-xl leading-none;
+    font-size: 1.25rem;
+  }
+
+  .cta-arrow {
+    @apply text-lg font-bold transform group-hover:translate-x-1 transition-transform duration-300;
+    font-size: 1.125rem;
   }
 
   .feature-text {
