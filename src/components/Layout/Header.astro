@@ -12,46 +12,8 @@ const { isAuthenticated = false } = Astro.props;
   aria-label="Navegación principal"
 >
   <nav class="nav-container mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Menú principal">
-    <div class="nav-wrapper flex items-center justify-between h-16 lg:h-20">
-      <!-- Critical Button - Optimizado para LCP instant rendering -->
-      {
-        !isAuthenticated && (
-          <button
-            id="signup-btn"
-            style="
-              position: absolute;
-              top: 50%;
-              right: 1rem;
-              transform: translateY(-50%);
-              z-index: 100;
-              display: inline-flex;
-              align-items: center;
-              justify-content: center;
-              padding: 0.5rem 1rem;
-              background: linear-gradient(135deg, #f59e0b 0%, #10b981 100%);
-              color: white;
-              font-weight: 600;
-              font-size: 0.875rem;
-              border: none;
-              border-radius: 0.5rem;
-              cursor: pointer;
-              text-decoration: none;
-              white-space: nowrap;
-              transition: none;
-              will-change: auto;
-              contain: layout style paint;
-            "
-            onmouseover="this.style.background='linear-gradient(135deg, #10b981 0%, #059669 100%)'"
-            onmouseout="this.style.background='linear-gradient(135deg, #f59e0b 0%, #10b981 100%)'"
-            aria-label="Acceso gratis a señales de trading en vivo"
-            title="Proveedor de señales trading líder - Acceso gratuito"
-          >
-            🔥 Gratis
-          </button>
-        )
-      }
-
-      <!-- Logo -->
+    <div class="nav-wrapper flex items-center justify-between h-16 lg:h-20 lg:relative">
+      <!-- Logo - Siempre centrado en desktop -->
       <div class="logo-container flex-shrink-0">
         <a
           href="/"
@@ -124,8 +86,8 @@ const { isAuthenticated = false } = Astro.props;
         </a>
       </div>
 
-      <!-- Desktop Navigation -->
-      <div class="nav-desktop hidden lg:flex items-center space-x-8">
+      <!-- Desktop Navigation - Centrado -->
+      <div class="nav-desktop hidden lg:flex lg:items-center lg:gap-8">
         <a
           href="#features"
           class="nav-link text-gray-300 hover:text-white transition-colors duration-200 font-medium"
@@ -160,8 +122,69 @@ const { isAuthenticated = false } = Astro.props;
         </a>
       </div>
 
-      <!-- Auth Buttons -->
-      <div class="auth-container flex items-center space-x-3">
+      <!-- Mobile Actions Container -->
+      <div class="mobile-actions flex items-center space-x-2 lg:hidden">
+        {
+          !isAuthenticated && (
+            <a
+              href="#contact"
+              id="signup-btn"
+              class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white rounded-lg bg-gradient-to-r from-amber-500 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 transform transition-transform duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 preload-critical"
+              aria-label="Únete a la lista VIP de señales de trading"
+              title="Proveedor de señales trading líder - Lista VIP"
+            >
+              🔥 Lista VIP
+            </a>
+          )
+        }
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="mobile-menu-toggle relative p-2 rounded-lg text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors duration-200"
+          aria-label="Abrir menú de navegación"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <!-- Hamburger Icon -->
+          <svg
+            class="menu-icon w-6 h-6 transition-transform duration-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+
+          <!-- Close Icon -->
+          <svg
+            class="close-icon w-6 h-6 hidden transition-transform duration-200"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Auth Buttons - Desktop Only -->
+      <div class="auth-container hidden lg:flex lg:items-center lg:space-x-3">
+        {
+          !isAuthenticated && (
+            <a
+              href="#contact"
+              class="inline-flex items-center justify-center px-6 py-2 text-sm font-semibold text-white rounded-lg bg-gradient-to-r from-amber-500 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 transform transition-transform duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+              aria-label="Únete a la lista VIP de señales de trading"
+              title="Proveedor de señales trading líder - Lista VIP"
+            >
+              🔥 Lista VIP
+            </a>
+          )
+        }
+
         {
           isAuthenticated && (
             <div class="user-menu relative">
@@ -186,112 +209,99 @@ const { isAuthenticated = false } = Astro.props;
             </div>
           )
         }
-
-        <!-- Mobile Menu Button -->
-        <button
-          id="mobile-menu-btn"
-          class="mobile-menu-toggle lg:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-200"
-          aria-label="Abrir menú de navegación"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-        >
-          <svg
-            class="menu-icon w-6 h-6 text-white"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-          <svg
-            class="close-icon w-6 h-6 text-white hidden"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
       </div>
     </div>
 
     <!-- Mobile Menu -->
     <div
       id="mobile-menu"
-      class="mobile-menu lg:hidden absolute top-full left-0 right-0 bg-gradient-to-b from-primary-900 to-primary-800 border-b border-white/20 shadow-2xl transform -translate-y-full opacity-0 invisible transition-all duration-300"
+      class="mobile-menu lg:hidden absolute top-full left-0 right-0 bg-gradient-to-b from-primary-900 to-primary-800 border-b border-white/20 shadow-2xl transform -translate-y-full opacity-0 invisible transition-all duration-300 z-40"
       role="menu"
       aria-labelledby="mobile-menu-btn"
     >
       <div class="mobile-menu-content px-4 py-6 space-y-6">
         <!-- Mobile Navigation Links -->
-        <nav class="mobile-nav space-y-4" role="none">
+        <nav class="mobile-nav space-y-2" role="none">
           <a
             href="#features"
-            class="mobile-nav-link block py-3 text-lg font-medium text-gray-200 hover:text-white transition-colors duration-200 border-b border-gray-600/40"
+            class="mobile-nav-link block py-4 px-4 text-lg font-medium text-gray-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
             role="menuitem"
             data-section="features"
+            title="Mejores indicadores trading y análisis técnico avanzado"
           >
-            Señales IA & Análisis Técnico
+            <div class="flex items-center space-x-3">
+              <div>
+                <div class="font-semibold">Señales IA</div>
+                <div class="text-sm text-gray-400">Análisis técnico avanzado</div>
+              </div>
+            </div>
           </a>
+
           <a
             href="#results"
-            class="mobile-nav-link block py-3 text-lg font-medium text-gray-200 hover:text-white transition-colors duration-200 border-b border-gray-600/40"
+            class="mobile-nav-link block py-4 px-4 text-lg font-medium text-gray-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
             role="menuitem"
             data-section="results"
+            title="Resultados reales de bitcoin trading y criptomonedas rentables"
           >
-            Resultados Bitcoin Trading
+            <div class="flex items-center space-x-3">
+              <div>
+                <div class="font-semibold">Resultados</div>
+                <div class="text-sm text-gray-400">Bitcoin trading comprobado</div>
+              </div>
+            </div>
           </a>
+
           <a
             href="#pricing"
-            class="mobile-nav-link block py-3 text-lg font-medium text-gray-200 hover:text-white transition-colors duration-200 border-b border-gray-600/40"
+            class="mobile-nav-link block py-4 px-4 text-lg font-medium text-gray-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
             role="menuitem"
             data-section="pricing"
+            title="Comprar bot trading y planes de arbitrage crypto"
           >
-            Planes Bot Trading
+            <div class="flex items-center space-x-3">
+              <div>
+                <div class="font-semibold">Planes</div>
+                <div class="text-sm text-gray-400">Bot trading y arbitrage</div>
+              </div>
+            </div>
           </a>
+
           <a
             href="#testimonials"
-            class="mobile-nav-link block py-3 text-lg font-medium text-gray-200 hover:text-white transition-colors duration-200 border-b border-gray-600/40"
+            class="mobile-nav-link block py-4 px-4 text-lg font-medium text-gray-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
             role="menuitem"
             data-section="testimonials"
+            title="Testimonios de usuarios usando estrategia trading criptomonedas"
           >
-            Testimonios Usuarios
+            <div class="flex items-center space-x-3">
+              <div>
+                <div class="font-semibold">Testimonios</div>
+                <div class="text-sm text-gray-400">Usuarios satisfechos</div>
+              </div>
+            </div>
+          </a>
+
+          <a
+            href="#contact"
+            class="mobile-nav-link block py-4 px-4 text-lg font-medium text-gray-200 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200"
+            role="menuitem"
+            data-section="contact"
+            title="Únete a la lista VIP de trading"
+          >
+            <div class="flex items-center space-x-3">
+              <div>
+                <div class="font-semibold">Lista VIP</div>
+                <div class="text-sm text-gray-400">Acceso prioritario</div>
+              </div>
+            </div>
           </a>
         </nav>
 
-        <!-- Mobile Auth Buttons -->
-        {
-          !isAuthenticated && (
-            <div class="mobile-auth space-y-4">
-              <button
-                style="
-                  width: 100%;
-                  padding: 0.75rem 1rem;
-                  background: linear-gradient(135deg, #f59e0b 0%, #10b981 100%);
-                  color: white;
-                  font-weight: 600;
-                  border: none;
-                  border-radius: 0.5rem;
-                  cursor: pointer;
-                  transition: background 0.2s ease;
-                  will-change: background;
-                  contain: layout style;
-                "
-                onmouseover="this.style.background='linear-gradient(135deg, #10b981 0%, #059669 100%)'"
-                onmouseout="this.style.background='linear-gradient(135deg, #f59e0b 0%, #10b981 100%)'"
-              >
-                🔥 Señales Trading Gratis
-              </button>
-            </div>
-          )
-        }
-
         <!-- Mobile Social Links -->
         <div class="mobile-social border-t border-gray-600/40 pt-6">
-          <p class="text-sm text-gray-300 mb-4">Síguenos - Análisis fundamental diario</p>
-          <div class="flex space-x-4">
+          <p class="text-sm text-gray-300 mb-4 text-center">Síguenos - Análisis fundamental diario</p>
+          <div class="flex justify-center space-x-4">
             <a
               href="https://x.com/cryptosenalespro"
               class="social-link p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-colors duration-200"
@@ -366,11 +376,33 @@ const { isAuthenticated = false } = Astro.props;
     will-change: transform;
   }
 
-  /* Mobile menu optimizations */
-  .mobile-menu.open {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
+  /* Mobile menu optimizations - CORREGIDO */
+  .mobile-menu {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+  }
+
+  /* Estados del menú móvil */
+  .mobile-menu.translate-y-0 {
+    transform: translateY(0) !important;
+  }
+
+  .mobile-menu.opacity-100 {
+    opacity: 1 !important;
+  }
+
+  .mobile-menu.visible {
+    visibility: visible !important;
+  }
+
+  /* Mobile actions container */
+  .mobile-actions {
+    position: relative;
+    z-index: 50;
   }
 
   /* Reduce paint complexity */
@@ -383,16 +415,362 @@ const { isAuthenticated = false } = Astro.props;
     backdrop-filter: blur(10px);
     background: rgba(10, 14, 39, 0.95);
   }
+
+  /* Improved mobile menu transitions */
+  .menu-icon,
+  .close-icon {
+    transition:
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+  }
+
+  .menu-icon.hidden,
+  .close-icon.hidden {
+    opacity: 0 !important;
+    transform: scale(0.8);
+  }
+
+  /* Mobile menu button hover effects */
+  .mobile-menu-toggle {
+    transition: all 0.2s ease-in-out;
+  }
+
+  .mobile-menu-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+  }
+
+  .mobile-menu-toggle:active {
+    transform: scale(0.95);
+  }
+
+  /* Icon hover effects */
+  .mobile-menu-toggle:hover .menu-icon,
+  .mobile-menu-toggle:hover .close-icon {
+    transform: scale(1.1);
+  }
+
+  /* Mobile navigation link hover effects */
+  .mobile-nav-link:hover {
+    transform: translateX(8px);
+  }
+
+  .mobile-nav-link:active {
+    transform: translateX(4px) scale(0.98);
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced gradient for text */
+  .text-gradient {
+    background: linear-gradient(135deg, #f59e0b 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .mobile-actions {
+      gap: 0.5rem;
+    }
+
+    #signup-btn {
+      font-size: 0.875rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .mobile-menu-content {
+      padding: 1rem;
+    }
+
+    .mobile-nav-link {
+      padding: 1rem;
+    }
+  }
+
+  /* Prevent body scroll when mobile menu is open */
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  /* Social links hover effects */
+  .social-link:hover svg {
+    transform: scale(1.1);
+  }
+
+  /* Focus styles for accessibility */
+  .mobile-nav-link:focus,
+  .mobile-menu-toggle:focus,
+  #signup-btn:focus {
+    outline: 2px solid #10b981;
+    outline-offset: 2px;
+  }
+
+  /* Mobile menu toggle styles */
+  .mobile-menu-toggle {
+    border: 2px solid transparent;
+  }
+
+  .mobile-menu-toggle:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Mobile menu states */
+  .mobile-menu[data-state="open"] {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Header layout optimizations for large screens */
+  @media (min-width: 1024px) {
+    .nav-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Logo MANTIENE su posición original a la izquierda */
+    .logo-container {
+      position: static !important;
+      transform: none !important;
+      z-index: 10;
+    }
+
+    /* SOLO el menú desktop centrado horizontalmente */
+    .nav-desktop {
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      top: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      z-index: 5;
+      background: transparent;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+    }
+
+    /* Botones de autenticación mantienen su posición original a la derecha */
+    .auth-container {
+      position: relative;
+      z-index: 10;
+      margin-left: auto;
+    }
+
+    /* Espaciado optimizado para el menú */
+    .nav-desktop a {
+      white-space: nowrap;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .nav-desktop a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  /* Solución eficiente: Solo reducir espaciado entre enlaces para 1024px */
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    .nav-desktop {
+      gap: 1rem !important;
+    }
+
+    .nav-desktop a {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+
+  /* Asegurar que en móvil todo esté en su posición normal */
+  @media (max-width: 1023px) {
+    .logo-container {
+      position: static !important;
+      transform: none !important;
+    }
+
+    .nav-desktop {
+      position: static !important;
+      transform: none !important;
+    }
+  }
 </style>
 
 <script>
-  // Optimized header initialization - reduced blocking
-  import { initHeader } from "../../scripts/header.ts";
+  // Script optimizado para el menú móvil con cierre automático
+  function initMobileMenu() {
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn") as HTMLButtonElement;
+    const mobileMenu = document.getElementById("mobile-menu") as HTMLDivElement;
+    const menuIcon = mobileMenuBtn?.querySelector(".menu-icon") as SVGElement;
+    const closeIcon = mobileMenuBtn?.querySelector(".close-icon") as SVGElement;
 
-  // Use requestIdleCallback if available, fallback to setTimeout
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(initHeader, { timeout: 2000 });
-  } else {
-    setTimeout(initHeader, 0);
+    if (!mobileMenuBtn || !mobileMenu) {
+      return;
+    }
+
+    let isOpen = false;
+
+    function openMenu() {
+      isOpen = true;
+
+      // Mostrar menú con animaciones
+      mobileMenu.style.transform = "translateY(0)";
+      mobileMenu.style.opacity = "1";
+      mobileMenu.style.visibility = "visible";
+      mobileMenu.setAttribute("data-state", "open");
+
+      // Cambiar iconos con transición suave
+      if (menuIcon && closeIcon) {
+        menuIcon.style.opacity = "0";
+        setTimeout(() => {
+          menuIcon.style.display = "none";
+          closeIcon.style.display = "block";
+          closeIcon.style.opacity = "1";
+        }, 100);
+      }
+
+      // Prevenir scroll del body
+      document.body.style.overflow = "hidden";
+      document.body.classList.add("menu-open");
+
+      // Actualizar aria
+      mobileMenuBtn.setAttribute("aria-expanded", "true");
+      mobileMenuBtn.setAttribute("aria-label", "Cerrar menú de navegación");
+    }
+
+    function closeMenu() {
+      isOpen = false;
+
+      // Ocultar menú con animaciones
+      mobileMenu.style.transform = "translateY(-100%)";
+      mobileMenu.style.opacity = "0";
+      mobileMenu.style.visibility = "hidden";
+      mobileMenu.setAttribute("data-state", "closed");
+
+      // Cambiar iconos con transición suave
+      if (menuIcon && closeIcon) {
+        closeIcon.style.opacity = "0";
+        setTimeout(() => {
+          closeIcon.style.display = "none";
+          menuIcon.style.display = "block";
+          menuIcon.style.opacity = "1";
+        }, 100);
+      }
+
+      // Restaurar scroll del body
+      document.body.style.overflow = "";
+      document.body.classList.remove("menu-open");
+
+      // Actualizar aria
+      mobileMenuBtn.setAttribute("aria-expanded", "false");
+      mobileMenuBtn.setAttribute("aria-label", "Abrir menú de navegación");
+    }
+
+    function toggleMenu() {
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    function smoothScrollToSection(targetId: string) {
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const headerHeight = 80;
+        const targetPosition = targetElement.offsetTop - headerHeight;
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+      }
+    }
+
+    // Event listener para el botón
+    mobileMenuBtn.addEventListener("click", function (e: Event) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Cerrar menú automáticamente al hacer click en CUALQUIER enlace
+    const allMenuLinks = mobileMenu.querySelectorAll("a") as NodeListOf<HTMLAnchorElement>;
+    allMenuLinks.forEach((link) => {
+      link.addEventListener("click", function (e: Event) {
+        const href = this.getAttribute("href");
+
+        if (href && href.startsWith("#")) {
+          e.preventDefault();
+
+          // Cerrar menú inmediatamente
+          closeMenu();
+
+          // Scroll suave después de un pequeño delay para la animación
+          setTimeout(() => {
+            const targetId = href.substring(1);
+            smoothScrollToSection(targetId);
+          }, 200);
+        } else {
+          // Para enlaces externos, simplemente cerrar el menú
+          closeMenu();
+        }
+      });
+    });
+
+    // También cerrar al hacer click en el botón Lista VIP desde móvil
+    const signupBtn = document.getElementById("signup-btn");
+    if (signupBtn) {
+      signupBtn.addEventListener("click", function (e: Event) {
+        if (isOpen) {
+          e.preventDefault();
+          closeMenu();
+
+          // Scroll a la sección de contacto
+          setTimeout(() => {
+            smoothScrollToSection("contact");
+          }, 200);
+        }
+      });
+    }
+
+    // Cerrar con ESC
+    document.addEventListener("keydown", function (e: KeyboardEvent) {
+      if (e.key === "Escape" && isOpen) {
+        closeMenu();
+      }
+    });
+
+    // Cerrar al hacer click fuera del menú
+    document.addEventListener("click", function (e: Event) {
+      const target = e.target as HTMLElement;
+      if (isOpen && !mobileMenu.contains(target) && !mobileMenuBtn.contains(target)) {
+        closeMenu();
+      }
+    });
+
+    // Cerrar automáticamente en resize a desktop
+    window.addEventListener("resize", function () {
+      if (window.innerWidth >= 1024 && isOpen) {
+        closeMenu();
+      }
+    });
   }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMobileMenu);
+  } else {
+    initMobileMenu();
+  }
+
+  // También para navegación de Astro
+  document.addEventListener("astro:page-load", function () {
+    setTimeout(initMobileMenu, 100);
+  });
 </script>

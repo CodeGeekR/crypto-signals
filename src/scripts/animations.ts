@@ -87,7 +87,7 @@ export class AnimationController {
       });
     } catch (error) {
       // Sin ScrollTrigger, las animaciones CSS son suficientes
-      console.log("ScrollTrigger no disponible, usando animaciones CSS");
+      // Fallback to CSS animations
     }
   }
 }

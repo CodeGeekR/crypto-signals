@@ -35,7 +35,9 @@
           .then(({ initParticleSystem }) => {
             initParticleSystem();
           })
-          .catch((err) => console.error("Error al cargar el sistema de partículas:", err));
+          .catch(() => {
+            // Fallback: continue without particles
+          });
       });
     } else {
       // Fallback para navegadores antiguos.
@@ -44,7 +46,9 @@
           .then(({ initParticleSystem }) => {
             initParticleSystem();
           })
-          .catch((err) => console.error("Error al cargar el sistema de partículas:", err));
+          .catch(() => {
+            // Fallback: continue without particles
+          });
       }, 2000); // Retraso significativo para no bloquear la carga.
     }
   };

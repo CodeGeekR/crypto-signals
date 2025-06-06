@@ -6,20 +6,40 @@
   class="hero-cta flex flex-col items-center justify-center w-full max-w-2xl mx-auto animate-slide-up"
   style="animation-delay: 0.8s;"
 >
-  <!-- Pre-CTA Features Section -->
+  <!-- Pre-CTA Features Section - Optimized -->
   <div id="pre-cta-section" class="w-full mb-12">
     <!-- Section Title -->
     <div class="text-center mb-8">
       <h2 class="text-sm text-gray-400 uppercase tracking-wider font-medium">Tecnología Institucional Disponible</h2>
     </div>
 
-    <!-- Features Grid -->
+    <!-- Features Grid - Simplified with Tabler Icons -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-lg mx-auto">
-      <!-- Feature 1 -->
+      <!-- Feature 1 - Chart Analysis -->
       <div class="feature-card">
         <div class="feature-content">
           <div class="feature-icon">
-            <span class="feature-emoji text-accent-green">📊</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-accent-green"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M3 3v18h18"></path>
+              <path d="M9 15m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+              <path d="M13 5m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+              <path d="M18 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+              <path d="M21 3l-6 1.5"></path>
+              <path d="M14.113 6.65l2.771 3.695"></path>
+              <path d="M16 12.5l-5 2"></path>
+            </svg>
           </div>
           <div class="feature-text">
             <h3 class="text-sm font-semibold text-white mb-1">Análisis Técnico</h3>
@@ -28,11 +48,31 @@
         </div>
       </div>
 
-      <!-- Feature 2 -->
+      <!-- Feature 2 - Bitcoin Trading -->
       <div class="feature-card">
         <div class="feature-content">
           <div class="feature-icon">
-            <span class="feature-emoji text-accent-gold">₿</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-accent-gold"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M6 6h8a3 3 0 0 1 0 6a3 3 0 0 1 0 6h-8"></path>
+              <path d="M8 6l0 12"></path>
+              <path d="M8 12l6 0"></path>
+              <path d="M9 3l0 3"></path>
+              <path d="M13 3l0 3"></path>
+              <path d="M9 18l0 3"></path>
+              <path d="M13 18l0 3"></path>
+            </svg>
           </div>
           <div class="feature-text">
             <h3 class="text-sm font-semibold text-white mb-1">Bitcoin Trading</h3>
@@ -43,36 +83,37 @@
     </div>
   </div>
 
-  <!-- Primary CTA Button -->
-  <div class="w-full mb-12">
-    <a
-      href="#contact"
-      id="cta-waitlist"
-      class="group relative overflow-hidden w-full max-w-md mx-auto px-8 py-5 bg-gradient-to-r from-red-500 to-orange-500 text-white text-lg font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:from-red-400 hover:to-orange-400 inline-block text-center"
-      aria-label="Acceder a señales de trading en vivo gratis - Plataforma institucional"
+  <!-- Primary CTA Button - Optimized -->
+  <div class="w-full flex flex-col items-center space-y-4 mb-8">
+    <button
+      class="cta-primary group relative w-full max-w-md bg-gradient-to-r from-accent-gold to-accent-green hover:from-accent-green hover:to-accent-gold text-white font-bold py-4 px-8 rounded-2xl shadow-2xl hover:shadow-accent-gold/25 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-accent-gold/50"
+      data-cta="primary"
+      aria-label="Acceder a señales de trading gratis"
     >
-      <!-- Background glow effect -->
-      <div
-        class="absolute inset-0 bg-gradient-to-r from-red-400/20 to-orange-400/20 rounded-xl blur-lg scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-      >
-      </div>
-
-      <!-- Button content -->
-      <span class="relative z-10 flex items-center justify-center space-x-2">
-        <span class="hidden sm:inline">🚀 Acceder a Señales Gratis</span>
-        <span class="sm:hidden">🚀 Señales Gratis</span>
-        <span class="cta-arrow">→</span>
+      <span class="relative z-10 flex items-center justify-center space-x-3">
+        <span class="text-lg">Apuntate a la lista VIP</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="group-hover:translate-x-1 transition-transform duration-300"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M5 12l14 0"></path>
+          <path d="M13 18l6 -6"></path>
+          <path d="M13 6l6 6"></path>
+        </svg>
       </span>
-
-      <!-- Pulse effect -->
-      <div
-        class="absolute inset-0 rounded-xl bg-gradient-to-r from-red-400 to-orange-400 opacity-0 group-hover:opacity-20 animate-pulse"
-      >
-      </div>
-    </a>
+    </button>
   </div>
 
-  <!-- Post-CTA Benefits Section -->
+  <!-- Post-CTA Section - Optimized -->
   <div id="post-cta-section" class="w-full">
     <!-- Section Divider -->
     <div class="flex items-center justify-center mb-10">
@@ -83,13 +124,27 @@
       <div class="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent w-full max-w-xs"></div>
     </div>
 
-    <!-- Benefits Grid -->
+    <!-- Benefits Grid - Simplified with Tabler Icons -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
-      <!-- Benefit 1 -->
+      <!-- Benefit 1 - Lightning Fast -->
       <div class="benefit-card">
         <div class="benefit-content">
           <div class="benefit-icon">
-            <span class="benefit-emoji text-accent-blue">⚡</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-accent-blue"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M13 3l0 7l6 0l-8 11l0 -7l-6 0l8 -11"></path>
+            </svg>
           </div>
           <div class="benefit-text">
             <h3 class="text-base font-medium text-white mb-2">Mejores Indicadores</h3>
@@ -98,11 +153,26 @@
         </div>
       </div>
 
-      <!-- Benefit 2 -->
+      <!-- Benefit 2 - Trending Up -->
       <div class="benefit-card">
         <div class="benefit-content">
           <div class="benefit-icon">
-            <span class="benefit-emoji text-accent-green">📈</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-accent-green"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M3 17l6 -6l4 4l8 -8"></path>
+              <path d="M14 7l7 0l0 7"></path>
+            </svg>
           </div>
           <div class="benefit-text">
             <h3 class="text-base font-medium text-white mb-2">Arbitrage Crypto</h3>
@@ -112,208 +182,93 @@
       </div>
     </div>
 
-    <!-- Advanced Features Info -->
-    <div class="advanced-features-info mb-10">
+    <!-- Advanced Features Info - Simplified -->
+    <div class="advanced-features-info">
       <div class="info-content">
         <div class="flex items-center justify-center space-x-3 mb-3">
-          <span class="info-dot"></span>
-          <h3 class="text-sm font-medium text-white">Acceso Completo Incluido</h3>
-          <span class="info-dot"></span>
+          <div class="info-dot"></div>
+          <span class="text-sm text-gray-300 font-medium">Acceso inmediato sin tarjeta de crédito</span>
+          <div class="info-dot"></div>
         </div>
-        <p class="text-sm text-gray-300 text-center leading-relaxed max-w-md mx-auto">
-          Acceso a <span class="text-accent-gold font-medium">criptomonedas más rentables</span>
-          con <span class="text-accent-blue font-medium">institutional trading software</span> profesional
+        <p class="text-xs text-gray-400">
+          Únete a <span class="text-accent-green font-semibold">2,847+ traders</span> que ya están generando ganancias
         </p>
-      </div>
-    </div>
-
-    <!-- Social Proof -->
-    <div class="social-proof-section">
-      <div class="proof-content">
-        <div class="proof-stats">
-          <span class="text-accent-gold font-bold text-2xl">+2,847</span>
-          <span class="text-white text-sm font-medium ml-2">traders LATAM</span>
-        </div>
-        <div class="proof-badge">
-          <span class="text-xs text-gray-400">ya usan nuestras</span>
-          <span class="text-sm text-white font-medium">Señales de Trading en Vivo Gratis</span>
-        </div>
       </div>
     </div>
   </div>
 </div>
 
-<script is:inline>
-  // Global variables for Motion library
-  window.Motion = window.Motion || null;
-  window.gtag = window.gtag || null;
-
-  // Motion library loader with fallback
-  async function loadMotion() {
-    try {
-      const motion = await import("https://cdn.jsdelivr.net/npm/motion@11.13.5/+esm");
-      window.Motion = {
-        animate: motion.animate,
-        stagger: motion.stagger,
-      };
-      return true;
-    } catch (error) {
-      return false;
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", async () => {
-    // Load Motion library
-    const motionLoaded = await loadMotion();
-
-    // Initialize animations
-    if (motionLoaded) {
-      initMotionAnimations();
-    } else {
-      initCSSFallbackAnimations();
+<!-- Optimized JavaScript - Reduced complexity -->
+<script>
+  // Simplified animation system - No external dependencies
+  document.addEventListener("DOMContentLoaded", () => {
+    // Immediate CSS-based animations
+    const heroSection = document.querySelector(".hero-cta") as HTMLElement;
+    if (heroSection) {
+      heroSection.style.opacity = "1";
+      heroSection.style.transform = "translateY(0)";
     }
 
-    // Initialize interactions
-    initCTAInteractions();
-  });
+    // CTA click handlers
+    const primaryCTA = document.querySelector('[data-cta="primary"]');
 
-  function initMotionAnimations() {
-    const { animate, stagger } = window.Motion;
-
-    // Animate feature cards with stagger
-    const featureCards = document.querySelectorAll(".feature-card");
-    if (featureCards.length > 0) {
-      animate(
-        featureCards,
-        {
-          opacity: [0, 1],
-          y: [30, 0],
-          scale: [0.95, 1],
-        },
-        {
-          delay: stagger(0.2, { start: 1.2 }),
-          duration: 0.8,
-          easing: "ease-out",
-        }
-      );
-    }
-
-    // Animate benefit cards with stagger
-    const benefitCards = document.querySelectorAll(".benefit-card");
-    if (benefitCards.length > 0) {
-      animate(
-        benefitCards,
-        {
-          opacity: [0, 1],
-          y: [20, 0],
-        },
-        {
-          delay: stagger(0.3, { start: 2.0 }),
-          duration: 0.7,
-          easing: "ease-out",
-        }
-      );
-    }
-
-    // Animate advanced features info
-    const advancedInfo = document.querySelector(".advanced-features-info");
-    if (advancedInfo) {
-      animate(
-        advancedInfo,
-        {
-          opacity: [0, 1],
-          y: [15, 0],
-        },
-        {
-          delay: 2.8,
-          duration: 0.6,
-          easing: "ease-out",
-        }
-      );
-    }
-
-    // Animate social proof
-    const socialProof = document.querySelector(".social-proof-section");
-    if (socialProof) {
-      animate(
-        socialProof,
-        {
-          opacity: [0, 1],
-          y: [10, 0],
-        },
-        {
-          delay: 3.2,
-          duration: 0.8,
-          easing: "ease-out",
-        }
-      );
-    }
-  }
-
-  function initCSSFallbackAnimations() {
-    // CSS-based stagger animation fallback
-    const allElements = document.querySelectorAll(
-      ".feature-card, .benefit-card, .advanced-features-info, .social-proof-section"
-    );
-
-    allElements.forEach((element, index) => {
-      element.style.opacity = "0";
-      element.style.transform = "translateY(20px)";
-      element.style.transition = "all 0.8s ease-out";
-
-      setTimeout(
-        () => {
-          element.style.opacity = "1";
-          element.style.transform = "translateY(0)";
-        },
-        1200 + index * 200
-      );
-    });
-  }
-
-  function initCTAInteractions() {
-    const waitlistBtn = document.getElementById("cta-waitlist");
-
-    // CTA button click handler (solo el botón principal debe tener interacciones)
-    waitlistBtn?.addEventListener("click", (e) => {
-      e.preventDefault();
-
-      // Button click animation
-      if (window.Motion) {
-        window.Motion.animate(waitlistBtn, { scale: [1, 0.95, 1] }, { duration: 0.2 });
-      }
-
-      // Scroll to contact section
-      const contactSection = document.getElementById("contact");
-      if (contactSection) {
-        const headerElement = document.querySelector(".header-main");
-        const headerHeight = headerElement?.offsetHeight || 80;
-        const targetPosition = contactSection.offsetTop - headerHeight;
-
-        window.scrollTo({
-          top: targetPosition,
-          behavior: "smooth",
-        });
-
-        // Track analytics
-        if (typeof window.gtag === "function") {
-          window.gtag("event", "cta_click", {
+    if (primaryCTA) {
+      primaryCTA.addEventListener("click", () => {
+        // Track conversion event
+        if (typeof (window as any).gtag !== "undefined") {
+          (window as any).gtag("event", "cta_click", {
             event_category: "engagement",
-            event_label: "institutional_trading_access",
-            event_content: "señales_trading_gratis",
+            event_label: "primary_cta",
             value: 1,
           });
         }
+
+        // Smooth scroll to contact section
+        const contactSection = document.getElementById("contact");
+        if (contactSection) {
+          contactSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      });
+    }
+
+    // Lazy load advanced animations only if needed
+    let advancedAnimationsLoaded = false;
+
+    const loadAdvancedAnimations = () => {
+      if (advancedAnimationsLoaded) return;
+      advancedAnimationsLoaded = true;
+
+      // Use requestIdleCallback for non-critical animations
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(() => {
+          // Simple stagger animation for cards
+          const cards = document.querySelectorAll(".feature-card, .benefit-card");
+          cards.forEach((card, index) => {
+            setTimeout(() => {
+              (card as HTMLElement).style.opacity = "1";
+              (card as HTMLElement).style.transform = "translateY(0)";
+            }, index * 100);
+          });
+        });
       }
+    };
+
+    // Load animations on user interaction
+    const interactionEvents = ["scroll", "mousemove", "touchstart"];
+    interactionEvents.forEach((event) => {
+      document.addEventListener(event, loadAdvancedAnimations, { once: true, passive: true });
     });
-  }
+  });
 </script>
 
 <style>
-  /* Feature Cards - Puramente informativas, sin interacciones */
+  /* Optimized styles - Reduced complexity */
   .feature-card {
-    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 transition-opacity duration-500;
-    opacity: 0; /* Initially hidden for animation */
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-5 transition-all duration-500;
+    opacity: 1; /* Visible by default */
   }
 
   .feature-content {
@@ -324,30 +279,14 @@
     @apply w-12 h-12 bg-gradient-to-br from-primary-700 to-primary-600 rounded-xl flex items-center justify-center flex-shrink-0;
   }
 
-  /* Emoji icons styling */
-  .feature-emoji {
-    @apply text-xl leading-none;
-    font-size: 1.25rem;
-  }
-
-  .benefit-emoji {
-    @apply text-xl leading-none;
-    font-size: 1.25rem;
-  }
-
-  .cta-arrow {
-    @apply text-lg font-bold transform group-hover:translate-x-1 transition-transform duration-300;
-    font-size: 1.125rem;
-  }
-
   .feature-text {
     @apply flex-1;
   }
 
-  /* Benefit Cards - Enfoque en contenido, no en interacción */
+  /* Benefit Cards - Simplified */
   .benefit-card {
-    @apply bg-gradient-to-br from-primary-800/30 to-primary-700/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 transition-opacity duration-500;
-    opacity: 0; /* Initially hidden for animation */
+    @apply bg-gradient-to-br from-primary-800/30 to-primary-700/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 transition-all duration-500;
+    opacity: 1; /* Visible by default */
   }
 
   .benefit-content {
@@ -365,7 +304,7 @@
   /* Advanced Features Info */
   .advanced-features-info {
     @apply w-full;
-    opacity: 0; /* Initially hidden for animation */
+    opacity: 1; /* Visible by default */
   }
 
   .info-content {
@@ -376,28 +315,25 @@
     @apply w-2 h-2 bg-accent-green rounded-full animate-pulse flex-shrink-0;
   }
 
-  /* Social Proof Section */
-  .social-proof-section {
-    @apply w-full;
-    opacity: 0; /* Initially hidden for animation */
+  /* CTA Button optimizations */
+  .cta-primary {
+    position: relative;
+    overflow: hidden;
   }
 
-  .proof-content {
-    @apply bg-gradient-to-r from-primary-800/25 to-primary-700/25 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center space-y-3;
+  .cta-primary::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
   }
 
-  .proof-stats {
-    @apply flex items-center justify-center;
-  }
-
-  .proof-badge {
-    @apply space-y-1;
-  }
-
-  /* Subtle visual enhancements without suggesting interactivity */
-  .feature-icon,
-  .benefit-icon {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  .cta-primary:hover::before {
+    left: 100%;
   }
 
   /* Responsive adjustments */
@@ -431,7 +367,7 @@
     }
   }
 
-  /* Extra spacing for better visual hierarchy */
+  /* Enhanced spacing */
   #pre-cta-section {
     margin-bottom: 3rem;
   }

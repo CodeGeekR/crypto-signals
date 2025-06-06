@@ -12,63 +12,59 @@ const {
 ---
 
 <div class={`countdown-container ${className}`}>
-  <!-- Título optimizado - Un solo elemento -->
+  <!-- Título optimizado - Eliminado emoji -->
   <div class="countdown-title mb-4 text-center">
-    <span class="text-xs sm:text-sm text-orange-300 font-medium"> 🚀 Lista VIP cierra en: </span>
+    <span class="text-xs sm:text-sm text-orange-300 font-medium">Lista VIP cierra en:</span>
   </div>
 
-  <!-- Timer simplificado - Eliminados wrappers innecesarios -->
-  <div class="domino-timer flex justify-center items-center gap-2 sm:gap-3 md:gap-4 max-w-lg mx-auto">
-    <!-- Días - Estructura simplificada -->
+  <!-- Timer ultra-simplificado - Estructura mínima -->
+  <div class="domino-timer flex justify-center items-center gap-2 sm:gap-3 max-w-lg mx-auto">
+    <!-- Días -->
     <div class="time-unit">
-      <div class="domino-card" id="days-card" data-value="--">--</div>
+      <div class="domino-card" id="days-card">--</div>
       <span class="time-label">días</span>
     </div>
 
     <!-- Horas -->
     <div class="time-unit">
-      <div class="domino-card" id="hours-card" data-value="--">--</div>
+      <div class="domino-card" id="hours-card">--</div>
       <span class="time-label">horas</span>
     </div>
 
     <!-- Minutos -->
     <div class="time-unit">
-      <div class="domino-card" id="minutes-card" data-value="--">--</div>
+      <div class="domino-card" id="minutes-card">--</div>
       <span class="time-label">min</span>
     </div>
 
     <!-- Segundos -->
     <div class="time-unit">
-      <div class="domino-card" id="seconds-card" data-value="--">--</div>
+      <div class="domino-card" id="seconds-card">--</div>
       <span class="time-label">seg</span>
     </div>
   </div>
 
-  <!-- Estado de expiración optimizado -->
-  <div class="countdown-expired hidden text-center mt-4 text-red-400 font-bold text-sm sm:text-base">
-    🔴 Oferta Expirada
-  </div>
+  <!-- Estado de expiración simplificado -->
+  <div class="countdown-expired hidden text-center mt-4 text-red-400 font-bold text-sm">Oferta Expirada</div>
 </div>
 
 <style>
-  /* Estilos optimizados - Reducción masiva de DOM */
+  /* Estilos ultra-optimizados - DOM mínimo */
   .countdown-container {
     @apply w-full;
   }
 
   .time-unit {
-    @apply flex flex-col items-center space-y-2;
+    @apply flex flex-col items-center space-y-1;
   }
 
   .domino-card {
-    @apply w-14 h-16 sm:w-16 sm:h-20 md:w-20 md:h-24 rounded-lg flex items-center justify-center;
-    @apply text-base sm:text-lg md:text-xl font-bold font-mono text-white;
+    @apply w-12 h-14 sm:w-14 sm:h-16 md:w-16 md:h-20 rounded-lg flex items-center justify-center;
+    @apply text-sm sm:text-base md:text-lg font-bold font-mono text-white;
     background: linear-gradient(145deg, #1e293b, #475569);
-    box-shadow:
-      0 8px 16px rgba(0, 0, 0, 0.4),
-      inset 0 2px 4px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-    transition: all 0.5s ease;
+    transition: transform 0.2s ease;
     border: 1px solid rgba(148, 163, 184, 0.2);
   }
 
@@ -76,53 +72,56 @@ const {
     @apply text-xs text-gray-400 font-medium;
   }
 
-  /* Responsive optimizado */
+  /* Responsive ultra-optimizado */
   @media (max-width: 480px) {
     .domino-card {
-      @apply w-12 h-14 text-sm;
+      @apply w-10 h-12 text-xs;
+    }
+
+    .time-label {
+      @apply text-xs;
     }
   }
 
-  /* Hover efecto simple */
+  /* Hover efecto mínimo */
   .domino-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    transform: translateY(-1px);
   }
 
-  /* Animaciones de entrada simplificadas */
+  /* Animación de entrada ultra-simplificada */
   .time-unit {
     opacity: 0;
-    animation: slideUp 0.6s ease-out forwards;
+    animation: fadeIn 0.4s ease-out forwards;
   }
 
   .time-unit:nth-child(1) {
-    animation-delay: 0.2s;
+    animation-delay: 0.1s;
   }
   .time-unit:nth-child(2) {
-    animation-delay: 0.3s;
+    animation-delay: 0.2s;
   }
   .time-unit:nth-child(3) {
-    animation-delay: 0.4s;
+    animation-delay: 0.3s;
   }
   .time-unit:nth-child(4) {
-    animation-delay: 0.5s;
+    animation-delay: 0.4s;
   }
 
-  @keyframes slideUp {
+  @keyframes fadeIn {
     to {
       opacity: 1;
       transform: translateY(0);
     }
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(10px);
     }
   }
 </style>
 
 <script>
-  // Lightweight countdown timer - Optimizado para DOM mínimo
-  class SimpleCountdownTimer {
+  // Ultra-lightweight countdown timer - Optimizado para performance
+  class OptimizedCountdownTimer {
     private targetDate: Date;
     private intervalId: number | null = null;
     private readonly STORAGE_KEY = "cryptosenales-countdown-target";
@@ -135,42 +134,33 @@ const {
 
     private getOrCreateTargetDate(daysFromNow: number): Date {
       try {
-        // Intentar obtener fecha existente del localStorage
         const storedTarget = localStorage.getItem(this.STORAGE_KEY);
-
         if (storedTarget) {
           const savedDate = new Date(storedTarget);
-          // Verificar que la fecha sea válida y esté en el futuro
           if (savedDate.getTime() > Date.now()) {
             return savedDate;
           }
         }
       } catch (error) {
-        // Si localStorage no está disponible, continuar con fecha nueva
-        console.warn("localStorage no disponible, usando fecha temporal");
+        // localStorage no disponible, continuar
       }
 
-      // 🎯 Fecha objetivo FIJA y realista para el lanzamiento
-      // Establecer una fecha específica en el futuro (ej: 15 de febrero de 2025)
-      const launchDate = new Date("2025-07-15T23:59:59Z"); // Fecha UTC fija
-
-      // Si la fecha ya pasó, usar 30 días desde ahora como fallback
+      // Fecha objetivo fija para el lanzamiento
+      const launchDate = new Date("2025-07-15T23:59:59Z");
       const newTarget =
         launchDate.getTime() > Date.now() ? launchDate : new Date(Date.now() + daysFromNow * 24 * 60 * 60 * 1000);
 
-      // Guardar en localStorage para persistencia
       try {
         localStorage.setItem(this.STORAGE_KEY, newTarget.toISOString());
       } catch (error) {
-        // Si localStorage falla, continuar sin persistencia
-        console.warn("No se pudo guardar fecha objetivo");
+        // Fallar silenciosamente
       }
 
       return newTarget;
     }
 
     private updateTime(): void {
-      const now = new Date().getTime();
+      const now = Date.now();
       const distance = this.targetDate.getTime() - now;
 
       if (distance < 0) {
@@ -183,7 +173,7 @@ const {
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // Actualizar directamente sin animaciones complejas
+      // Actualización directa sin animaciones complejas
       this.updateElement("days", days);
       this.updateElement("hours", hours);
       this.updateElement("minutes", minutes);
@@ -193,60 +183,55 @@ const {
     private updateElement(unit: string, value: number): void {
       const element = document.getElementById(`${unit}-card`);
       if (element) {
-        element.textContent = value.toString().padStart(2, "0");
-      }
-    }
-
-    private handleExpiration(): void {
-      this.stopTimer();
-      const expiredElement = document.querySelector(".countdown-expired") as HTMLElement;
-      const timerElement = document.querySelector(".domino-timer") as HTMLElement;
-
-      if (expiredElement && timerElement) {
-        timerElement.style.opacity = "0";
-        expiredElement.classList.remove("hidden");
-
-        // 🗑️ Limpiar localStorage cuando expire para evitar fechas pasadas
-        try {
-          localStorage.removeItem(this.STORAGE_KEY);
-        } catch (error) {
-          console.warn("No se pudo limpiar localStorage");
+        const formattedValue = value.toString().padStart(2, "0");
+        if (element.textContent !== formattedValue) {
+          element.textContent = formattedValue;
         }
       }
     }
 
+    private handleExpiration(): void {
+      if (this.intervalId) {
+        clearInterval(this.intervalId);
+        this.intervalId = null;
+      }
+
+      // Mostrar estado expirado
+      const expiredElement = document.querySelector(".countdown-expired");
+      const timerElement = document.querySelector(".domino-timer");
+
+      if (expiredElement && timerElement) {
+        timerElement.classList.add("hidden");
+        expiredElement.classList.remove("hidden");
+      }
+    }
+
     private startTimer(): void {
+      // Usar setInterval optimizado
       this.intervalId = window.setInterval(() => {
         this.updateTime();
       }, 1000);
     }
 
-    private stopTimer(): void {
+    public destroy(): void {
       if (this.intervalId) {
         clearInterval(this.intervalId);
         this.intervalId = null;
       }
     }
-
-    // 🔄 Método público para reinicializar el contador (útil para testing)
-    public resetCountdown(): void {
-      try {
-        localStorage.removeItem(this.STORAGE_KEY);
-        this.stopTimer();
-        this.targetDate = this.getOrCreateTargetDate(30);
-        this.updateTime();
-        this.startTimer();
-      } catch (error) {
-        console.warn("No se pudo reinicializar el contador");
-      }
-    }
   }
 
-  // Inicializar simplificado
+  // Inicialización optimizada
   document.addEventListener("DOMContentLoaded", () => {
-    const timer = new SimpleCountdownTimer(30);
+    // Crear timer solo si el elemento existe
+    const timerContainer = document.querySelector(".countdown-container");
+    if (timerContainer) {
+      const timer = new OptimizedCountdownTimer(30);
 
-    // 🛠️ Exposer método global para desarrollo/testing
-    (window as any).resetCountdown = () => timer.resetCountdown();
+      // Cleanup al salir de la página
+      window.addEventListener("beforeunload", () => {
+        timer.destroy();
+      });
+    }
   });
 </script>
