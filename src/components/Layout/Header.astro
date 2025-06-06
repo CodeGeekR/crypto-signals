@@ -129,12 +129,13 @@ const { isAuthenticated = false } = Astro.props;
             <div class="auth-buttons flex items-center space-x-2 lg:space-x-4">
               <button
                 id="signup-btn"
-                class="btn-signup px-4 py-2 lg:px-6 lg:py-3 bg-gradient-to-r from-accent-gold to-accent-green text-white font-semibold rounded-lg hover:scale-105 transition-all duration-300 text-sm lg:text-base"
+                class="btn-signup px-4 py-2 lg:px-6 lg:py-3 bg-accent-gold text-white font-semibold rounded-lg hover:bg-accent-green transition-colors duration-300 text-sm lg:text-base"
                 aria-label="Acceso gratis a señales de trading en vivo"
                 title="Proveedor de señales trading líder - Acceso gratuito"
               >
-                <span class="hidden sm:inline">🔥 Acceso Gratuito</span>
-                <span class="sm:hidden">🔥 Gratis</span>
+                <span class="signup-text" data-short="🔥 Gratis" data-long="🔥 Acceso Gratuito">
+                  🔥 Gratis
+                </span>
               </button>
             </div>
           ) : (
@@ -239,7 +240,7 @@ const { isAuthenticated = false } = Astro.props;
         {
           !isAuthenticated && (
             <div class="mobile-auth space-y-4">
-              <button class="mobile-signup-btn w-full py-3 px-4 bg-gradient-to-r from-accent-gold to-accent-green text-white font-semibold rounded-lg hover:scale-105 transition-all duration-300">
+              <button class="mobile-signup-btn w-full py-3 px-4 bg-accent-gold text-white font-semibold rounded-lg hover:bg-accent-green transition-colors duration-300">
                 🔥 Señales Trading Gratis
               </button>
             </div>
@@ -318,63 +319,70 @@ const { isAuthenticated = false } = Astro.props;
   </nav>
 </header>
 
-<script>
-  import { initHeader } from "../../scripts/header.ts";
-
-  document.addEventListener("DOMContentLoaded", () => {
-    initHeader();
-  });
-</script>
-
 <style>
+  /* Responsive text usando CSS content - elimina duplicación de elementos */
+  .signup-text::before {
+    content: attr(data-short);
+  }
+
+  @media (min-width: 640px) {
+    .signup-text::before {
+      content: attr(data-long);
+    }
+  }
+
+  /* Ocultar texto original y mostrar solo el pseudo-elemento */
+  .signup-text {
+    font-size: 0;
+  }
+
+  .signup-text::before {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  @media (min-width: 1024px) {
+    .signup-text::before {
+      font-size: 1rem;
+    }
+  }
+
+  /* Optimización adicional para el header */
   .header-main {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
   }
 
-  .header-main.scrolled {
-    background-color: rgba(10, 14, 39, 0.98);
-    backdrop-filter: blur(20px);
-    border-bottom-color: rgba(255, 255, 255, 0.2);
+  .btn-signup {
+    will-change: background-color;
   }
 
+  /* Mobile menu optimizations */
   .mobile-menu.open {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
   }
 
-  .nav-link {
-    position: relative;
+  /* Reduce paint complexity */
+  .mobile-menu-content {
+    contain: layout style paint;
   }
 
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #f7931a, #00d4aa);
-    transition: width 0.3s ease;
-  }
-
-  .nav-link:hover::after,
-  .nav-link.active::after {
-    width: 100%;
-  }
-
-  .logo-link:hover .logo-icon {
-    filter: drop-shadow(0 0 10px rgba(247, 147, 26, 0.5));
-  }
-
-  @media (max-width: 1023px) {
-    .mobile-menu {
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    }
-  }
-
-  /* Smooth scroll offset para fixed header */
-  html {
-    scroll-padding-top: 80px;
+  /* Scroll performance optimization */
+  .header-main.scrolled {
+    backdrop-filter: blur(10px);
+    background: rgba(10, 14, 39, 0.95);
   }
 </style>
+
+<script>
+  // Optimized header initialization - reduced blocking
+  import { initHeader } from "../../scripts/header.ts";
+
+  // Use requestIdleCallback if available, fallback to setTimeout
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(initHeader, { timeout: 2000 });
+  } else {
+    setTimeout(initHeader, 0);
+  }
+</script>

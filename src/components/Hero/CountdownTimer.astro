@@ -16,8 +16,9 @@ const {
   <div class="countdown-title mb-4 text-center">
     <span class="text-xs sm:text-sm text-orange-300 font-medium flex items-center justify-center gap-2">
       <span class="animate-pulse">🚀</span>
-      <span class="hidden sm:inline">Lista VIP cierra en:</span>
-      <span class="sm:hidden">Lista VIP cierra en:</span>
+      <span class="responsive-text" data-short="Lista VIP cierra en:" data-long="Lista VIP cierra en:"
+        >Lista VIP cierra en:</span
+      >
     </span>
   </div>
 
@@ -30,12 +31,7 @@ const {
           <span class="domino-number" id="days-current">30</span>
           <span class="domino-number" id="days-next">30</span>
         </div>
-        <div class="time-label">
-          <span class="text-xs text-gray-400 font-medium">
-            <span class="hidden sm:inline">días</span>
-            <span class="sm:hidden">d</span>
-          </span>
-        </div>
+        <span class="time-label text-xs text-gray-400 font-medium" data-short="d" data-long="días"></span>
       </div>
 
       <!-- Horas -->
@@ -44,12 +40,7 @@ const {
           <span class="domino-number" id="hours-current">00</span>
           <span class="domino-number" id="hours-next">00</span>
         </div>
-        <div class="time-label">
-          <span class="text-xs text-gray-400 font-medium">
-            <span class="hidden sm:inline">horas</span>
-            <span class="sm:hidden">h</span>
-          </span>
-        </div>
+        <span class="time-label text-xs text-gray-400 font-medium" data-short="h" data-long="horas"></span>
       </div>
 
       <!-- Minutos -->
@@ -58,12 +49,7 @@ const {
           <span class="domino-number" id="minutes-current">00</span>
           <span class="domino-number" id="minutes-next">00</span>
         </div>
-        <div class="time-label">
-          <span class="text-xs text-gray-400 font-medium">
-            <span class="hidden sm:inline">min</span>
-            <span class="sm:hidden">m</span>
-          </span>
-        </div>
+        <span class="time-label text-xs text-gray-400 font-medium" data-short="m" data-long="min"></span>
       </div>
 
       <!-- Segundos -->
@@ -72,12 +58,7 @@ const {
           <span class="domino-number" id="seconds-current">00</span>
           <span class="domino-number" id="seconds-next">00</span>
         </div>
-        <div class="time-label">
-          <span class="text-xs text-gray-400 font-medium">
-            <span class="hidden sm:inline">seg</span>
-            <span class="sm:hidden">s</span>
-          </span>
-        </div>
+        <span class="time-label text-xs text-gray-400 font-medium" data-short="s" data-long="seg"></span>
       </div>
     </div>
 
@@ -143,8 +124,46 @@ const {
     transform: translateY(0);
   }
 
-  .time-label {
-    @apply mt-2;
+  /* Responsive text usando CSS content - elimina duplicación de elementos */
+  .time-label::before {
+    content: attr(data-short);
+  }
+
+  .responsive-text::before {
+    content: attr(data-short);
+  }
+
+  @media (min-width: 640px) {
+    .time-label::before {
+      content: attr(data-long);
+    }
+
+    .responsive-text::before {
+      content: attr(data-long);
+    }
+  }
+
+  /* Ocultar texto original y mostrar solo el pseudo-elemento */
+  .time-label,
+  .responsive-text {
+    font-size: 0;
+  }
+
+  .time-label::before,
+  .responsive-text::before {
+    @apply text-xs text-gray-400 font-medium;
+    font-size: 0.75rem;
+  }
+
+  .responsive-text::before {
+    @apply text-orange-300;
+    font-size: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .responsive-text::before {
+      font-size: 0.875rem;
+    }
   }
 
   /* Estilos para el efecto de dominó auténtico */
@@ -156,12 +175,6 @@ const {
   .domino-card::after {
     content: "";
     @apply absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-white opacity-20;
-  }
-
-  /* Efecto de brillo superior */
-  .domino-card::before {
-    content: "";
-    @apply absolute top-0 left-0 right-0 h-2 bg-gradient-to-b from-white to-transparent opacity-10 rounded-t-lg;
   }
 
   /* Responsive adjustments */
@@ -432,36 +445,20 @@ const {
         opacity: 0,
         y: 50,
         ease: "power2.in",
-      })
-        .fromTo(
-          nextElement,
-          {
-            opacity: 0,
-            y: -50,
-          },
-          {
-            duration: 0.4,
-            opacity: 1,
-            y: 0,
-            ease: "power2.out",
-          },
-          0.2 // Solapamiento para transición más suave
-        )
-        // Pequeño efecto de brillo suave
-        .to(
-          cardElement,
-          {
-            duration: 0.15,
-            boxShadow: "0 0 20px rgba(247, 147, 26, 0.4)",
-            ease: "power2.out",
-          },
-          0.4
-        )
-        .to(cardElement, {
-          duration: 0.25,
-          boxShadow: "0 8px 16px rgba(0, 0, 0, 0.4)",
+      }).fromTo(
+        nextElement,
+        {
+          opacity: 0,
+          y: -50,
+        },
+        {
+          duration: 0.4,
+          opacity: 1,
+          y: 0,
           ease: "power2.out",
-        });
+        },
+        0.2 // Solapamiento para transición más suave
+      );
     }
 
     private animateWithCSS(
