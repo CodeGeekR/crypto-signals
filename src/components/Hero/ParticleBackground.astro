@@ -22,9 +22,40 @@
 </div>
 
 <script>
-  import { initParticleSystem } from "../../scripts/particles.ts";
-  document.addEventListener("DOMContentLoaded", () => {
-    initParticleSystem();
+  // 🚀 Estrategia de carga diferida para scripts no críticos (partículas)
+  // Esto reduce drásticamente el "Total Blocking Time" (TBT) y mejora el TTI.
+
+  // 1. Definimos la función que cargará e inicializará el script.
+  const loadAndInitParticles = () => {
+    // Usamos requestIdleCallback para asegurar que la ejecución pesada
+    // solo ocurra cuando el hilo principal esté libre.
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(() => {
+        import("../../scripts/particles.ts")
+          .then(({ initParticleSystem }) => {
+            initParticleSystem();
+          })
+          .catch((err) => console.error("Error al cargar el sistema de partículas:", err));
+      });
+    } else {
+      // Fallback para navegadores antiguos.
+      setTimeout(() => {
+        import("../../scripts/particles.ts")
+          .then(({ initParticleSystem }) => {
+            initParticleSystem();
+          })
+          .catch((err) => console.error("Error al cargar el sistema de partículas:", err));
+      }, 2000); // Retraso significativo para no bloquear la carga.
+    }
+  };
+
+  // 2. Creamos un listener de interacción que se ejecuta UNA SOLA VEZ.
+  // El script de partículas no se descargará hasta que el usuario interactúe.
+  const interactions = ["scroll", "mousemove", "touchstart"];
+  const options = { once: true, passive: true };
+
+  interactions.forEach((event) => {
+    document.addEventListener(event, loadAndInitParticles, options);
   });
 </script>
 

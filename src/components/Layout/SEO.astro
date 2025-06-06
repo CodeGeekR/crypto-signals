@@ -389,6 +389,9 @@ const webPageSchema = {
 };
 ---
 
+<!-- 🚀 Preload LCP (Largest Contentful Paint) image para optimizar la carga -->
+<link rel="preload" href="/images/logo-cs.webp" as="image" type="image/webp" fetchpriority="high" />
+
 <!-- Enhanced SEO Meta Tags para máxima visibilidad -->
 <meta name="keywords" content={keywords} />
 <meta name="author" content={author} />
@@ -469,7 +472,6 @@ const webPageSchema = {
 <!-- DNS Prefetch para recursos externos críticos -->
 <link rel="dns-prefetch" href="//api.binance.com" />
 <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
-<link rel="dns-prefetch" href="//www.googletagmanager.com" />
 
 <!-- Prefetch para páginas críticas -->
 <!-- Nota: Los prefetch se activarán cuando tengamos más páginas creadas -->
