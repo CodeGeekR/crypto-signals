@@ -447,6 +447,33 @@ const webPageSchema = {
 <!-- JSON-LD Structured Data - WebPage Schema para SEO 2025 -->
 <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
 
+<!-- Critical CSS para ELIMINAR completamente el retraso de LCP -->
+<style>
+  #signup-btn {
+    position: absolute !important;
+    top: 50% !important;
+    right: 1rem !important;
+    transform: translateY(-50%) !important;
+    z-index: 100 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.5rem 1rem !important;
+    background: linear-gradient(135deg, #f59e0b 0%, #10b981 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    border: none !important;
+    border-radius: 0.5rem !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    transition: none !important;
+    will-change: auto !important;
+    contain: layout style paint !important;
+  }
+</style>
+
 <!-- Performance optimization preconnects -->
 <!-- NOTA: Google Fonts preconnects se manejan en FontOptimization.astro -->
 <link rel="preconnect" href="https://www.googletagmanager.com" />

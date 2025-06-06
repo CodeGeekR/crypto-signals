@@ -13,6 +13,44 @@ const { isAuthenticated = false } = Astro.props;
 >
   <nav class="nav-container mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Menú principal">
     <div class="nav-wrapper flex items-center justify-between h-16 lg:h-20">
+      <!-- Critical Button - Optimizado para LCP instant rendering -->
+      {
+        !isAuthenticated && (
+          <button
+            id="signup-btn"
+            style="
+              position: absolute;
+              top: 50%;
+              right: 1rem;
+              transform: translateY(-50%);
+              z-index: 100;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              padding: 0.5rem 1rem;
+              background: linear-gradient(135deg, #f59e0b 0%, #10b981 100%);
+              color: white;
+              font-weight: 600;
+              font-size: 0.875rem;
+              border: none;
+              border-radius: 0.5rem;
+              cursor: pointer;
+              text-decoration: none;
+              white-space: nowrap;
+              transition: none;
+              will-change: auto;
+              contain: layout style paint;
+            "
+            onmouseover="this.style.background='linear-gradient(135deg, #10b981 0%, #059669 100%)'"
+            onmouseout="this.style.background='linear-gradient(135deg, #f59e0b 0%, #10b981 100%)'"
+            aria-label="Acceso gratis a señales de trading en vivo"
+            title="Proveedor de señales trading líder - Acceso gratuito"
+          >
+            🔥 Gratis
+          </button>
+        )
+      }
+
       <!-- Logo -->
       <div class="logo-container flex-shrink-0">
         <a
@@ -125,20 +163,7 @@ const { isAuthenticated = false } = Astro.props;
       <!-- Auth Buttons -->
       <div class="auth-container flex items-center space-x-3">
         {
-          !isAuthenticated ? (
-            <div class="auth-buttons flex items-center space-x-2 lg:space-x-4">
-              <button
-                id="signup-btn"
-                class="btn-signup px-4 py-2 lg:px-6 lg:py-3 bg-accent-gold text-white font-semibold rounded-lg hover:bg-accent-green transition-colors duration-300 text-sm lg:text-base"
-                aria-label="Acceso gratis a señales de trading en vivo"
-                title="Proveedor de señales trading líder - Acceso gratuito"
-              >
-                <span class="signup-text" data-short="🔥 Gratis" data-long="🔥 Acceso Gratuito">
-                  🔥 Gratis
-                </span>
-              </button>
-            </div>
-          ) : (
+          isAuthenticated && (
             <div class="user-menu relative">
               <button
                 id="user-menu-btn"
@@ -240,7 +265,23 @@ const { isAuthenticated = false } = Astro.props;
         {
           !isAuthenticated && (
             <div class="mobile-auth space-y-4">
-              <button class="mobile-signup-btn w-full py-3 px-4 bg-accent-gold text-white font-semibold rounded-lg hover:bg-accent-green transition-colors duration-300">
+              <button
+                style="
+                  width: 100%;
+                  padding: 0.75rem 1rem;
+                  background: linear-gradient(135deg, #f59e0b 0%, #10b981 100%);
+                  color: white;
+                  font-weight: 600;
+                  border: none;
+                  border-radius: 0.5rem;
+                  cursor: pointer;
+                  transition: background 0.2s ease;
+                  will-change: background;
+                  contain: layout style;
+                "
+                onmouseover="this.style.background='linear-gradient(135deg, #10b981 0%, #059669 100%)'"
+                onmouseout="this.style.background='linear-gradient(135deg, #f59e0b 0%, #10b981 100%)'"
+              >
                 🔥 Señales Trading Gratis
               </button>
             </div>
@@ -320,40 +361,9 @@ const { isAuthenticated = false } = Astro.props;
 </header>
 
 <style>
-  /* Responsive text usando CSS content - elimina duplicación de elementos */
-  .signup-text::before {
-    content: attr(data-short);
-  }
-
-  @media (min-width: 640px) {
-    .signup-text::before {
-      content: attr(data-long);
-    }
-  }
-
-  /* Ocultar texto original y mostrar solo el pseudo-elemento */
-  .signup-text {
-    font-size: 0;
-  }
-
-  .signup-text::before {
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
-
-  @media (min-width: 1024px) {
-    .signup-text::before {
-      font-size: 1rem;
-    }
-  }
-
   /* Optimización adicional para el header */
   .header-main {
     will-change: transform;
-  }
-
-  .btn-signup {
-    will-change: background-color;
   }
 
   /* Mobile menu optimizations */

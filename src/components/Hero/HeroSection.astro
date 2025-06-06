@@ -129,33 +129,148 @@ import CountdownTimer from "./CountdownTimer.astro";
   </div>
 </section>
 
-<script>
-  // 🚀 Script de animación optimizado para no bloquear el LCP
-  document.addEventListener("DOMContentLoaded", () => {
-    // Usamos requestIdleCallback para asegurar que las animaciones pesadas
-    // solo se ejecuten cuando el navegador esté inactivo, priorizando el renderizado.
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(() => {
-        import("../../scripts/animations.ts")
-          .then(({ initHeroAnimations }) => {
-            initHeroAnimations();
-          })
-          .catch((error) => {
-            console.error("Error al cargar animaciones dinámicas:", error);
-          });
-      });
-    } else {
-      // Fallback para navegadores antiguos: un pequeño retraso.
-      setTimeout(() => {
-        import("../../scripts/animations.ts")
-          .then(({ initHeroAnimations }) => {
-            initHeroAnimations();
-          })
-          .catch((error) => {
-            console.error("Error al cargar animaciones dinámicas:", error);
-          });
-      }, 500); // 500ms de retraso como fallback
+<style>
+  /* 🚀 CSS-only animations - Reemplazo para GSAP/ScrollTrigger (20KB savings) */
+  .hero-badge-container,
+  .hero-title,
+  .hero-subtitle,
+  .hero-description,
+  .hero-metrics,
+  .hero-cta {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+
+  /* Animaciones escalonadas cuando están listas */
+  .animations-ready .hero-badge-container {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
+  }
+
+  .animations-ready .hero-title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.8s;
+    transition-duration: 1.2s;
+  }
+
+  .animations-ready .hero-subtitle {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1s;
+    transition-duration: 1s;
+  }
+
+  .animations-ready .hero-description {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.2s;
+    transition-duration: 1s;
+  }
+
+  .animations-ready .hero-metrics {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.4s;
+    transition-duration: 0.8s;
+  }
+
+  .animations-ready .hero-cta {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.6s;
+    transition-duration: 1s;
+  }
+
+  /* Animación de métricas con efecto stagger */
+  .hero-metrics .metric-item {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .animations-ready .hero-metrics .metric-item:nth-child(1) {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 1.6s;
+  }
+
+  .animations-ready .hero-metrics .metric-item:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 1.7s;
+  }
+
+  .animations-ready .hero-metrics .metric-item:nth-child(3) {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition-delay: 1.8s;
+  }
+
+  /* Parallax scrolling con CSS puro (opcional, lightweight) */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-title {
+      transform: translateY(30px) translateZ(0);
+      will-change: transform;
     }
+
+    @supports (transform-style: preserve-3d) {
+      .hero-title {
+        transform: translate3d(0, 30px, 0);
+      }
+    }
+  }
+
+  /* Reducir animaciones en dispositivos lentos */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-badge-container,
+    .hero-title,
+    .hero-subtitle,
+    .hero-description,
+    .hero-metrics,
+    .hero-cta,
+    .metric-item {
+      transition: opacity 0.3s ease;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  // 🚀 CSS-only animations para eliminar JavaScript bloqueante
+  // Sin importaciones de GSAP/ScrollTrigger - 20KB savings!
+  document.addEventListener("DOMContentLoaded", () => {
+    // Activar animaciones CSS puras después del DOM ready
+    document.documentElement.classList.add("animations-ready");
+
+    // Opcional: cargar animaciones avanzadas solo si el usuario interactúa
+    let advancedAnimationsLoaded = false;
+
+    const loadAdvancedAnimations = () => {
+      if (advancedAnimationsLoaded) return;
+      advancedAnimationsLoaded = true;
+
+      // Solo cargar si el usuario ha mostrado interés (scroll, click, etc.)
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(() => {
+          import("../../scripts/animations.ts")
+            .then(({ initHeroAnimations }) => {
+              initHeroAnimations();
+            })
+            .catch(() => {
+              // Fallar silenciosamente - las animaciones CSS son suficientes
+            });
+        });
+      }
+    };
+
+    // Cargar animaciones avanzadas solo después de interacción del usuario
+    let interactionEvents = ["scroll", "click", "touchstart", "keydown"];
+    interactionEvents.forEach((event) => {
+      document.addEventListener(event, loadAdvancedAnimations, { once: true, passive: true });
+    });
   });
 </script>
 

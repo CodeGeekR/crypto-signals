@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+// Lazy load ScrollTrigger solo para efectos avanzados - 20KB savings
+let ScrollTrigger: any = null;
 
 export class AnimationController {
   private tl: gsap.core.Timeline;
@@ -13,7 +13,8 @@ export class AnimationController {
 
   initializeAnimations() {
     this.heroAnimations();
-    this.setupScrollTriggers();
+    // ScrollTriggers solo si el usuario ya está interactuando
+    this.setupScrollTriggersLazy();
   }
 
   heroAnimations() {
@@ -64,17 +65,30 @@ export class AnimationController {
       }, "-=0.3");
   }
 
-  setupScrollTriggers() {
-    gsap.to(".hero-title", {
-      yPercent: -50,
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#hero",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true
+  async setupScrollTriggersLazy() {
+    // Solo cargar ScrollTrigger si realmente es necesario
+    try {
+      if (!ScrollTrigger) {
+        const { ScrollTrigger: ST } = await import("gsap/ScrollTrigger");
+        ScrollTrigger = ST;
+        gsap.registerPlugin(ScrollTrigger);
       }
-    });
+      
+      // Efecto parallax suave en el título
+      gsap.to(".hero-title", {
+        yPercent: -50,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#hero",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    } catch (error) {
+      // Sin ScrollTrigger, las animaciones CSS son suficientes
+      console.log("ScrollTrigger no disponible, usando animaciones CSS");
+    }
   }
 }
 

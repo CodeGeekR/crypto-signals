@@ -178,11 +178,15 @@ import { TrendingUp, Zap } from "lucide-react";
         </form>
 
         <!-- Benefits Section -->
-        <div class="mt-12 pt-8 border-t border-white/10">
-          <h4 class="text-xl font-bold text-center mb-6 text-white">¿Qué obtienes al reservar tu spot?</h4>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="text-center">
-              <div class="w-12 h-12 bg-accent-green/20 rounded-full flex items-center justify-center mx-auto mb-3">
+        <div class="mt-12 pt-8 border-t border-white/10" data-benefits-section>
+          <h4 class="text-xl font-bold text-center mb-6 text-white" data-benefits-title>
+            ¿Qué obtienes al reservar tu spot?
+          </h4>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-benefits-grid>
+            <div class="text-center benefit-card" data-benefit-item="1">
+              <div
+                class="w-12 h-12 bg-accent-green/20 rounded-full flex items-center justify-center mx-auto mb-3 benefit-icon"
+              >
                 <span class="text-2xl">🚀</span>
               </div>
               <h5 class="font-semibold text-white mb-2">Acceso Prioritario</h5>
@@ -190,8 +194,10 @@ import { TrendingUp, Zap } from "lucide-react";
                 Serás de los primeros en probar la plataforma antes que el público general.
               </p>
             </div>
-            <div class="text-center">
-              <div class="w-12 h-12 bg-accent-gold/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div class="text-center benefit-card" data-benefit-item="2">
+              <div
+                class="w-12 h-12 bg-accent-gold/20 rounded-full flex items-center justify-center mx-auto mb-3 benefit-icon"
+              >
                 <span class="text-2xl">💎</span>
               </div>
               <h5 class="font-semibold text-white mb-2">3 Señales Premium</h5>
@@ -199,8 +205,10 @@ import { TrendingUp, Zap } from "lucide-react";
                 Recibirás 3 de nuestras mejores señales para que veas resultados desde el día 1.
               </p>
             </div>
-            <div class="text-center">
-              <div class="w-12 h-12 bg-accent-blue/20 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div class="text-center benefit-card" data-benefit-item="3">
+              <div
+                class="w-12 h-12 bg-accent-blue/20 rounded-full flex items-center justify-center mx-auto mb-3 benefit-icon"
+              >
                 <span class="text-2xl">📈</span>
               </div>
               <h5 class="font-semibold text-white mb-2">Precio Fundador</h5>
@@ -435,57 +443,107 @@ import { TrendingUp, Zap } from "lucide-react";
       htmlElement.classList.add("animate-particle-drift");
     });
 
-    // GSAP animations if available
-    if (typeof window.gsap !== "undefined") {
-      const { gsap } = window;
+    // CSS-based animations usando Intersection Observer (lightweight)
+    const animateOnScroll = (
+      elements: NodeListOf<Element> | Element[],
+      options: IntersectionObserverInit = {}
+    ): void => {
+      if (!("IntersectionObserver" in window)) return;
 
-      // Check if ScrollTrigger is available
-      if (gsap.ScrollTrigger) {
-        // Animate stats section entrance
-        gsap.from("[data-social-metric]", {
-          duration: 0.8,
-          y: 30,
-          opacity: 0,
-          stagger: 0.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: "[data-social-metric]",
-            start: "top 85%",
-            onEnter: () => {
-              // Trigger counter animations if not already triggered
-              if (!animationsTriggered) {
-                triggerStatsAnimations();
-              }
-            },
-          },
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animate-in");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: "20% 0px", // Triggers much earlier
+          threshold: 0.1,
+          ...options,
+        }
+      );
+
+      elements.forEach((el: Element) => {
+        if (el) {
+          el.classList.add("animate-ready");
+          observer.observe(el);
+        }
+      });
+    };
+
+    // Optimized animations para benefits - aparecen inmediatamente
+    const fastAnimateOnScroll = (
+      elements: NodeListOf<Element> | Element[],
+      options: IntersectionObserverInit = {}
+    ): void => {
+      if (!("IntersectionObserver" in window)) {
+        // Fallback: mostrar inmediatamente si no hay soporte
+        elements.forEach((el: Element) => {
+          el.classList.add("animate-ready", "animate-in");
         });
+        return;
       }
 
-      // Animate form entrance
-      if (gsap.ScrollTrigger) {
-        gsap.from("[data-contact-form]", {
-          duration: 1,
-          y: 50,
-          opacity: 0,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: "[data-contact-form]",
-            start: "top 80%",
-          },
-        });
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animate-in");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: "50% 0px", // Triggers VERY early for benefits
+          threshold: 0.01, // Minimal threshold
+          ...options,
+        }
+      );
 
-        // Animate benefits cards
-        gsap.from(".grid .text-center", {
-          duration: 0.8,
-          y: 30,
-          opacity: 0,
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: ".grid",
-            start: "top 80%",
-          },
-        });
-      }
+      elements.forEach((el: Element) => {
+        if (el) {
+          el.classList.add("animate-ready");
+          observer.observe(el);
+        }
+      });
+    };
+
+    // Animar elementos con diferentes velocidades
+    const socialMetrics = document.querySelectorAll("[data-social-metric]");
+    const contactForm = document.querySelector("[data-contact-form]");
+    const benefitsSection = document.querySelector("[data-benefits-section]");
+    const benefitsTitle = document.querySelector("[data-benefits-title]");
+    const benefitCards = document.querySelectorAll("[data-benefit-item]");
+
+    // Social metrics - normal speed
+    if (socialMetrics.length > 0) {
+      socialMetrics.forEach((metric, index) => {
+        (metric as HTMLElement).style.setProperty("--animation-delay", `${index * 0.15}s`);
+      });
+      animateOnScroll(socialMetrics);
+    }
+
+    // Contact form - normal speed
+    if (contactForm) {
+      animateOnScroll([contactForm]);
+    }
+
+    // Benefits - FAST animations
+    if (benefitsTitle) {
+      (benefitsTitle as HTMLElement).style.setProperty("--animation-delay", "0s");
+      fastAnimateOnScroll([benefitsTitle]);
+    }
+
+    if (benefitCards.length > 0) {
+      benefitCards.forEach((card, index) => {
+        (card as HTMLElement).style.setProperty("--animation-delay", `${index * 0.1}s`); // Faster stagger
+      });
+      fastAnimateOnScroll(benefitCards);
     }
   });
 </script>
@@ -539,6 +597,84 @@ import { TrendingUp, Zap } from "lucide-react";
     }
     50% {
       background-position: 100% 50%;
+    }
+  }
+
+  /* CSS animations para reemplazar GSAP/ScrollTrigger - 20KB savings */
+  .animate-ready {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.8s ease-out;
+    transition-delay: var(--animation-delay, 0s);
+  }
+
+  [data-contact-form].animate-ready {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  [data-contact-form].animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 1s ease-out;
+  }
+
+  /* Benefits Section - Optimized for faster appearance */
+  [data-benefits-title].animate-ready {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  [data-benefits-title].animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.4s ease-out;
+    transition-delay: 0s !important;
+  }
+
+  .benefit-card.animate-ready {
+    opacity: 0;
+    transform: translateY(25px) scale(0.95);
+  }
+
+  .benefit-card.animate-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: var(--animation-delay, 0s);
+  }
+
+  /* Benefit icons bounce effect */
+  .benefit-card.animate-in .benefit-icon {
+    animation: benefit-icon-bounce 0.6s ease-out;
+    animation-delay: calc(var(--animation-delay, 0s) + 0.2s);
+  }
+
+  @keyframes benefit-icon-bounce {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Reducir movimiento para usuarios con preferencias de accesibilidad */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-ready,
+    .animate-in {
+      transform: none !important;
+      transition: opacity 0.3s ease !important;
     }
   }
 </style>

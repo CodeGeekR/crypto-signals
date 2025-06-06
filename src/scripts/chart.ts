@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+// Lazy load ScrollTrigger solo cuando sea necesario - 20KB savings iniciales
+let ScrollTrigger: any = null;
 
 interface Point {
   x: number;
@@ -151,16 +151,47 @@ class PerformanceChart {
     }
   }
 
-  private initAnimation() {
-    ScrollTrigger.create({
-      trigger: this.canvas,
-      start: "top 80%",
-      onEnter: () => {
-        if (!this.isAnimating) {
-          this.animate();
+  private async initAnimation() {
+    // Usar Intersection Observer como alternativa lightweight
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !this.isAnimating) {
+            this.animate();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '20% 0px',
+        threshold: 0.1
+      });
+      
+      observer.observe(this.canvas);
+    } else {
+      // Fallback: cargar ScrollTrigger solo si es necesario
+      if (!ScrollTrigger) {
+        try {
+          const { ScrollTrigger: ST } = await import("gsap/ScrollTrigger");
+          ScrollTrigger = ST;
+          gsap.registerPlugin(ScrollTrigger);
+        } catch (error) {
+          // Fallback sin ScrollTrigger
+          setTimeout(() => this.animate(), 1000);
+          return;
         }
       }
-    });
+      
+      ScrollTrigger.create({
+        trigger: this.canvas,
+        start: "top 80%",
+        onEnter: () => {
+          if (!this.isAnimating) {
+            this.animate();
+          }
+        }
+      });
+    }
   }
 
   private animate() {

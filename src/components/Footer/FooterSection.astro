@@ -513,60 +513,141 @@ import { ChevronRight } from "lucide-react";
       });
     });
 
-    // GSAP ScrollTrigger animations for footer sections
-    if (typeof window.gsap !== "undefined" && window.gsap.ScrollTrigger) {
-      const { gsap } = window;
+    // CSS-based animations con Intersection Observer (elimina ScrollTrigger)
+    const footerElements = [
+      { selector: "[data-newsletter-section]", class: "footer-animate-newsletter" },
+      { selector: "[data-company-info]", class: "footer-animate-info" },
+      { selector: "[data-footer-links]", class: "footer-animate-links" },
+      { selector: "[data-social-links]", class: "footer-animate-social" },
+      { selector: "[data-security-badges]", class: "footer-animate-badges" },
+    ];
 
-      // Animate newsletter section
-      gsap.from("[data-newsletter-section]", {
-        duration: 1,
-        y: 50,
-        opacity: 0,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: "[data-newsletter-section]",
-          start: "top 85%",
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("footer-animate-in");
+              observer.unobserve(entry.target);
+            }
+          });
         },
-      });
+        {
+          root: null,
+          rootMargin: "0px 0px -15% 0px",
+          threshold: 0.1,
+        }
+      );
 
-      // Animate footer sections with stagger
-      gsap.from("[data-company-info], [data-footer-links]", {
-        duration: 0.8,
-        y: 30,
-        opacity: 0,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: "[data-company-info]",
-          start: "top 85%",
-        },
-      });
-
-      // Animate social icons
-      gsap.from("[data-social-links] .social-icon", {
-        duration: 0.6,
-        scale: 0,
-        rotation: 180,
-        stagger: 0.1,
-        ease: "back.out(1.7)",
-        scrollTrigger: {
-          trigger: "[data-social-links]",
-          start: "top 85%",
-        },
-      });
-
-      // Animate security badges
-      gsap.from("[data-security-badges] > div", {
-        duration: 0.6,
-        x: 20,
-        opacity: 0,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: "[data-footer-bottom]",
-          start: "top 90%",
-        },
+      footerElements.forEach(({ selector, class: className }) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          element.classList.add(className);
+          observer.observe(element);
+        }
       });
     }
   });
 </script>
+
+<style>
+  /* CSS animations para reemplazar GSAP/ScrollTrigger en Footer - 20KB savings */
+  .footer-animate-newsletter,
+  .footer-animate-info,
+  .footer-animate-links,
+  .footer-animate-social,
+  .footer-animate-badges {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+
+  .footer-animate-newsletter.footer-animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition-duration: 1s;
+  }
+
+  .footer-animate-info.footer-animate-in,
+  .footer-animate-links.footer-animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.1s;
+  }
+
+  .footer-animate-social.footer-animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+  }
+
+  .footer-animate-badges.footer-animate-in {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+  }
+
+  /* Social icons efecto stagger */
+  .footer-animate-social .social-icon {
+    opacity: 0;
+    transform: scale(0) rotate(180deg);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .footer-animate-social.footer-animate-in .social-icon:nth-child(1) {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    transition-delay: 0.3s;
+  }
+
+  .footer-animate-social.footer-animate-in .social-icon:nth-child(2) {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    transition-delay: 0.4s;
+  }
+
+  .footer-animate-social.footer-animate-in .social-icon:nth-child(3) {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    transition-delay: 0.5s;
+  }
+
+  .footer-animate-social.footer-animate-in .social-icon:nth-child(4) {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    transition-delay: 0.6s;
+  }
+
+  /* Security badges efecto slide */
+  .footer-animate-badges > div {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.6s ease-out;
+  }
+
+  .footer-animate-badges.footer-animate-in > div:nth-child(1) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.4s;
+  }
+
+  .footer-animate-badges.footer-animate-in > div:nth-child(2) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.5s;
+  }
+
+  /* Reducir movimiento para accesibilidad */
+  @media (prefers-reduced-motion: reduce) {
+    .footer-animate-newsletter,
+    .footer-animate-info,
+    .footer-animate-links,
+    .footer-animate-social,
+    .footer-animate-badges,
+    .social-icon,
+    .footer-animate-badges > div {
+      transform: none !important;
+      transition: opacity 0.3s ease !important;
+    }
+  }
+</style>

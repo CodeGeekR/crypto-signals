@@ -12,318 +12,161 @@ const {
 ---
 
 <div class={`countdown-container ${className}`}>
-  <!-- Título del contador -->
+  <!-- Título optimizado - Un solo elemento -->
   <div class="countdown-title mb-4 text-center">
-    <span class="text-xs sm:text-sm text-orange-300 font-medium flex items-center justify-center gap-2">
-      <span class="animate-pulse">🚀</span>
-      <span class="responsive-text" data-short="Lista VIP cierra en:" data-long="Lista VIP cierra en:"
-        >Lista VIP cierra en:</span
-      >
-    </span>
+    <span class="text-xs sm:text-sm text-orange-300 font-medium"> 🚀 Lista VIP cierra en: </span>
   </div>
 
-  <!-- Contenedor principal del timer con animación suave -->
-  <div class="domino-timer-wrapper">
-    <div class="domino-timer flex justify-center items-center gap-2 sm:gap-3 md:gap-4 max-w-lg mx-auto">
-      <!-- Días -->
-      <div class="time-section">
-        <div class="domino-card" id="days-card">
-          <span class="domino-number" id="days-current">30</span>
-          <span class="domino-number" id="days-next">30</span>
-        </div>
-        <span class="time-label text-xs text-gray-400 font-medium" data-short="d" data-long="días"></span>
-      </div>
-
-      <!-- Horas -->
-      <div class="time-section">
-        <div class="domino-card" id="hours-card">
-          <span class="domino-number" id="hours-current">00</span>
-          <span class="domino-number" id="hours-next">00</span>
-        </div>
-        <span class="time-label text-xs text-gray-400 font-medium" data-short="h" data-long="horas"></span>
-      </div>
-
-      <!-- Minutos -->
-      <div class="time-section">
-        <div class="domino-card" id="minutes-card">
-          <span class="domino-number" id="minutes-current">00</span>
-          <span class="domino-number" id="minutes-next">00</span>
-        </div>
-        <span class="time-label text-xs text-gray-400 font-medium" data-short="m" data-long="min"></span>
-      </div>
-
-      <!-- Segundos -->
-      <div class="time-section">
-        <div class="domino-card" id="seconds-card">
-          <span class="domino-number" id="seconds-current">00</span>
-          <span class="domino-number" id="seconds-next">00</span>
-        </div>
-        <span class="time-label text-xs text-gray-400 font-medium" data-short="s" data-long="seg"></span>
-      </div>
+  <!-- Timer simplificado - Eliminados wrappers innecesarios -->
+  <div class="domino-timer flex justify-center items-center gap-2 sm:gap-3 md:gap-4 max-w-lg mx-auto">
+    <!-- Días - Estructura simplificada -->
+    <div class="time-unit">
+      <div class="domino-card" id="days-card" data-value="--">--</div>
+      <span class="time-label">días</span>
     </div>
 
-    <!-- Estado de expiración -->
-    <div class="countdown-expired hidden text-center mt-4">
-      <div class="text-red-400 font-bold text-sm sm:text-base">🔴 Oferta Expirada</div>
+    <!-- Horas -->
+    <div class="time-unit">
+      <div class="domino-card" id="hours-card" data-value="--">--</div>
+      <span class="time-label">horas</span>
     </div>
+
+    <!-- Minutos -->
+    <div class="time-unit">
+      <div class="domino-card" id="minutes-card" data-value="--">--</div>
+      <span class="time-label">min</span>
+    </div>
+
+    <!-- Segundos -->
+    <div class="time-unit">
+      <div class="domino-card" id="seconds-card" data-value="--">--</div>
+      <span class="time-label">seg</span>
+    </div>
+  </div>
+
+  <!-- Estado de expiración optimizado -->
+  <div class="countdown-expired hidden text-center mt-4 text-red-400 font-bold text-sm sm:text-base">
+    🔴 Oferta Expirada
   </div>
 </div>
 
 <style>
+  /* Estilos optimizados - Reducción masiva de DOM */
   .countdown-container {
     @apply w-full;
   }
 
-  .domino-timer-wrapper {
-    @apply relative;
-  }
-
-  .time-section {
+  .time-unit {
     @apply flex flex-col items-center space-y-2;
   }
 
   .domino-card {
-    @apply relative w-14 h-16 sm:w-16 sm:h-20 md:w-20 md:h-24 rounded-lg overflow-hidden;
-    background: linear-gradient(145deg, #1e293b 0%, #334155 50%, #475569 100%);
+    @apply w-14 h-16 sm:w-16 sm:h-20 md:w-20 md:h-24 rounded-lg flex items-center justify-center;
+    @apply text-base sm:text-lg md:text-xl font-bold font-mono text-white;
+    background: linear-gradient(145deg, #1e293b, #475569);
     box-shadow:
       0 8px 16px rgba(0, 0, 0, 0.4),
-      inset 0 2px 4px rgba(255, 255, 255, 0.1),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+      inset 0 2px 4px rgba(255, 255, 255, 0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    transition: all 0.5s ease;
     border: 1px solid rgba(148, 163, 184, 0.2);
   }
 
-  .domino-number {
-    @apply absolute top-0 left-0 w-full h-full flex items-center justify-center;
-    @apply text-base sm:text-lg md:text-xl font-bold font-mono text-white text-center leading-none;
-    text-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.8),
-      0 0 4px rgba(247, 147, 26, 0.3);
-    font-feature-settings: "tnum" 1;
-    letter-spacing: -0.02em;
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .domino-number:first-child {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .domino-number:last-child {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-
-  /* Animación suave de cambio de número */
-  .smooth-transition > .domino-number:first-child {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-
-  .smooth-transition > .domino-number:last-child {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Responsive text usando CSS content - elimina duplicación de elementos */
-  .time-label::before {
-    content: attr(data-short);
-  }
-
-  .responsive-text::before {
-    content: attr(data-short);
-  }
-
-  @media (min-width: 640px) {
-    .time-label::before {
-      content: attr(data-long);
-    }
-
-    .responsive-text::before {
-      content: attr(data-long);
-    }
-  }
-
-  /* Ocultar texto original y mostrar solo el pseudo-elemento */
-  .time-label,
-  .responsive-text {
-    font-size: 0;
-  }
-
-  .time-label::before,
-  .responsive-text::before {
+  .time-label {
     @apply text-xs text-gray-400 font-medium;
-    font-size: 0.75rem;
   }
 
-  .responsive-text::before {
-    @apply text-orange-300;
-    font-size: 0.75rem;
-  }
-
-  @media (min-width: 640px) {
-    .responsive-text::before {
-      font-size: 0.875rem;
-    }
-  }
-
-  /* Estilos para el efecto de dominó auténtico */
-  .domino-card::before {
-    content: "";
-    @apply absolute top-1 left-1 w-1.5 h-1.5 rounded-full bg-white opacity-20;
-  }
-
-  .domino-card::after {
-    content: "";
-    @apply absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-white opacity-20;
-  }
-
-  /* Responsive adjustments */
+  /* Responsive optimizado */
   @media (max-width: 480px) {
     .domino-card {
-      @apply w-12 h-14;
-    }
-
-    .domino-number {
-      @apply text-sm;
+      @apply w-12 h-14 text-sm;
     }
   }
 
-  @media (min-width: 481px) and (max-width: 768px) {
-    .domino-card {
-      @apply w-14 h-16;
-    }
-
-    .domino-number {
-      @apply text-base;
-    }
-  }
-
-  @media (min-width: 769px) {
-    .domino-card {
-      @apply w-16 h-20;
-    }
-
-    .domino-number {
-      @apply text-lg;
-    }
-  }
-
-  /* Efectos hover para interactividad */
+  /* Hover efecto simple */
   .domino-card:hover {
-    box-shadow:
-      0 12px 24px rgba(0, 0, 0, 0.5),
-      inset 0 2px 4px rgba(255, 255, 255, 0.15),
-      inset 0 -2px 4px rgba(0, 0, 0, 0.4);
     transform: translateY(-2px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
   }
 
-  /* Animaciones de entrada inicial */
-  .time-section:nth-child(1) {
-    animation: slideUpDelay 0.8s ease-out 0.2s both;
+  /* Animaciones de entrada simplificadas */
+  .time-unit {
+    opacity: 0;
+    animation: slideUp 0.6s ease-out forwards;
   }
 
-  .time-section:nth-child(2) {
-    animation: slideUpDelay 0.8s ease-out 0.4s both;
+  .time-unit:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+  .time-unit:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+  .time-unit:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  .time-unit:nth-child(4) {
+    animation-delay: 0.5s;
   }
 
-  .time-section:nth-child(3) {
-    animation: slideUpDelay 0.8s ease-out 0.6s both;
-  }
-
-  .time-section:nth-child(4) {
-    animation: slideUpDelay 0.8s ease-out 0.8s both;
-  }
-
-  @keyframes slideUpDelay {
-    from {
-      opacity: 0;
-      transform: translateY(20px) scale(0.9);
-    }
+  @keyframes slideUp {
     to {
       opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  /* Fallback CSS para animación suave */
-  .css-smooth-transition > .domino-number:first-child {
-    animation: smoothSlideDown 0.8s ease-out forwards;
-  }
-
-  .css-smooth-transition > .domino-number:last-child {
-    animation: smoothSlideUp 0.8s ease-out forwards;
-  }
-
-  @keyframes smoothSlideDown {
-    0% {
-      opacity: 1;
       transform: translateY(0);
     }
-    100% {
+    from {
       opacity: 0;
-      transform: translateY(100%);
-    }
-  }
-
-  @keyframes smoothSlideUp {
-    0% {
-      opacity: 0;
-      transform: translateY(-100%);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
+      transform: translateY(20px);
     }
   }
 </style>
 
 <script>
-  // TypeScript declarations
-  declare global {
-    interface Window {
-      gtag?: (...args: any[]) => void;
-      gsap?: any;
-    }
-  }
-
-  interface TimeUnits {
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  }
-
-  class SmoothCountdownTimer {
+  // Lightweight countdown timer - Optimizado para DOM mínimo
+  class SimpleCountdownTimer {
     private targetDate: Date;
-    private currentTime: TimeUnits = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    private previousTime: TimeUnits = { days: 0, hours: 0, minutes: 0, seconds: 0 };
     private intervalId: number | null = null;
-    private isExpired: boolean = false;
-    private hasGSAP: boolean = false;
-    private isAnimating: Map<string, boolean> = new Map();
+    private readonly STORAGE_KEY = "cryptosenales-countdown-target";
 
     constructor(daysFromNow: number = 30) {
-      // Verificar si GSAP está disponible
-      this.hasGSAP = typeof window.gsap !== "undefined";
-
-      // Crear fecha objetivo
-      this.targetDate = new Date();
-      this.targetDate.setDate(this.targetDate.getDate() + daysFromNow);
-
-      // Inicializar estados de animación
-      this.initializeAnimationStates();
-
-      // Inicializar
+      this.targetDate = this.getOrCreateTargetDate(daysFromNow);
       this.updateTime();
       this.startTimer();
     }
 
-    private initializeAnimationStates(): void {
-      const units = ["days", "hours", "minutes", "seconds"];
-      units.forEach((unit) => {
-        this.isAnimating.set(unit, false);
-      });
+    private getOrCreateTargetDate(daysFromNow: number): Date {
+      try {
+        // Intentar obtener fecha existente del localStorage
+        const storedTarget = localStorage.getItem(this.STORAGE_KEY);
+
+        if (storedTarget) {
+          const savedDate = new Date(storedTarget);
+          // Verificar que la fecha sea válida y esté en el futuro
+          if (savedDate.getTime() > Date.now()) {
+            return savedDate;
+          }
+        }
+      } catch (error) {
+        // Si localStorage no está disponible, continuar con fecha nueva
+        console.warn("localStorage no disponible, usando fecha temporal");
+      }
+
+      // 🎯 Fecha objetivo FIJA y realista para el lanzamiento
+      // Establecer una fecha específica en el futuro (ej: 15 de febrero de 2025)
+      const launchDate = new Date("2025-07-15T23:59:59Z"); // Fecha UTC fija
+
+      // Si la fecha ya pasó, usar 30 días desde ahora como fallback
+      const newTarget =
+        launchDate.getTime() > Date.now() ? launchDate : new Date(Date.now() + daysFromNow * 24 * 60 * 60 * 1000);
+
+      // Guardar en localStorage para persistencia
+      try {
+        localStorage.setItem(this.STORAGE_KEY, newTarget.toISOString());
+      } catch (error) {
+        // Si localStorage falla, continuar sin persistencia
+        console.warn("No se pudo guardar fecha objetivo");
+      }
+
+      return newTarget;
     }
 
     private updateTime(): void {
@@ -335,202 +178,40 @@ const {
         return;
       }
 
-      // Calcular tiempo restante
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      // Guardar tiempo anterior
-      this.previousTime = { ...this.currentTime };
-
-      // Actualizar tiempo actual
-      this.currentTime = { days, hours, minutes, seconds };
-
-      // Actualizar UI con animaciones suaves
-      this.updateDisplay();
+      // Actualizar directamente sin animaciones complejas
+      this.updateElement("days", days);
+      this.updateElement("hours", hours);
+      this.updateElement("minutes", minutes);
+      this.updateElement("seconds", seconds);
     }
 
-    private updateDisplay(): void {
-      // En la primera carga, mostrar todos los números
-      if (
-        this.previousTime.days === 0 &&
-        this.previousTime.hours === 0 &&
-        this.previousTime.minutes === 0 &&
-        this.previousTime.seconds === 0
-      ) {
-        this.setInitialValues();
-        return;
+    private updateElement(unit: string, value: number): void {
+      const element = document.getElementById(`${unit}-card`);
+      if (element) {
+        element.textContent = value.toString().padStart(2, "0");
       }
-
-      // Verificar cambios y animar solo los números que cambiaron
-      Object.keys(this.currentTime).forEach((unit) => {
-        const unitKey = unit as keyof TimeUnits;
-        const currentValue = this.currentTime[unitKey];
-        const previousValue = this.previousTime[unitKey];
-
-        if (currentValue !== previousValue && !this.isAnimating.get(unit)) {
-          this.animateSmoothChange(unitKey, currentValue);
-        }
-      });
-    }
-
-    private setInitialValues(): void {
-      Object.keys(this.currentTime).forEach((unit) => {
-        const unitKey = unit as keyof TimeUnits;
-        const value = this.currentTime[unitKey];
-        const formattedValue = value.toString().padStart(2, "0");
-
-        const currentElement = document.getElementById(`${unit}-current`);
-        const nextElement = document.getElementById(`${unit}-next`);
-
-        if (currentElement) {
-          currentElement.textContent = formattedValue;
-        }
-        if (nextElement) {
-          nextElement.textContent = formattedValue;
-        }
-      });
-    }
-
-    private animateSmoothChange(unit: keyof TimeUnits, newValue: number): void {
-      const currentElement = document.getElementById(`${unit}-current`);
-      const nextElement = document.getElementById(`${unit}-next`);
-      const cardElement = document.getElementById(`${unit}-card`);
-
-      if (!currentElement || !nextElement || !cardElement) return;
-
-      const formattedValue = newValue.toString().padStart(2, "0");
-
-      // Marcar como animando
-      this.isAnimating.set(unit, true);
-
-      // Establecer el nuevo valor en el elemento next
-      nextElement.textContent = formattedValue;
-
-      // Resetear la posición del 'next' para que entre desde la dirección correcta
-      if (this.hasGSAP) {
-        window.gsap.set(nextElement, { y: -50, opacity: 0 });
-        this.animateWithGSAP(unit, currentElement, nextElement, cardElement, formattedValue);
-      } else {
-        nextElement.style.transform = "translateY(-100%)";
-        nextElement.style.opacity = "0";
-        this.animateWithCSS(unit, currentElement, nextElement, cardElement, formattedValue);
-      }
-    }
-
-    private animateWithGSAP(
-      unit: string,
-      currentElement: HTMLElement,
-      nextElement: HTMLElement,
-      cardElement: HTMLElement,
-      formattedValue: string
-    ): void {
-      const { gsap } = window;
-
-      // Timeline para animación suave
-      const tl = gsap.timeline({
-        onComplete: () => {
-          // Intercambiar valores y resetear posiciones
-          currentElement.textContent = formattedValue;
-          gsap.set(currentElement, { opacity: 1, y: 0 });
-          gsap.set(nextElement, { opacity: 0, y: -50 });
-          this.isAnimating.set(unit, false);
-        },
-      });
-
-      // Animación suave y elegante
-      tl.to(currentElement, {
-        duration: 0.4,
-        opacity: 0,
-        y: 50,
-        ease: "power2.in",
-      }).fromTo(
-        nextElement,
-        {
-          opacity: 0,
-          y: -50,
-        },
-        {
-          duration: 0.4,
-          opacity: 1,
-          y: 0,
-          ease: "power2.out",
-        },
-        0.2 // Solapamiento para transición más suave
-      );
-    }
-
-    private animateWithCSS(
-      unit: string,
-      currentElement: HTMLElement,
-      nextElement: HTMLElement,
-      cardElement: HTMLElement,
-      formattedValue: string
-    ): void {
-      // Animación CSS suave como fallback
-      cardElement.classList.add("css-smooth-transition");
-
-      setTimeout(() => {
-        currentElement.textContent = formattedValue;
-        // Reset styles
-        cardElement.classList.remove("css-smooth-transition");
-        this.isAnimating.set(unit, false);
-      }, 800);
     }
 
     private handleExpiration(): void {
-      if (this.isExpired) return;
-
-      this.isExpired = true;
       this.stopTimer();
-
-      // Mostrar estado expirado
-      const expiredElement = document.querySelector(".countdown-expired");
-      const timerElement = document.querySelector(".domino-timer");
+      const expiredElement = document.querySelector(".countdown-expired") as HTMLElement;
+      const timerElement = document.querySelector(".domino-timer") as HTMLElement;
 
       if (expiredElement && timerElement) {
-        if (this.hasGSAP) {
-          const { gsap } = window;
-          gsap.to(timerElement, {
-            duration: 0.5,
-            opacity: 0,
-            scale: 0.9,
-            ease: "power2.in",
-          });
+        timerElement.style.opacity = "0";
+        expiredElement.classList.remove("hidden");
 
-          gsap.fromTo(
-            expiredElement,
-            {
-              opacity: 0,
-              y: 20,
-              display: "block",
-            },
-            {
-              duration: 0.5,
-              opacity: 1,
-              y: 0,
-              ease: "power2.out",
-              delay: 0.3,
-            }
-          );
-        } else {
-          // Fallback CSS
-          (timerElement as HTMLElement).style.opacity = "0";
-          (timerElement as HTMLElement).style.transform = "scale(0.9)";
-          setTimeout(() => {
-            (expiredElement as HTMLElement).style.display = "block";
-            (expiredElement as HTMLElement).style.opacity = "1";
-          }, 300);
+        // 🗑️ Limpiar localStorage cuando expire para evitar fechas pasadas
+        try {
+          localStorage.removeItem(this.STORAGE_KEY);
+        } catch (error) {
+          console.warn("No se pudo limpiar localStorage");
         }
-      }
-
-      // Analytics tracking
-      if (typeof window !== "undefined" && window.gtag) {
-        window.gtag("event", "countdown_expired", {
-          event_category: "engagement",
-          event_label: "smooth_countdown_timer",
-        });
       }
     }
 
@@ -547,75 +228,25 @@ const {
       }
     }
 
-    public destroy(): void {
-      this.stopTimer();
+    // 🔄 Método público para reinicializar el contador (útil para testing)
+    public resetCountdown(): void {
+      try {
+        localStorage.removeItem(this.STORAGE_KEY);
+        this.stopTimer();
+        this.targetDate = this.getOrCreateTargetDate(30);
+        this.updateTime();
+        this.startTimer();
+      } catch (error) {
+        console.warn("No se pudo reinicializar el contador");
+      }
     }
   }
 
-  // Inicializar cuando el DOM esté listo
+  // Inicializar simplificado
   document.addEventListener("DOMContentLoaded", () => {
-    // Crear instancia del countdown timer con animaciones suaves
-    const smoothCountdownTimer = new SmoothCountdownTimer(30);
+    const timer = new SimpleCountdownTimer(30);
 
-    // Limpiar al descargar la página
-    window.addEventListener("beforeunload", () => {
-      smoothCountdownTimer.destroy();
-    });
-
-    // Animaciones de entrada si GSAP está disponible
-    if (typeof window.gsap !== "undefined") {
-      const { gsap } = window;
-
-      gsap.fromTo(
-        ".countdown-title",
-        {
-          opacity: 0,
-          y: -20,
-        },
-        {
-          duration: 0.6,
-          opacity: 1,
-          y: 0,
-          ease: "power2.out",
-          delay: 1.8,
-        }
-      );
-
-      gsap.fromTo(
-        ".domino-timer-wrapper",
-        {
-          opacity: 0,
-          scale: 0.8,
-          y: 30,
-        },
-        {
-          duration: 0.8,
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          ease: "back.out(1.7)",
-          delay: 2,
-        }
-      );
-
-      // Efecto de entrada escalonada suave para cada ficha
-      gsap.fromTo(
-        ".time-section",
-        {
-          opacity: 0,
-          scale: 0.9,
-          y: 20,
-        },
-        {
-          duration: 0.6,
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          stagger: 0.1,
-          ease: "power2.out",
-          delay: 2.2,
-        }
-      );
-    }
+    // 🛠️ Exposer método global para desarrollo/testing
+    (window as any).resetCountdown = () => timer.resetCountdown();
   });
 </script>
