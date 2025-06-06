@@ -32,26 +32,14 @@ const {
 const imageUrl = Astro.site ? new URL(ogImage, Astro.site).href : ogImage;
 const logoUrl = Astro.site ? new URL("/images/logo.png", Astro.site).href : "/images/logo.png";
 
-// Función para escapar JSON y evitar errores de sintaxis
-const escapeJsonString = (str: string) => {
-  if (!str) return "";
-  return str
-    .replace(/\\/g, "\\\\")
-    .replace(/"/g, '\\"')
-    .replace(/\n/g, "\\n")
-    .replace(/\r/g, "\\r")
-    .replace(/\t/g, "\\t");
-};
-
 // Datos para el schema estructurado - optimizado con keywords SEMrush 2025
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "CryptoSeñales Pro",
-  alternateName: "Proveedor de señales trading profesional para América Latina",
-  description: escapeJsonString(
-    "Líder en plataformas trading criptomonedas especializadas en analisis tecnico trading avanzado. Ofrecemos institutional trading software con las criptomonedas mas rentables del mercado actual."
-  ),
+  alternateName: "Señales de trading reales + indicadores con el Bot de arbitrage Crypto",
+  description:
+    "Basta de estafa crypto, El Proveedor de señales trading legítimo con análisis técnico y fundamental. Los mejores indicadores institucionales Aquí!",
   url: canonical,
   logo: {
     "@type": "ImageObject",
@@ -210,9 +198,8 @@ const softwareSchema = {
   operatingSystem: "Web Browser, iOS, Android",
   applicationCategory: "FinanceApplication",
   genre: "Cryptocurrency Trading, Investment Tools",
-  description: escapeJsonString(
-    "Aplicación líder para comprar bot trading automatizado. Incluye analisis tecnico trading en tiempo real y acceso a las criptomonedas mas rentables del mercado."
-  ),
+  description:
+    "Aplicación líder para comprar bot trading automatizado. Incluye analisis tecnico trading en tiempo real y acceso a las criptomonedas mas rentables del mercado.",
   url: canonical,
   downloadUrl: canonical,
   screenshot: imageUrl,
@@ -257,9 +244,8 @@ const financialServiceSchema = {
   "@context": "https://schema.org",
   "@type": "FinancialService",
   name: "CryptoSeñales Pro - Servicios de Arbitrage Crypto Trading",
-  description: escapeJsonString(
-    "Proveedor líder de señales trading especializado en análisis técnico trading. Ofrecemos acceso exclusivo a las criptomonedas más rentables con estrategias probadas."
-  ),
+  description:
+    "Proveedor líder de señales trading especializado en análisis técnico trading. Ofrecemos acceso exclusivo a las criptomonedas más rentables con estrategias probadas.",
   url: canonical,
   logo: logoUrl,
   image: imageUrl,
@@ -358,8 +344,8 @@ const faqSchema = {
 const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: escapeJsonString(title),
-  description: escapeJsonString(description),
+  name: title,
+  description: description,
   url: canonical,
   mainEntity: {
     "@type": "Service",
@@ -388,9 +374,6 @@ const webPageSchema = {
   inLanguage: "es-ES",
 };
 ---
-
-<!-- 🚀 Preload LCP (Largest Contentful Paint) image para optimizar la carga -->
-<link rel="preload" href="/images/logo-cs.webp" as="image" type="image/webp" fetchpriority="high" />
 
 <!-- Enhanced SEO Meta Tags para máxima visibilidad -->
 <meta name="keywords" content={keywords} />
@@ -472,6 +455,7 @@ const webPageSchema = {
 <!-- DNS Prefetch para recursos externos críticos -->
 <link rel="dns-prefetch" href="//api.binance.com" />
 <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+<link rel="dns-prefetch" href="//www.googletagmanager.com" />
 
 <!-- Prefetch para páginas críticas -->
 <!-- Nota: Los prefetch se activarán cuando tengamos más páginas creadas -->

@@ -26,19 +26,9 @@ const {
     <div class="domino-timer flex justify-center items-center gap-2 sm:gap-3 md:gap-4 max-w-lg mx-auto">
       <!-- Días -->
       <div class="time-section">
-        <div class="domino-container">
-          <div class="domino-card-wrapper">
-            <div class="domino-card smooth-flip" id="days-card">
-              <div class="number-container">
-                <div class="number-current">
-                  <span class="domino-number" id="days-current">30</span>
-                </div>
-                <div class="number-next">
-                  <span class="domino-number" id="days-next">30</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="domino-card" id="days-card">
+          <span class="domino-number" id="days-current">30</span>
+          <span class="domino-number" id="days-next">30</span>
         </div>
         <div class="time-label">
           <span class="text-xs text-gray-400 font-medium">
@@ -50,19 +40,9 @@ const {
 
       <!-- Horas -->
       <div class="time-section">
-        <div class="domino-container">
-          <div class="domino-card-wrapper">
-            <div class="domino-card smooth-flip" id="hours-card">
-              <div class="number-container">
-                <div class="number-current">
-                  <span class="domino-number" id="hours-current">00</span>
-                </div>
-                <div class="number-next">
-                  <span class="domino-number" id="hours-next">00</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="domino-card" id="hours-card">
+          <span class="domino-number" id="hours-current">00</span>
+          <span class="domino-number" id="hours-next">00</span>
         </div>
         <div class="time-label">
           <span class="text-xs text-gray-400 font-medium">
@@ -74,19 +54,9 @@ const {
 
       <!-- Minutos -->
       <div class="time-section">
-        <div class="domino-container">
-          <div class="domino-card-wrapper">
-            <div class="domino-card smooth-flip" id="minutes-card">
-              <div class="number-container">
-                <div class="number-current">
-                  <span class="domino-number" id="minutes-current">00</span>
-                </div>
-                <div class="number-next">
-                  <span class="domino-number" id="minutes-next">00</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="domino-card" id="minutes-card">
+          <span class="domino-number" id="minutes-current">00</span>
+          <span class="domino-number" id="minutes-next">00</span>
         </div>
         <div class="time-label">
           <span class="text-xs text-gray-400 font-medium">
@@ -98,19 +68,9 @@ const {
 
       <!-- Segundos -->
       <div class="time-section">
-        <div class="domino-container">
-          <div class="domino-card-wrapper">
-            <div class="domino-card smooth-flip" id="seconds-card">
-              <div class="number-container">
-                <div class="number-current">
-                  <span class="domino-number" id="seconds-current">00</span>
-                </div>
-                <div class="number-next">
-                  <span class="domino-number" id="seconds-next">00</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="domino-card" id="seconds-card">
+          <span class="domino-number" id="seconds-current">00</span>
+          <span class="domino-number" id="seconds-next">00</span>
         </div>
         <div class="time-label">
           <span class="text-xs text-gray-400 font-medium">
@@ -141,16 +101,6 @@ const {
     @apply flex flex-col items-center space-y-2;
   }
 
-  .domino-container {
-    @apply relative;
-    perspective: 1000px;
-  }
-
-  .domino-card-wrapper {
-    @apply relative;
-    transform-style: preserve-3d;
-  }
-
   .domino-card {
     @apply relative w-14 h-16 sm:w-16 sm:h-20 md:w-20 md:h-24 rounded-lg overflow-hidden;
     background: linear-gradient(145deg, #1e293b 0%, #334155 50%, #475569 100%);
@@ -159,48 +109,38 @@ const {
       inset 0 2px 4px rgba(255, 255, 255, 0.1),
       inset 0 -2px 4px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(148, 163, 184, 0.2);
-    transform-style: preserve-3d;
-  }
-
-  .number-container {
-    @apply relative w-full h-full;
-    overflow: hidden;
-  }
-
-  .number-current,
-  .number-next {
-    @apply absolute top-0 left-0 w-full h-full flex items-center justify-center;
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .number-current {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .number-next {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-
-  /* Animación suave de cambio de número */
-  .smooth-transition .number-current {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-
-  .smooth-transition .number-next {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   .domino-number {
+    @apply absolute top-0 left-0 w-full h-full flex items-center justify-center;
     @apply text-base sm:text-lg md:text-xl font-bold font-mono text-white text-center leading-none;
     text-shadow:
       0 1px 2px rgba(0, 0, 0, 0.8),
       0 0 4px rgba(247, 147, 26, 0.3);
     font-feature-settings: "tnum" 1;
     letter-spacing: -0.02em;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .domino-number:first-child {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .domino-number:last-child {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  /* Animación suave de cambio de número */
+  .smooth-transition > .domino-number:first-child {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  .smooth-transition > .domino-number:last-child {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .time-label {
@@ -294,11 +234,11 @@ const {
   }
 
   /* Fallback CSS para animación suave */
-  .css-smooth-transition .number-current {
+  .css-smooth-transition > .domino-number:first-child {
     animation: smoothSlideDown 0.8s ease-out forwards;
   }
 
-  .css-smooth-transition .number-next {
+  .css-smooth-transition > .domino-number:last-child {
     animation: smoothSlideUp 0.8s ease-out forwards;
   }
 
@@ -455,9 +395,13 @@ const {
       // Establecer el nuevo valor en el elemento next
       nextElement.textContent = formattedValue;
 
+      // Resetear la posición del 'next' para que entre desde la dirección correcta
       if (this.hasGSAP) {
+        window.gsap.set(nextElement, { y: -50, opacity: 0 });
         this.animateWithGSAP(unit, currentElement, nextElement, cardElement, formattedValue);
       } else {
+        nextElement.style.transform = "translateY(-100%)";
+        nextElement.style.opacity = "0";
         this.animateWithCSS(unit, currentElement, nextElement, cardElement, formattedValue);
       }
     }
@@ -477,7 +421,7 @@ const {
           // Intercambiar valores y resetear posiciones
           currentElement.textContent = formattedValue;
           gsap.set(currentElement, { opacity: 1, y: 0 });
-          gsap.set(nextElement, { opacity: 0, y: -100 });
+          gsap.set(nextElement, { opacity: 0, y: -50 });
           this.isAnimating.set(unit, false);
         },
       });
