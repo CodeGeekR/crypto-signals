@@ -140,15 +140,32 @@ import CountdownTimer from "./CountdownTimer.astro";
 </section>
 
 <script>
+  // 🚀 Script de animación optimizado para no bloquear el LCP
   document.addEventListener("DOMContentLoaded", () => {
-    // Cargar animaciones GSAP como fallback
-    import("../../scripts/animations.ts")
-      .then(({ initHeroAnimations }) => {
-        initHeroAnimations();
-      })
-      .catch((error) => {
-        // Las animaciones CSS ya están funcionando como fallback
+    // Usamos requestIdleCallback para asegurar que las animaciones pesadas
+    // solo se ejecuten cuando el navegador esté inactivo, priorizando el renderizado.
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(() => {
+        import("../../scripts/animations.ts")
+          .then(({ initHeroAnimations }) => {
+            initHeroAnimations();
+          })
+          .catch((error) => {
+            console.error("Error al cargar animaciones dinámicas:", error);
+          });
       });
+    } else {
+      // Fallback para navegadores antiguos: un pequeño retraso.
+      setTimeout(() => {
+        import("../../scripts/animations.ts")
+          .then(({ initHeroAnimations }) => {
+            initHeroAnimations();
+          })
+          .catch((error) => {
+            console.error("Error al cargar animaciones dinámicas:", error);
+          });
+      }, 500); // 500ms de retraso como fallback
+    }
   });
 </script>
 

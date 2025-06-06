@@ -25,11 +25,14 @@ const { isAuthenticated = false } = Astro.props;
               class="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
             >
               <img
-                src="/images/logo-cs.svg"
+                src="/images/logo-cs.webp"
                 alt="logo de la plataforma Crypto Señales de trading con criptomonedas mas rentables"
                 class="w-full h-full object-contain"
                 width="48"
                 height="48"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
               />
             </div>
           </div>

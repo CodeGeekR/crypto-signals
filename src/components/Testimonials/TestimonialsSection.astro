@@ -83,7 +83,11 @@ const testimonials = [
           </div>
 
           <!-- Rating -->
-          <div class="flex items-center mb-4" aria-label={`Calificación: ${testimonial.rating} de 5 estrellas`}>
+          <div
+            class="flex items-center mb-4"
+            role="img"
+            aria-label={`Calificación: ${testimonial.rating} de 5 estrellas`}
+          >
             {Array(testimonial.rating).fill(null).map((_, starIndex) => (
               <Star 
                 className="w-5 h-5 text-accent-gold fill-current" 
@@ -101,22 +105,34 @@ const testimonials = [
           <!-- Stats -->
           <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10">
             <div class="text-center">
-              <div class="text-xl font-bold text-accent-green" aria-label={`ROI: ${testimonial.stats.roi}`}>
+              <div
+                class="text-xl font-bold text-accent-green"
+                id={`stat-roi-${index}`}
+                aria-labelledby={`stat-roi-${index} stat-roi-label-${index}`}
+              >
                 {testimonial.stats.roi}
               </div>
-              <div class="text-sm text-gray-400">ROI</div>
+              <div class="text-sm text-gray-400" id={`stat-roi-label-${index}`}>ROI</div>
             </div>
             <div class="text-center">
-              <div class="text-xl font-bold text-accent-gold" aria-label={`Período: ${testimonial.stats.period}`}>
+              <div
+                class="text-xl font-bold text-accent-gold"
+                id={`stat-period-${index}`}
+                aria-labelledby={`stat-period-${index} stat-period-label-${index}`}
+              >
                 {testimonial.stats.period}
               </div>
-              <div class="text-sm text-gray-400">Período</div>
+              <div class="text-sm text-gray-400" id={`stat-period-label-${index}`}>Período</div>
             </div>
             <div class="text-center">
-              <div class="text-xl font-bold text-accent-blue" aria-label={`Trades: ${testimonial.stats.trades}`}>
+              <div
+                class="text-xl font-bold text-accent-blue"
+                id={`stat-trades-${index}`}
+                aria-labelledby={`stat-trades-${index} stat-trades-label-${index}`}
+              >
                 {testimonial.stats.trades}
               </div>
-              <div class="text-sm text-gray-400">Trades</div>
+              <div class="text-sm text-gray-400" id={`stat-trades-label-${index}`}>Trades</div>
             </div>
           </div>
         </div>

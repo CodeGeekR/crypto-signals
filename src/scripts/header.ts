@@ -5,7 +5,12 @@ export class HeaderController {
   private isMenuOpen: boolean = false;
 
   constructor() {
-    this.init();
+    // Defer non-critical initializations
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => this.init());
+    } else {
+      this.init();
+    }
   }
 
   private init() {
@@ -13,10 +18,21 @@ export class HeaderController {
     this.mobileMenu = document.getElementById('mobile-menu');
     this.header = document.querySelector('.header-main');
 
-    this.setupEventListeners();
-    this.setupScrollEffect();
-    this.setupSmoothScrolling();
-    this.setupSignupButtons();
+    this.setupEventListeners(); // Critical: menu interaction
+    this.setupSignupButtons();   // Critical: primary CTA
+
+    // Defer non-critical scroll-related functionalities
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => {
+        this.setupScrollEffect();
+        this.setupSmoothScrolling();
+      });
+    } else {
+      setTimeout(() => {
+        this.setupScrollEffect();
+        this.setupSmoothScrolling();
+      }, 300);
+    }
   }
 
   private setupEventListeners() {
