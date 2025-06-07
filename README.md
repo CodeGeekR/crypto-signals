@@ -1,4 +1,4 @@
-# 🌟 CryptoSeñales Pro - Wall Street Technology For Bitcoin Trading
+# 🌟 CryptoSeñales Pro - The Trading Bots of Wall Street, Now Yours.
 
 <div align="right">
   <a href="README_ES.md">
