@@ -42,3 +42,4 @@ src/test/
 test-results/
 vitest.config.ts
 docs/
+src/__tests__/

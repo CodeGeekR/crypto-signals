@@ -99,16 +99,45 @@ import { TrendingUp, Zap } from "lucide-react";
               required
             >
               <option value="" class="bg-primary-800">Selecciona tu país</option>
-              <option value="MX" class="bg-primary-800">🇲🇽 México</option>
-              <option value="CO" class="bg-primary-800">🇨🇴 Colombia</option>
-              <option value="AR" class="bg-primary-800">🇦🇷 Argentina</option>
-              <option value="CL" class="bg-primary-800">🇨🇱 Chile</option>
-              <option value="PE" class="bg-primary-800">🇵🇪 Perú</option>
-              <option value="EC" class="bg-primary-800">🇪🇨 Ecuador</option>
-              <option value="VE" class="bg-primary-800">🇻🇪 Venezuela</option>
-              <option value="UY" class="bg-primary-800">🇺🇾 Uruguay</option>
-              <option value="PY" class="bg-primary-800">🇵🇾 Paraguay</option>
-              <option value="OTHER" class="bg-primary-800">Otro país LATAM</option>
+
+              <!-- América del Norte -->
+              <optgroup label="🇺🇸🇨🇦 América del Norte" class="bg-primary-800 text-gray-300">
+                <option value="US" class="bg-primary-800">🇺🇸 Estados Unidos</option>
+                <option value="CA" class="bg-primary-800">🇨🇦 Canadá</option>
+              </optgroup>
+
+              <!-- LATAM Principales -->
+              <optgroup label="🌎 Latinoamérica" class="bg-primary-800 text-gray-300">
+                <option value="MX" class="bg-primary-800">🇲🇽 México</option>
+                <option value="BR" class="bg-primary-800">🇧🇷 Brasil</option>
+                <option value="CO" class="bg-primary-800">🇨🇴 Colombia</option>
+                <option value="AR" class="bg-primary-800">🇦🇷 Argentina</option>
+                <option value="CL" class="bg-primary-800">🇨🇱 Chile</option>
+                <option value="PE" class="bg-primary-800">🇵🇪 Perú</option>
+                <option value="EC" class="bg-primary-800">🇪🇨 Ecuador</option>
+                <option value="VE" class="bg-primary-800">🇻🇪 Venezuela</option>
+                <option value="UY" class="bg-primary-800">🇺🇾 Uruguay</option>
+                <option value="PY" class="bg-primary-800">🇵🇾 Paraguay</option>
+                <option value="BO" class="bg-primary-800">🇧🇴 Bolivia</option>
+              </optgroup>
+
+              <!-- Centroamérica y Caribe -->
+              <optgroup label="🏝️ Centroamérica y Caribe" class="bg-primary-800 text-gray-300">
+                <option value="CR" class="bg-primary-800">🇨🇷 Costa Rica</option>
+                <option value="PA" class="bg-primary-800">🇵🇦 Panamá</option>
+                <option value="GT" class="bg-primary-800">🇬🇹 Guatemala</option>
+                <option value="HN" class="bg-primary-800">🇭🇳 Honduras</option>
+                <option value="NI" class="bg-primary-800">🇳🇮 Nicaragua</option>
+                <option value="SV" class="bg-primary-800">🇸🇻 El Salvador</option>
+                <option value="BZ" class="bg-primary-800">🇧🇿 Belice</option>
+                <option value="DO" class="bg-primary-800">🇩🇴 República Dominicana</option>
+                <option value="CU" class="bg-primary-800">🇨🇺 Cuba</option>
+                <option value="JM" class="bg-primary-800">🇯🇲 Jamaica</option>
+                <option value="HT" class="bg-primary-800">🇭🇹 Haití</option>
+                <option value="TT" class="bg-primary-800">🇹🇹 Trinidad y Tobago</option>
+              </optgroup>
+
+              <option value="OTHER" class="bg-primary-800">🌎 Otro país</option>
             </select>
           </div>
 
@@ -259,7 +288,30 @@ import { TrendingUp, Zap } from "lucide-react";
           });
         }
 
-        // Simulate API call
+        // 🚀 Llamada real a la API
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          // Manejar errores específicos de validación
+          if (result.errors) {
+            let errorMessage = "Por favor, corrige los siguientes errores:\n";
+            Object.entries(result.errors).forEach(([field, messages]) => {
+              const messageArray = Array.isArray(messages) ? messages : [messages];
+              errorMessage += `• ${messageArray.join(", ")}\n`;
+            });
+            throw new Error(errorMessage);
+          } else {
+            throw new Error(result.message || "Error al procesar tu solicitud");
+          }
+        }
 
         // Show success state
         const button = target.querySelector('button[type="submit"]') as HTMLButtonElement;
@@ -291,12 +343,8 @@ import { TrendingUp, Zap } from "lucide-react";
           // Reset form
           target.reset();
 
-          // Show thank you message
-          setTimeout(() => {
-            alert(
-              "🎉 ¡Bienvenido a la lista VIP! Eres uno de los elegidos. Revisa tu email para confirmar tu spot y recibir las 3 señales premium."
-            );
-          }, 1000);
+          // Success state - el botón ya muestra el estado
+          // No se necesitan notificaciones adicionales
 
           // Reset button after 3 seconds
           setTimeout(() => {
@@ -308,8 +356,22 @@ import { TrendingUp, Zap } from "lucide-react";
           }, 3000);
         }, 2000);
       } catch (error) {
-        // Handle error silently in production
-        alert("Error al reservar tu spot. Por favor, inténtalo de nuevo.");
+        // Handle error - reset button state
+        const button = target.querySelector('button[type="submit"]') as HTMLButtonElement;
+        if (button) {
+          const originalText = button.innerHTML;
+          button.innerHTML = `
+            <span class="flex items-center justify-center text-white">
+              ❌ Error - Inténtalo de nuevo
+            </span>
+          `;
+          button.className = button.className.replace("from-accent-green to-accent-blue", "from-red-500 to-red-600");
+
+          setTimeout(() => {
+            button.innerHTML = originalText;
+            button.className = button.className.replace("from-red-500 to-red-600", "from-accent-green to-accent-blue");
+          }, 3000);
+        }
       }
     });
 

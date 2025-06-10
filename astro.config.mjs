@@ -4,13 +4,16 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://cryptosenales.com',
-  output: 'static',
+  output: 'server',
   integrations: [
     tailwind({
       applyBaseStyles: false,
     }),
     react(),
   ],
+  // 🚀 Optimizaciones SEO adicionales
+  compressHTML: true,
+  trailingSlash: 'ignore',
   build: {
     inlineStylesheets: 'always',
   },
