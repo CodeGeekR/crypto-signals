@@ -332,7 +332,7 @@ import { TrendingUp, Zap } from "lucide-react";
         setTimeout(() => {
           button.innerHTML = `
             <span class="flex items-center justify-center text-white">
-              ✅ ¡Spot Reservado! Revisa tu email
+              ✅ ¡Spot Reservado!
             </span>
           `;
           button.className = button.className.replace(
@@ -346,14 +346,14 @@ import { TrendingUp, Zap } from "lucide-react";
           // Success state - el botón ya muestra el estado
           // No se necesitan notificaciones adicionales
 
-          // Reset button after 3 seconds
+          // Reset button after 8 seconds
           setTimeout(() => {
             button.innerHTML = originalText;
             button.className = button.className.replace(
               "from-green-500 to-green-600",
               "from-accent-green to-accent-blue"
             );
-          }, 3000);
+          }, 8000);
         }, 2000);
       } catch (error) {
         // Handle error - reset button state
