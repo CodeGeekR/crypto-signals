@@ -43,3 +43,4 @@ test-results/
 vitest.config.ts
 docs/
 src/__tests__/
+database/
