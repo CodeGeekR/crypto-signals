@@ -342,14 +342,20 @@ import { ChevronRight } from "lucide-react";
             </div>
             <span class="hidden sm:inline text-gray-400">•</span>
             <div class="flex items-center gap-2">
-              <span class="text-gray-400">Powered by</span>
               <a
                 href="https://bolt.new/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-accent-gold hover:text-accent-green transition-colors duration-300 font-medium whitespace-nowrap"
+                class="group transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-accent-gold/50 rounded-lg p-1"
+                aria-label="Powered by Bolt - Plataforma de desarrollo utilizada"
               >
-                Bolt
+                <img
+                  src="/logotext_poweredby_360w.webp"
+                  alt="Powered by Bolt"
+                  class="h-4 sm:h-5 lg:h-6 w-auto opacity-80 group-hover:opacity-100 transition-all duration-300 group-hover:brightness-110"
+                  loading="lazy"
+                  decoding="async"
+                />
               </a>
             </div>
           </div>
@@ -547,6 +553,50 @@ import { ChevronRight } from "lucide-react";
         }
       });
     }
+
+    // Bolt logo hover animation con GSAP mejorado
+    const boltLogo = document.querySelector('a[aria-label*="Bolt"]');
+    if (boltLogo) {
+      const boltImage = boltLogo.querySelector("img");
+
+      boltLogo.addEventListener("mouseenter", () => {
+        if (typeof window.gsap !== "undefined") {
+          window.gsap.to(boltImage, {
+            duration: 0.4,
+            scale: 1.1,
+            y: -2,
+            rotationY: 5,
+            filter: "brightness(1.2) saturate(1.1)",
+            ease: "power2.out",
+          });
+        }
+      });
+
+      boltLogo.addEventListener("mouseleave", () => {
+        if (typeof window.gsap !== "undefined") {
+          window.gsap.to(boltImage, {
+            duration: 0.4,
+            scale: 1,
+            y: 0,
+            rotationY: 0,
+            filter: "brightness(1) saturate(1)",
+            ease: "power2.out",
+          });
+        }
+      });
+
+      // Animación de entrada para el logo Bolt
+      if (typeof window.gsap !== "undefined") {
+        window.gsap.from(boltImage, {
+          duration: 0.8,
+          opacity: 0,
+          scale: 0.8,
+          y: 20,
+          delay: 0.6,
+          ease: "power3.out",
+        });
+      }
+    }
   });
 </script>
 
@@ -654,5 +704,46 @@ import { ChevronRight } from "lucide-react";
       transform: none !important;
       transition: opacity 0.3s ease !important;
     }
+  }
+
+  /* Powered by Bolt image optimizations */
+  .footer-animate-info a[aria-label*="Bolt"] {
+    transform-origin: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .footer-animate-info a[aria-label*="Bolt"]:hover {
+    transform: scale(1.05) translateY(-1px);
+    filter: drop-shadow(0 4px 8px rgba(247, 147, 26, 0.3));
+  }
+
+  .footer-animate-info a[aria-label*="Bolt"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(247, 147, 26, 0.5);
+  }
+
+  /* Responsive image sizing for Bolt logo */
+  .footer-animate-info a[aria-label*="Bolt"] img {
+    max-width: 80px;
+    height: auto;
+    transition: all 0.3s ease;
+  }
+
+  @media (min-width: 640px) {
+    .footer-animate-info a[aria-label*="Bolt"] img {
+      max-width: 90px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-animate-info a[aria-label*="Bolt"] img {
+      max-width: 100px;
+    }
+  }
+
+  /* Preload optimization for Bolt image */
+  .footer-animate-info a[aria-label*="Bolt"] img {
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
   }
 </style>

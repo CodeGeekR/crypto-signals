@@ -370,6 +370,32 @@ const { isAuthenticated = false } = Astro.props;
   </nav>
 </header>
 
+<!-- Bolt.new Floating Badge - Mandatory for all submitted projects -->
+<div
+  class="bolt-floating-badge fixed top-20 right-4 z-40 lg:top-24 lg:right-6"
+  role="banner"
+  aria-label="Powered by Bolt.new"
+>
+  <a
+    href="https://bolt.new/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="bolt-badge-link group block transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent rounded-full"
+    aria-label="Built with Bolt.new - AI-powered development platform"
+    title="This project was built with Bolt.new"
+  >
+    <img
+      src="/black_circle_360x360.webp"
+      alt="Built with Bolt.new"
+      class="bolt-badge-image w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-full shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:brightness-110"
+      loading="eager"
+      decoding="async"
+      width="64"
+      height="64"
+    />
+  </a>
+</div>
+
 <style>
   /* Optimización adicional para el header */
   .header-main {
@@ -600,6 +626,149 @@ const { isAuthenticated = false } = Astro.props;
       transform: none !important;
     }
   }
+
+  /* Bolt.new Floating Badge Styles - Mandatory Project Requirement */
+  .bolt-floating-badge {
+    /* Posicionamiento optimizado para diferentes pantallas */
+    position: fixed;
+    top: 5rem; /* 80px - Debajo del navbar */
+    right: 1rem; /* 16px */
+    z-index: 40;
+
+    /* Animación de entrada suave */
+    animation: boltBadgeSlideIn 0.8s ease-out 1s both;
+
+    /* Optimización de performance */
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Animación de entrada del badge */
+  @keyframes boltBadgeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateX(100%) scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  /* Estilos del enlace del badge */
+  .bolt-badge-link {
+    display: block;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+  }
+
+  .bolt-badge-link:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+  }
+
+  .bolt-badge-link:active {
+    transform: scale(1.05) rotate(2deg);
+  }
+
+  /* Estilos de la imagen del badge */
+  .bolt-badge-image {
+    display: block;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .bolt-badge-link:hover .bolt-badge-image {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    brightness: 1.1;
+  }
+
+  /* Tamaños responsive para el badge */
+  @media (min-width: 640px) {
+    .bolt-floating-badge {
+      top: 5rem;
+      right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .bolt-floating-badge {
+      top: 6rem; /* 96px - Más espacio en desktop */
+      right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .bolt-floating-badge {
+      right: 2rem;
+    }
+  }
+
+  /* Optimización para dispositivos con movimiento reducido */
+  @media (prefers-reduced-motion: reduce) {
+    .bolt-floating-badge {
+      animation: none;
+    }
+
+    .bolt-badge-link {
+      transition: opacity 0.2s ease;
+    }
+
+    .bolt-badge-link:hover {
+      transform: none;
+      filter: none;
+    }
+  }
+
+  /* Asegurar visibilidad en diferentes fondos */
+  .bolt-badge-image {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Estados de focus para accesibilidad */
+  .bolt-badge-link:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 4px;
+  }
+
+  /* Optimización para pantallas muy pequeñas */
+  @media (max-width: 480px) {
+    .bolt-floating-badge {
+      top: 4.5rem;
+      right: 0.75rem;
+    }
+
+    .bolt-badge-image {
+      width: 2.5rem !important; /* 40px */
+      height: 2.5rem !important; /* 40px */
+    }
+  }
+
+  /* Hover effect con micro-animación */
+  .bolt-badge-link:hover .bolt-badge-image {
+    animation: boltPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes boltPulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  /* Asegurar que no interfiera con el mobile menu */
+  @media (max-width: 1023px) {
+    .mobile-menu {
+      margin-right: 4rem; /* Espacio para el badge */
+    }
+  }
 </style>
 
 <script>
@@ -772,5 +941,104 @@ const { isAuthenticated = false } = Astro.props;
   // También para navegación de Astro
   document.addEventListener("astro:page-load", function () {
     setTimeout(initMobileMenu, 100);
+  });
+
+  // Bolt.new Badge Functionality - Enhanced Performance & Analytics
+  function initBoltBadge() {
+    const boltBadge = document.querySelector(".bolt-floating-badge") as HTMLElement;
+    const boltLink = document.querySelector(".bolt-badge-link") as HTMLAnchorElement;
+
+    if (!boltBadge || !boltLink) return;
+
+    // Intersection Observer para animación de entrada optimizada
+    const badgeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).style.animationPlayState = "running";
+            badgeObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      }
+    );
+
+    // Observar el badge para animación de entrada
+    badgeObserver.observe(boltBadge);
+
+    // Analytics tracking para clicks en el badge
+    boltLink.addEventListener("click", function (e: Event) {
+      // Track click event si Google Analytics está disponible
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "bolt_badge_click", {
+          event_category: "external_link",
+          event_label: "bolt_new_badge",
+          transport_type: "beacon",
+        });
+      }
+
+      // Performance tracking
+      if ("performance" in window && "mark" in window.performance) {
+        window.performance.mark("bolt-badge-click");
+      }
+    });
+
+    // Optimización de hover para dispositivos táctiles
+    if ("ontouchstart" in window) {
+      let touchTimeout: ReturnType<typeof setTimeout>;
+
+      boltLink.addEventListener("touchstart", function (this: HTMLAnchorElement) {
+        this.classList.add("touch-hover");
+        clearTimeout(touchTimeout);
+      });
+
+      boltLink.addEventListener("touchend", function (this: HTMLAnchorElement) {
+        touchTimeout = setTimeout(() => {
+          this.classList.remove("touch-hover");
+        }, 300);
+      });
+    }
+
+    // Keyboard navigation support
+    boltLink.addEventListener("keydown", function (this: HTMLAnchorElement, e: KeyboardEvent) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        this.click();
+      }
+    });
+
+    // Auto-hide en scroll (opcional - comentado por defecto)
+    /* 
+    let scrollTimeout: ReturnType<typeof setTimeout>;
+    window.addEventListener('scroll', function() {
+      boltBadge.style.opacity = '0.6';
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        boltBadge.style.opacity = '1';
+      }, 150);
+    });
+    */
+
+    // Preload de la página de destino (opcional)
+    const linkPrefetch = document.createElement("link");
+    linkPrefetch.rel = "prefetch";
+    linkPrefetch.href = "https://bolt.new/";
+    document.head.appendChild(linkPrefetch);
+  }
+
+  // Inicializar el badge cuando el DOM esté listo
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initBoltBadge);
+  } else {
+    initBoltBadge();
+  }
+
+  // También para navegación de Astro
+  document.addEventListener("astro:page-load", function () {
+    setTimeout(initBoltBadge, 100);
   });
 </script>
